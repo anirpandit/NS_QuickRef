@@ -1,0 +1,196 @@
+% layout 'default';
+% title "NS Quick Ref: Info Search";
+
+
+%   #Common $dbh helper
+%   my $dbh = $self->app->dbh;
+
+%   #Query to get values for the Species Select Dropdown
+%   my $query = "SELECT speciesID, SpeciesName FROM SpeciesInfo ";
+%   my $sth = $dbh->prepare($query);    
+%   $sth->execute();
+
+%   #Query to get values for the Neuropeptides Select Dropdown
+%   my $query2 = "SELECT neuropeptideID, NeuropeptideName FROM NeuropeptideInfo ";
+%   my $sth2 = $dbh->prepare($query2);    
+%   $sth2->execute();
+
+%   #Query to get values for the Functionality Categories Select Dropdown
+%   my $query3 = "SELECT funcID, FuncCategoryName FROM FuncCategories ";
+%   my $sth3 = $dbh->prepare($query3);    
+%   $sth3->execute();
+
+<div class="container">
+    <h1> NS Quick Ref Search</h1>
+        <h4>Put your search text here:</h4>
+        
+        <form method = "get" action = "/infosearch">
+     
+            <div class="form-group">
+                <label for="sel1">Select Species:</label>
+                <select class="form-control" id="sel1" name="species">
+                <option value = "">Please Select </option>
+%               while (my @row = $sth->fetchrow_array()) {
+%                   my $value1 = $row[0]; 
+%                   my $value2 = $row[1]; 
+                    
+                    <option value = <%= $value1 %> > <%= $value2 %> </option>
+%               }      
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="sel2">Select Neuropeptide:</label>
+                <select class="form-control" id="sel2" name="neuropeptide">
+                <option value = "">Please Select </option>
+%               while (my @row2 = $sth2->fetchrow_array()) {
+%                   my $value1 = $row2[0]; 
+%                   my $value2 = $row2[1]; 
+                    
+                    <option value = <%= $value1 %> > <%= $value2 %> </option>
+%               }      
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="sel3">Select Functionality:</label>
+%               while (my @row3 = $sth3->fetchrow_array()) {
+%                   my $value1 = $row3[0]; 
+%                   my $value2 = $row3[1]; 
+                    
+                    <div class="checkbox" >
+                    <label><input type="radio" name="functionality" value=<%= $value1 %>> <%= $value2 %></label>
+                    </div>
+%               }  
+
+                    <div class="checkbox" >
+                    <label><input type="radio" name="functionality" value="All"> All functionalities</label>
+                    </div>       
+            </div>
+            
+      
+            <button type="submit" class="formButton btn btn-default">Search&nbsp;<span class="glyphicon glyphicon-question-sign"></span></button>
+            <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove-sign"></span></button>
+        </form>
+</div>
+
+%   #If results found, they are displayed below
+
+%   if ($species) {
+        <div class="container">
+        <h1> Search results</h1>
+
+        <h3> General Information </h3>
+
+        <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th> Species Name</th>
+                    <th> Order</th>
+                    <th> Common Name </th>
+                    <th> Importance </th>
+                    <th> Genome Sequence Available</th>
+                    <th> Genome Database</th>
+                    <th> Species Source</th>
+                </tr>
+            </thead>
+        
+            <tbody>
+%          foreach my $result (@{$results}) {
+%              my $value1 = $result->[0];
+%              my $value2 = $result->[1];
+%              my $value3 = $result->[2];
+%              my $value4 = $result->[3];
+%              my $value5 = $result->[4];
+%              my $value6 = $result->[5];
+%              my $value7 = $result->[6];
+%              my $value8 = $result->[7];
+
+                <tr>
+                    <td><%= $value1 %></td>
+                    <td><%= $value2 %></td>
+                    <td><%= $value3 %></td>
+                    <td><%= $value4 %></td>
+                    <td><%= $value5 %></td>
+                    <td><a target="_blank" href="<%= $value7 %> " data-toggle="tooltip" data-placement="bottom" title="Click to view external reference"><%= $value6 %></a></td>
+                    <td><%= $value8 %></td>
+                </tr>
+    %       }  
+            </tbody>
+        </table> 
+        </div>
+
+<h3> Gene Information </h3>
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr>
+            <th> Species Name</th>
+            <th> Neuropeptide Name</th>
+            <th> GenBank Ascension </th>
+        </tr>
+    </thead>
+    <tbody>
+
+    <% foreach my $result (@{$GenBankInfo}) { %>
+
+
+       
+        <% my $value1 = $result->[0]; %>
+        <% my $value2 = $result->[1]; %>
+        <% my $value3 = $result->[2]; %>
+        <% my $value4 = $result->[3]; %>
+
+        <% if (!$value3) { %>
+            <h4> No results Found </h4>
+        <% }  else {%>
+
+        <tr>
+            <td><%= $value1 %></td>
+            <td><%= $value2 %></td>
+            <td><a target="_blank" href="<%= $value4 %> " data-toggle="tooltip" data-placement="bottom" title="Click to view external reference"><%= $value3 %></a></td>
+        </tr>
+        <% } %> 
+
+     <% } %>
+        
+    </tbody>
+</table> 
+
+
+<h3> Functionality Information </h3>
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr>
+            <th> Species Name</th>
+            <th> Neuropeptide Name</th>
+            <th> Functionality Category</th>
+            <th> Functionality Description </th>
+        </tr>
+    </thead>
+    <tbody>
+
+    <% foreach my $result (@{$FuncCategories}) { %>
+
+        <% my $value1 = $result->[0]; %>
+        <% my $value2 = $result->[1]; %>
+        <% my $value3 = $result->[2]; %>
+        <% my $value4 = $result->[3]; %>
+        <% my $value5 = $result->[4]; %>
+
+        <tr>
+            <td><%= $value1 %></td>
+            <td><%= $value2 %></td>
+            <td><%= $value3 %></td>
+            <td><a target="_blank" href="<%= $value5 %> " data-toggle="tooltip" data-placement="bottom" title="Click to view external reference"><%= $value4 %></a></td>
+        </tr>
+    <% } %> 
+        
+    </tbody>
+</table>   
+
+
+</div>
+
+% }
+
