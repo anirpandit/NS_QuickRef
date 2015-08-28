@@ -26,18 +26,20 @@ app->attr(dbh => sub {
     my $self = shift;
     
     my $dbh = DBI->connect(
-    'DBI:mysql:NS_QuickRef:127.0.0.1:3306','root','spider'
+    'DBI:mysql:nSP_QuickRef:127.0.0.1:3306','root','spider'
     ) or die "Unable to connect: $DBI::errstr\n";
     
     return $dbh;
 });
 
 #Gene Search Form route#
-get '/infosearch' => sub {
+any '/infosearch' => sub {
     my $self = shift;
+
+    my $functionality = "All";
     my $species = $self->param('species');
     my $neuropeptide = $self->param('neuropeptide');
-    my $functionality = $self->param('functionality');
+    $functionality = $self->param('functionality');
     
     #Info Search Form Queries#
 
@@ -48,6 +50,9 @@ get '/infosearch' => sub {
 
     if($functionality ne "All"){
         $cond3 = "AND FuncCategories.funcID = ?";
+    }
+    else{
+        $cond3 = "";
     }
     
     my $query = '
@@ -81,6 +86,7 @@ get '/infosearch' => sub {
     $sth->execute($species);
 
     my $sth2 = $dbh->prepare($query2);  
+
     if($functionality ne "All"){  
         $sth2->execute($species,$neuropeptide,$functionality);
     }

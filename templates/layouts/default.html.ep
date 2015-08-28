@@ -4,20 +4,8 @@
         
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-       
-       
         <link rel="stylesheet" href="/css/bootstrap.css">
         <link rel="stylesheet" href="/css/std.css">
-        
-        
-
-        <!-- jQuery library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-        <!-- Latest compiled JavaScript -->
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
         <link rel="shortcut icon" href="/img/favicon.ico" />
 
         <title><%= title %></title>
@@ -32,7 +20,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="home">NS QuickRef</a>
+                    <a class="navbar-brand" href="home">nSP QuickRef</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
@@ -46,13 +34,23 @@
         <div class="container">
             <div class="row jumbotron">
                 <div class="col-sm-1"><img style="max-width:150px; align:center; valign:middle" src="/img/nsplogo.jpg"></div>
-                <div class="col-sm-11"><h1 align="center">nEUROSTRESSPEP Quick Reference</h1></div>
+                <div class="col-sm-11"><h1 align="center">nEUROSTRESSPEP Quick Reference Tool</h1></div>
             </div>
 
         </div>
         <div class="container-fluid">
             <%= content %>
         </div>
+
+        <div class = "navbar navbar-default navbar-fixed-bottom" >
+            <div class= "container">
+                <div class="footer" >&copy; Dow-Davies Lab, 2015</div>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="/js/validator.js"></script>
     </body>
 </html>
 

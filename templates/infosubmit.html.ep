@@ -1,5 +1,5 @@
 % layout 'default';
-% title "NS Quick Ref: Info Submit";
+% title "nSP Quick Reference: Information Submission";
 
 
 %   #Common $dbh helper
@@ -32,320 +32,336 @@
 %   $sth4->execute();
 
 <div class="container">
-    <h1> NS Quick Ref Submit Form(s)</h1>
+    <h1> nSP Quick Reference: Information Submission</h1>
 
-<div class="panel-group" id="accordion">
+    <div class="row">
+        <div class="col-md-12"><p>The following forms can be used to enter new data into the backed databases. Please use correct forms by clicking on the header for the information you would like to enter data for. Please make sure you have entered the correct information prior to submitting the form.</p></div>
+    </div>
 
-  <!-- Form for Species Info-->
-  <div class="panel panel-default">
+    <div class="panel-group" id="accordion">
 
-        <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><span class="glyphicon glyphicon-collapse-down"></span>&nbsp;Enter the new Species Information</a>
-        </h4>
-      </div>
-        <div id="collapse1" class="panel-collapse collapse">
-            <div class="panel-body">
-        <form method = "post" action = "/infosubmit">
+        <!-- Form for Species Info-->
+        <div class="panel panel-default">
+
+                    <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter new Species Information</a>
+                </h4>
+            </div>
+
+            <div id="collapse1" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form method = "post" action = "/infosubmit" data-toggle="validator" role="form">
+             
+                        <div class="form-group has-feedback">
+                            <label for="SpeciesName">Species Name :</label>
+                            <input type="text" class="form-control" name="SpeciesName" data-error="Please enter a species" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>
+                    
+                        <div class="form-group has-feedback">
+                            <label for="orderID">Select Order:</label>
+                            <select class="form-control" name="orderID" data-error="Please select an Order" required>
+                            <option value = "">Please Select </option>
+%                           while (my @row = $sth4->fetchrow_array()) {
+%                               my $value1 = $row[0]; 
+%                               my $value2 = $row[1]; 
+                                
+                                <option value = <%= $value1 %> > <%= $value2 %> </option>
+%                           }      
+                            </select>
+                            <div class="help-block with-errors alert-message"></div>  
+                        </div>
+
+
+                        <div class="form-group has-feedback">
+                            <label for="CommonName">Common Name :</label>
+                            <input type="text" class="form-control" name="CommonName" data-error="Please enter a Common Name" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>
+                        
+                        <div class="form-group has-feedback">
+                            <label for="Importance">Importance :</label>
+                            <input type="text" class="form-control" name="Importance" data-error="Please enter the Importance" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>
+                
+                        <div class="form-group has-feedback">
+                            <label for="GenomeSequence">Genome Sequence Available:</label>
+                            <select class="form-control" id="GenomeSequence" name="GenomeSequence" data-error="Please state Genome Sequence availability" required>
+                            <option value = "">Please Select </option>
+                            <option value = "Yes" >Yes</option>
+                            <option value = "No" >No</option>
+                            </select>
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>   
+
+                        <div class="form-group has-feedback">
+                            <label for="GenomeDatabase">Genome Database :</label>
+                            <input type="text" class="form-control" name="GenomeDatabase" data-error="Please enter the Genome Database for this species" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>
+                        
+                        <div class="form-group has-feedback">
+                            <label for="DatabaseURL">Genome Database URL :</label>
+                            <input type="text" class="form-control" name="DatabaseURL" data-error="Please enter the Genome Database URL for this species" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>   
+
+                        <div class="form-group has-feedback">
+                            <label for="SpeciesSource">Species Source :</label>
+                            <input type="text" class="form-control" name="SpeciesSource" data-error="Please enter the Species Source for this species" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>   
+          
+                        <button type="submit" class="formButton btn btn-default">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
+                        <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form for Functionality Info-->
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter new Functionality Information</a>
+                </h4>
+            </div>
+        
+            <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form method = "post" action = "/infosubmit" data-toggle="validator" role="form">
      
-            <div class="form-group">
-                <label for="usr">Species Name :</label>
-                <input type="text" class="form-control" name="SpeciesName">
-            </div>
-            
-            <div class="form-group">
-                <label for="sel1">Select Order:</label>
-                <select class="form-control" id="sel1" name="orderID">
-                <option value = "">Please Select </option>
-%              while (my @row = $sth4->fetchrow_array()) {
-%                  my $value1 = $row[0]; 
-%                  my $value2 = $row[1]; 
+                        <div class="form-group has-feedback">
+                            <label for="speciesID">Select Species:</label>
+                            <select class="form-control" id="speciesID" name="speciesID" data-error="Please select the Species" required>
+                            <option value = "">Please Select </option>
+                            % while (my @row = $sth->fetchrow_array()) {
+                                % my $value1 = $row[0]; 
+                                % my $value2 = $row[1]; 
                         
-                    <option value = <%= $value1 %> > <%= $value2 %> </option>
-%                }      
-                </select>
-            </div>
-
-
-            <div class="form-group">
-                <label for="usr">Common Name :</label>
-                <input type="text" class="form-control" name="CommonName">
-            </div>
-
-            <div class="form-group">
-                <label for="usr">Importance :</label>
-                <input type="text" class="form-control" name="Importance">
-            </div>
+                                <option value = <%= $value1 %> > <%= $value2 %> </option>
+                            % }      
+                            </select>
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>
             
-            <div class="form-group">
-                <label for="sel2">Genome Sequence Available:</label>
-                <select class="form-control" id="sel2" name="GenomeSequence">
-                <option value = "">Please Select </option>
-                <option value = "Yes" >Yes</option>
-                <option value = "No" >No</option>
-                </select>
-            </div>   
+                        <div class="form-group has-feedback">
+                            <label for="neuropeptideID">Select Neuropeptide:</label>
+                            <select class="form-control" id="neuropeptideID" name="neuropeptideID" data-error="Please select the Neuropeptide" required>
+                            <option value = "">Please Select </option>
+                            % while (my @row = $sth2->fetchrow_array()) {
+                                % my $value1 = $row[0]; 
+                                % my $value2 = $row[1]; 
+                        
+                                <option value = <%= $value1 %> > <%= $value2 %> </option>
+                            % }      
+                            </select>
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>
 
-            <div class="form-group">
-                <label for="usr">Genome Database :</label>
-                <input type="text" class="form-control" name="GenomeDatabase">
-            </div>
+
+                        <div class="form-group has-feedback">
+                        <label for="funcID">Select Functionality:</label>
+                        <select class="form-control" id="funcID" name="funcID" data-error="Please select the Functionality" required>
+                        <option value = "">Please Select </option>
+                        % while (my @row = $sth3->fetchrow_array()) {
+                            % my $value1 = $row[0]; 
+                            % my $value2 = $row[1]; 
+                        
+                            <option value = <%= $value1 %> > <%= $value2 %> </option>
+                        % }      
+                        </select>
+                        <div class="help-block with-errors alert-message"></div>   
+                    </div>
+
+                    <div class="form-group has-feedback">
+                        <label for="FuncDescription">Functionality Description :</label>
+                        <input type="text" class="form-control" name="FuncDescription" data-error="Please enter the Functionality Description" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>
             
-            <div class="form-group">
-                <label for="usr">Genome Database URL :</label>
-                <input type="text" class="form-control" name="DatabaseURL">
-            </div>   
+                    <div class="form-group has-feedback">
+                        <label for="FuncURL">Functionality URL :</label>
+                        <input type="text" class="form-control" name="FuncURL" data-error="Please enter the Functionality URL" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>   
 
-            <div class="form-group">
-                <label for="usr">Species Source :</label>
-                <input type="text" class="form-control" name="SpeciesSource">
-            </div>   
-      
-            <button type="submit" class="formButton btn btn-default">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
-            <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
-        </form>
+                    <button type="submit" class="formButton btn btn-default">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
+                    <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
+                </form>
+            </div>
         </div>
-        </div>
-        
-</div>
-<!-- Form for Functionality Info-->
-  <div class="panel panel-default">
+    </div>
+    
+    <!-- Form for GenBank Info-->
+    <div class="panel panel-default">
 
         <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><span class="glyphicon glyphicon-collapse-down"></span>&nbsp;Enter the new Functionality Information</a>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter new GenBank Information</a>
         </h4>
-      </div>
-        <div id="collapse2" class="panel-collapse collapse">
-            <div class="panel-body">
-        <form method = "post" action = "/infosubmit">
-     
-            <div class="form-group">
-                <label for="sel1">Select Species:</label>
-                <select class="form-control" id="sel1" name="speciesID">
-                <option value = "">Please Select </option>
-%              while (my @row = $sth->fetchrow_array()) {
-%                  my $value1 = $row[0]; 
-%                  my $value2 = $row[1]; 
-                        
-                    <option value = <%= $value1 %> > <%= $value2 %> </option>
-%              }      
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="sel1">Select Neuropeptide:</label>
-                <select class="form-control" id="sel1" name="neuropeptideID">
-                <option value = "">Please Select </option>
-%              while (my @row = $sth2->fetchrow_array()) {
-%                  my $value1 = $row[0]; 
-%                  my $value2 = $row[1]; 
-                        
-                    <option value = <%= $value1 %> > <%= $value2 %> </option>
-%              }      
-                </select>
-            </div>
-
-
-            <div class="form-group">
-                <label for="sel1">Select Functionality:</label>
-                <select class="form-control" id="sel1" name="funcID">
-                <option value = "">Please Select </option>
-%              while (my @row = $sth3->fetchrow_array()) {
-%                  my $value1 = $row[0]; 
-%                  my $value2 = $row[1]; 
-                        
-                    <option value = <%= $value1 %> > <%= $value2 %> </option>
-%              }      
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="usr">Functionality Description :</label>
-                <input type="text" class="form-control" name="FuncDescription">
-            </div>
-            
-            <div class="form-group">
-                <label for="usr">Functionality URL :</label>
-                <input type="text" class="form-control" name="FuncURL">
-            </div>   
-
-            <button type="submit" class="formButton btn btn-default">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
-            <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
-        </form>
-        
-        </div>
         </div>
         
-</div>
-<!-- Form for GenBank Info-->
-  <div class="panel panel-default">
-
-        <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><span class="glyphicon glyphicon-collapse-down"></span>&nbsp;Enter new GenBank Information</a>
-        </h4>
-      </div>
         <div id="collapse3" class="panel-collapse collapse">
             <div class="panel-body">
-        <form method = "post" action = "/infosubmit">
+                <form method = "post" action = "/infosubmit" data-toggle="validator" role="form">
      
-            <div class="form-group">
-                <label for="sel1">Select Species:</label>
-                <select class="form-control" id="sel1_gb" name="speciesID_gb">
-                <option value = "">Please Select </option>
-%              while (my @row2 = $sth5->fetchrow_array()) {
-%                  my $value1 = $row2[0]; 
-%                  my $value2 = $row2[1]; 
-                        
-                    <option value = <%= $value1 %> > <%= $value2 %> </option>
-%              }      
-                </select>
-            </div>
+                    <div class="form-group has-feedback">
+                        <label for="speciesID_gb">Select Species:</label>
+                        <select class="form-control" id="speciesID_gb" name="speciesID_gb" data-error="Please select the Species" required>
+                        <option value = "">Please Select </option>
+                        % while (my @row2 = $sth5->fetchrow_array()) {
+                            % my $value1 = $row2[0]; 
+                            % my $value2 = $row2[1]; 
+                            
+                            <option value = <%= $value1 %> > <%= $value2 %> </option>
+                        % }      
+                        </select>
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>
             
-            <div class="form-group">
-                <label for="sel1">Select Neuropeptide:</label>
-                <select class="form-control" id="sel2_gb" name="neuropeptideID_gb">
-                <option value = "">Please Select </option>
-%              while (my @row3 = $sth6->fetchrow_array()) {
-%                  my $value1 = $row3[0]; 
-%                  my $value2 = $row3[1]; 
-                        
-                    <option value = <%= $value1 %> > <%= $value2 %> </option>
-%              }      
-                </select>
-            </div>
+                    <div class="form-group has-feedback">
+                        <label for="sel1">Select Neuropeptide:</label>
+                        <select class="form-control" id="sel2_gb" name="neuropeptideID_gb" data-error="Please select the Neuropeptide" required>
+                        <option value = "">Please Select </option>
+                        % while (my @row3 = $sth6->fetchrow_array()) {
+                            % my $value1 = $row3[0]; 
+                            % my $value2 = $row3[1]; 
+                            
+                            <option value = <%= $value1 %> > <%= $value2 %> </option>
+                        % } 
+                        </select>
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>
 
-
-            <div class="form-group">
-                <label for="usr">GenBank Ascension Number:</label>
-                <input type="text" class="form-control" name="GenBankAscNum">
-            </div>
+                    <div class="form-group has-feedback">
+                        <label for="GenBankAscNum">GenBank Ascension Number:</label>
+                        <input type="text" class="form-control" name="GenBankAscNum" data-error="Please enter the GenBank Ascension Number" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>
             
-            <div class="form-group">
-                <label for="usr">GenBank Ascension Number URL :</label>
-                <input type="text" class="form-control" name="GenBankAscNumURL">
-            </div>   
+                    <div class="form-group has-feedback">
+                        <label for="GenBankAscNumURL">GenBank Ascension Number URL :</label>
+                        <input type="text" class="form-control" name="GenBankAscNumURL" data-error="Please enter the GenBank Ascension Number" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div> 
+                    </div>   
 
-            <button type="submit" class="formButton btn btn-default">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
-            <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
-        </form>
-
-                </div>
+                    <button type="submit" class="formButton btn btn-default">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
+                    <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
+                </form>
+            </div>
         </div>
-        
-</div>
+    </div>
 
-<!-- Form for Neuropeptide Info-->
-  <div class="panel panel-default">
+    <!-- Form for Neuropeptide Info-->
+    <div class="panel panel-default">
 
         <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4"><span class="glyphicon glyphicon-collapse-down"></span>&nbsp;Enter new Neuropeptide Information</a>
-        </h4>
-      </div>
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter new Neuropeptide Information</a>
+            </h4>
+        </div>
+        
         <div id="collapse4" class="panel-collapse collapse">
             <div class="panel-body">
-        <form method = "post" action = "/infosubmit">
+                <form method = "post" action = "/infosubmit" data-toggle="validator" role="form">
      
-            <div class="form-group">
-                <label for="usr">Neuropeptide Name :</label>
-                <input type="text" class="form-control" name="NeuropeptideName">
-            </div>
+                    <div class="form-group has-feedback">
+                        <label for="usr">Neuropeptide Name :</label>
+                        <input type="text" class="form-control" name="NeuropeptideName" data-error="Please enter the Neuropeptide Name" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div> 
+                    </div>
 
-            <div class="form-group">
-                <label for="usr">Neuropeptide Details :</label>
-                <input type="text" class="form-control" name="NeuropeptideInfo">
+                    <div class="form-group has-feedback">
+                        <label for="usr">Neuropeptide Details :</label>
+                        <input type="text" class="form-control" name="NeuropeptideInfo" data-error="Please enter the Neuropeptide Details" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div> 
+                    </div>
+              
+                    <button type="submit" class="formButton btn btn-default">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
+                    <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
+                </form>
             </div>
-      
-            <button type="submit" class="formButton btn btn-default">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
-            <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
-        </form>
-
-                </div>
         </div>
-        
-</div>
+    </div>
 
 
-<!-- Form for Order Info-->
-  <div class="panel panel-default">
+    <!-- Form for Order Info-->
+    <div class="panel panel-default">
 
         <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse5"><span class="glyphicon glyphicon-collapse-down"></span>&nbsp;Enter a new Order</a>
-        </h4>
-      </div>
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter new Order Information</a>
+            </h4>
+        </div>
+        
         <div id="collapse5" class="panel-collapse collapse">
             <div class="panel-body">
-        <form method = "post" action = "/infosubmit">
+                <form method = "post" action = "/infosubmit" data-toggle="validator" role="form">
      
-            <div class="form-group">
-                <label for="usr">Insect Order :</label>
-                <input type="text" class="form-control" name="OrderName">
+                    <div class="form-group has-feedback">
+                        <label for="OrderName">Insect Order :</label>
+                        <input type="text" class="form-control" name="OrderName" data-error="Please enter the Order Name" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div> 
+                    </div>
+
+                    <button type="submit" class="formButton btn btn-default">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
+                    <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
+                </form>
             </div>
-
-            <button type="submit" class="formButton btn btn-default">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
-            <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
-        </form>
-
-                </div>
         </div>
-        
-</div>
+    </div>
 
-<!-- Form for Functionality Category-->
-  <div class="panel panel-default">
-
+    <!-- Form for Functionality Category-->
+    <div class="panel panel-default">
         <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse6"><span class="glyphicon glyphicon-collapse-down"></span>&nbsp;Enter the new Functionality Category</a>
-        </h4>
-      </div>
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse6"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter a new Functionality Category</a>
+            </h4>
+        </div>
         <div id="collapse6" class="panel-collapse collapse">
             <div class="panel-body">
-        <form method = "post" action = "/infosubmit">
+                <form method = "post" action = "/infosubmit" data-toggle="validator" role="form">
      
-            <div class="form-group">
-                <label for="usr">Functionality Category :</label>
-                <input type="text" class="form-control" name="FuncCategoryName">
+                    <div class="form-group has-feedback">
+                        <label for="FuncCategoryName">Functionality Category :</label>
+                        <input type="text" class="form-control" name="FuncCategoryName" data-error="Please enter the Functionality Category" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div> 
+                    </div>
+
+                    <button type="submit" class="formButton btn btn-default">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
+                    <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
+                </form>
             </div>
-
-            <button type="submit" class="formButton btn btn-default">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
-            <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
-        </form>
-                </div>
         </div>
-        
-</div>
-
+    </div>
 </div>
 
 %if($submitteddetails eq "Success"){
             <div class="container">
-                <div class="alert alert-success alert-fixed" id="myAlert">
-                    <a href="#" class="close">&times;</a>
-                        <strong>Success!</strong> The information has been successfully submitted.
-                    </div>
+                <div class="alert alert-success alert-fixed">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Success!</strong> The information has been successfully submitted.
                 </div>
-
-                <script>
-                    $(document).ready(function(){
-                        $(".close").click(function(){
-                            $("#myAlert").alert("close");
-                        });
-                    });
-                </script>
-            </div>
+          </div>
 
 %}
-
-<script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip(); 
-});
-</script>
-
-
 
 

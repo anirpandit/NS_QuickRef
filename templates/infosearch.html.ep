@@ -1,5 +1,5 @@
 % layout 'default';
-% title "NS Quick Ref: Info Search";
+% title "nSP Quick Reference: Information Search";
 
 
 %   #Common $dbh helper
@@ -20,66 +20,99 @@
 %   my $sth3 = $dbh->prepare($query3);    
 %   $sth3->execute();
 
+%   my $collapseopt = "in";
+%   my $SearchFormTitle = "Perform a Search";
+
+%   if ($species) {
+%       $collapseopt = "";
+%       $SearchFormTitle = "Click here to perform a new Search";
+%   }
+
 <div class="container">
-    <h1> NS Quick Ref Search</h1>
-        <h4>Put your search text here:</h4>
-        
-        <form method = "get" action = "/infosearch">
+    <h1>nSP Quick Reference: Information Search</h1>
+
+    <div class="row">
+        <div class="col-md-12"><p>The following form can be used to search for data currently held for the references to various functionalities per species per neuropeptide.</p></div>
+    </div>
+       
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default"> 
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><span class="glyphicon glyphicon-edit"></span>&nbsp;<%= $SearchFormTitle %></a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse <%= $collapseopt %>">
+                    <div class="panel-body">
+                        <form method = "get" action = "/infosearch" data-toggle="validator" role="form">
      
-            <div class="form-group">
-                <label for="sel1">Select Species:</label>
-                <select class="form-control" id="sel1" name="species">
-                <option value = "">Please Select </option>
-%               while (my @row = $sth->fetchrow_array()) {
-%                   my $value1 = $row[0]; 
-%                   my $value2 = $row[1]; 
-                    
-                    <option value = <%= $value1 %> > <%= $value2 %> </option>
-%               }      
-                </select>
-            </div>
+                            <div class="form-group has-feedback">
+                                <label for="sel1">Select Species:</label>
+                                <select class="form-control" id="sel1" name="species" data-error="Please select a species" required>
+                                <option value = "">Please Select </option>
+%                               while (my @row = $sth->fetchrow_array()) {
+%                                   my $value1 = $row[0]; 
+%                                   my $value2 = $row[1]; 
+                                    <option value = <%= $value1 %> > <%= $value2 %> </option>
+%                               }      
+                                </select>
+                                <div class="help-block with-errors alert-message"></div>        
+                            </div>
 
-            <div class="form-group">
-                <label for="sel2">Select Neuropeptide:</label>
-                <select class="form-control" id="sel2" name="neuropeptide">
-                <option value = "">Please Select </option>
-%               while (my @row2 = $sth2->fetchrow_array()) {
-%                   my $value1 = $row2[0]; 
-%                   my $value2 = $row2[1]; 
-                    
-                    <option value = <%= $value1 %> > <%= $value2 %> </option>
-%               }      
-                </select>
-            </div>
+                            <div class="form-group has-feedback">
+                                <label for="sel2">Select Neuropeptide:</label>
+                                <select class="form-control" id="sel2" name="neuropeptide" data-error="Please select a neuropeptide" required>
+                                <option value = "">Please Select </option>
+%                               while (my @row2 = $sth2->fetchrow_array()) {
+%                                   my $value1 = $row2[0]; 
+%                                   my $value2 = $row2[1]; 
+                        
+                                    <option value = <%= $value1 %> > <%= $value2 %> </option>
+%                               }         
+                                </select>
+                                
+                                <div class="help-block with-errors alert-message"></div>     
+                            </div>
 
-            <div class="form-group">
-                <label for="sel3">Select Functionality:</label>
-%               while (my @row3 = $sth3->fetchrow_array()) {
-%                   my $value1 = $row3[0]; 
-%                   my $value2 = $row3[1]; 
-                    
-                    <div class="checkbox" >
-                    <label><input type="radio" name="functionality" value=<%= $value1 %>> <%= $value2 %></label>
+
+                            <div class="form-group has-feedback">
+                                <label for="sel3">Select Functionality:</label>
+%                               while (my @row3 = $sth3->fetchrow_array()) {
+%                                   my $value1 = $row3[0]; 
+%                                   my $value2 = $row3[1]; 
+                        
+                                    <div class="radio" >
+                                        <label><input type="radio" name="functionality" value=<%= $value1 %> data-error="Please select at least one functionality" required > <%= $value2 %> </label>
+                                    </div>
+%                              }  
+
+                                <div class="radio" >
+                                    <label><input type="radio" name="functionality" value="All" required> All functionalities</label>
+                                </div> 
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                                <div class="help-block with-errors alert-message"></div>     
+                            </div>
+                            
+                            <button type="submit" class="formButton btn btn-default">Search&nbsp;<span class="glyphicon glyphicon-question-sign"></span></button>
+                            <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove-sign"></span></button>
+                        </form>
                     </div>
-%               }  
-
-                    <div class="checkbox" >
-                    <label><input type="radio" name="functionality" value="All"> All functionalities</label>
-                    </div>       
+                </div>
             </div>
-            
-      
-            <button type="submit" class="formButton btn btn-default">Search&nbsp;<span class="glyphicon glyphicon-question-sign"></span></button>
-            <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove-sign"></span></button>
-        </form>
-</div>
+        </div>
+    </div>
 
 %   #If results found, they are displayed below
 
 %   if ($species) {
         <div class="container">
-        <h1> Search results</h1>
+        <div class="panel panel-default">
+        
+        <div class="panel-heading">
+            <h4 class="panel-title"><span class="glyphicon glyphicon-search"></span>&nbsp;Search Results:</h4>
+        </div>
 
+        <div class="panel-body">
         <h3> General Information </h3>
 
         <div class="table-responsive">
@@ -187,8 +220,9 @@
     <% } %> 
         
     </tbody>
-</table>   
-
+</table> 
+</div>  
+</div>
 
 </div>
 
