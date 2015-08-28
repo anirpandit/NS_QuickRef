@@ -6,6 +6,7 @@ use DBD::mysql;
 
 use Mojo::Parameters;
 
+app->config(hypnotoad => {listen => ['http://*:8080']});
 
 #First instance#
 get '/' => sub {

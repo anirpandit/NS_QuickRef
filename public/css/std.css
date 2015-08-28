@@ -43,3 +43,12 @@ h2 {
 #.formButton {
     width: 150px;
 }
+
+.navbar-static-bottom {
+    border-radius: 0;
+    z-index: 1000;
+    border-width: 0 0 1px;
+    padding-right: 0;
+    padding-left: 0;
+    margin: 20px 0 0;
+}

@@ -55,7 +55,7 @@
              
                         <div class="form-group has-feedback">
                             <label for="SpeciesName">Species Name :</label>
-                            <input type="text" class="form-control" name="SpeciesName" data-error="Please enter a species" required>
+                            <input type="text" class="form-control" name="SpeciesName" data-error="Please enter the Species name" placeholder = "Please enter the Species name" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div>   
                         </div>
@@ -77,14 +77,14 @@
 
                         <div class="form-group has-feedback">
                             <label for="CommonName">Common Name :</label>
-                            <input type="text" class="form-control" name="CommonName" data-error="Please enter a Common Name" required>
+                            <input type="text" class="form-control" name="CommonName" data-error="Please enter a Common Name" placeholder = "Please enter a Common Name" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div>   
                         </div>
                         
                         <div class="form-group has-feedback">
                             <label for="Importance">Importance :</label>
-                            <input type="text" class="form-control" name="Importance" data-error="Please enter the Importance" required>
+                            <input type="text" class="form-control" name="Importance" data-error="Please enter the Importance" placeholder = "Please enter the Importance" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div>   
                         </div>
@@ -101,21 +101,21 @@
 
                         <div class="form-group has-feedback">
                             <label for="GenomeDatabase">Genome Database :</label>
-                            <input type="text" class="form-control" name="GenomeDatabase" data-error="Please enter the Genome Database for this species" required>
+                            <input type="text" class="form-control" name="GenomeDatabase" data-error="Please enter the Genome Database for this species" placeholder="Please enter the Genome Database for this species"required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div>   
                         </div>
                         
                         <div class="form-group has-feedback">
                             <label for="DatabaseURL">Genome Database URL :</label>
-                            <input type="text" class="form-control" name="DatabaseURL" data-error="Please enter the Genome Database URL for this species" required>
+                            <input type="text" class="form-control" name="DatabaseURL" data-error="Please enter the Genome Database URL for this species" placeholder="Please enter the Genome Database URL for this species" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div>   
                         </div>   
 
                         <div class="form-group has-feedback">
                             <label for="SpeciesSource">Species Source :</label>
-                            <input type="text" class="form-control" name="SpeciesSource" data-error="Please enter the Species Source for this species" required>
+                            <input type="text" class="form-control" name="SpeciesSource" data-error="Please enter the Species Source for this species" placeholder="Please enter the Species Source for this species" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div>   
                         </div>   
@@ -185,14 +185,14 @@
 
                     <div class="form-group has-feedback">
                         <label for="FuncDescription">Functionality Description :</label>
-                        <input type="text" class="form-control" name="FuncDescription" data-error="Please enter the Functionality Description" required>
+                        <input type="text" class="form-control" name="FuncDescription" data-error="Please enter the Functionality Description" placeholder="Please enter the Functionality Description"required>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                         <div class="help-block with-errors alert-message"></div>  
                     </div>
             
                     <div class="form-group has-feedback">
                         <label for="FuncURL">Functionality URL :</label>
-                        <input type="text" class="form-control" name="FuncURL" data-error="Please enter the Functionality URL" required>
+                        <input type="text" class="form-control" name="FuncURL" data-error="Please enter the Functionality URL" placeholder="Please enter the Functionality URL"required>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                         <div class="help-block with-errors alert-message"></div>  
                     </div>   
@@ -247,14 +247,14 @@
 
                     <div class="form-group has-feedback">
                         <label for="GenBankAscNum">GenBank Ascension Number:</label>
-                        <input type="text" class="form-control" name="GenBankAscNum" data-error="Please enter the GenBank Ascension Number" required>
+                        <input type="text" class="form-control" name="GenBankAscNum" data-error="Please enter the GenBank Ascension Number" placeholder="Please enter the GenBank Ascension Number" required>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                         <div class="help-block with-errors alert-message"></div>  
                     </div>
             
                     <div class="form-group has-feedback">
                         <label for="GenBankAscNumURL">GenBank Ascension Number URL :</label>
-                        <input type="text" class="form-control" name="GenBankAscNumURL" data-error="Please enter the GenBank Ascension Number" required>
+                        <input type="text" class="form-control" name="GenBankAscNumURL" data-error="Please enter the GenBank Ascension Number" placeholder="Please enter the GenBank Ascension Number" required>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                         <div class="help-block with-errors alert-message"></div> 
                     </div>   
@@ -280,15 +280,15 @@
                 <form method = "post" action = "/infosubmit" data-toggle="validator" role="form">
      
                     <div class="form-group has-feedback">
-                        <label for="usr">Neuropeptide Name :</label>
-                        <input type="text" class="form-control" name="NeuropeptideName" data-error="Please enter the Neuropeptide Name" required>
+                        <label for="NeuropeptideName">Neuropeptide Name :</label>
+                        <input type="text" class="form-control" name="NeuropeptideName" data-error="Please enter the Neuropeptide Name" placeholder="Please enter the Neuropeptide Name" required>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                         <div class="help-block with-errors alert-message"></div> 
                     </div>
 
                     <div class="form-group has-feedback">
-                        <label for="usr">Neuropeptide Details :</label>
-                        <input type="text" class="form-control" name="NeuropeptideInfo" data-error="Please enter the Neuropeptide Details" required>
+                        <label for="NeuropeptideInfo">Neuropeptide Details :</label>
+                        <input type="text" class="form-control" name="NeuropeptideInfo" data-error="Please enter the Neuropeptide Details" placeholder="Please enter the Neuropeptide Details"  required>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                         <div class="help-block with-errors alert-message"></div> 
                     </div>
@@ -316,7 +316,7 @@
      
                     <div class="form-group has-feedback">
                         <label for="OrderName">Insect Order :</label>
-                        <input type="text" class="form-control" name="OrderName" data-error="Please enter the Order Name" required>
+                        <input type="text" class="form-control" name="OrderName" data-error="Please enter the Order Name" placeholder="Please enter the Order Name" required>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                         <div class="help-block with-errors alert-message"></div> 
                     </div>
@@ -335,13 +335,15 @@
             <a data-toggle="collapse" data-parent="#accordion" href="#collapse6"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter a new Functionality Category</a>
             </h4>
         </div>
+
+        
         <div id="collapse6" class="panel-collapse collapse">
             <div class="panel-body">
                 <form method = "post" action = "/infosubmit" data-toggle="validator" role="form">
      
                     <div class="form-group has-feedback">
                         <label for="FuncCategoryName">Functionality Category :</label>
-                        <input type="text" class="form-control" name="FuncCategoryName" data-error="Please enter the Functionality Category" required>
+                        <input type="text" class="form-control" name="FuncCategoryName" data-error="Please enter the Functionality Category" placeholder="Please enter the Functionality Category" required>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                         <div class="help-block with-errors alert-message"></div> 
                     </div>

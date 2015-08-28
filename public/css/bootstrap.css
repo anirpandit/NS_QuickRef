@@ -11,6 +11,7 @@ html {
 }
 body {
   margin: 0;
+  padding-bottom: 50px;
 }
 article,
 aside,
@@ -4317,6 +4318,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-width: 0 0 1px;
 }
 .navbar-fixed-bottom {
+  margin: 20px 0 0;
   bottom: 0;
   margin-bottom: 0;
   border-width: 1px 0 0;
