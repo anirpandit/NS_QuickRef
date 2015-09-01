@@ -10,6 +10,17 @@ use Mojo::Parameters;
 
 app->config(hypnotoad => {listen => ['http://*:8080']});
 
+# Create a database connection as an application attribute
+app->attr(dbh => sub {
+    my $self = shift;
+    
+    my $dbh = DBI->connect(
+    'DBI:mysql:nSP_QuickRef:127.0.0.1:3306','root','spider'
+    ) or die "Unable to connect: $DBI::errstr\n";
+    
+    return $dbh;
+});
+
 #First instance#
 get '/' => sub {
     my $self = shift;
@@ -22,18 +33,40 @@ get '/home' => sub {
     $self->render('home');
 };
 
-
-
-# Create a database connection as an application attribute
-app->attr(dbh => sub {
+any '/fasta' => sub {
     my $self = shift;
-    
-    my $dbh = DBI->connect(
-    'DBI:mysql:nSP_QuickRef:127.0.0.1:3306','root','spider'
-    ) or die "Unable to connect: $DBI::errstr\n";
-    
-    return $dbh;
-});
+
+    my $isoID = $self->param('isoID');
+    my $neuropeptideID = $self->param('neuropeptideID');
+    my ($useme,$query);
+
+    if($isoID){
+        $query = '
+            SELECT DISTINCT NeuroPepIsoInfo.IsoformName, NeuroPepIsoInfo.IsoformAASeq
+            FROM NeuroPepIsoInfo
+            WHERE NeuroPepIsoInfo.isoID = ?';
+            $useme = $isoID;
+    }
+
+    else{
+        $query = '
+            SELECT DISTINCT NeuroPepIsoInfo.IsoformName, NeuroPepIsoInfo.IsoformAASeq
+            FROM NeuroPepIsoInfo
+            WHERE NeuroPepIsoInfo.neuropeptideID = ?';
+            $useme = $neuropeptideID;
+    }
+
+
+    my $dbh = $self->app->dbh;
+    my $sth = $dbh->prepare($query);    
+    $sth->execute($useme);
+
+    $self->stash(
+        seqinfo => $sth->fetchall_arrayref
+    );
+
+    $self->render('fasta');
+};
 
 #Gene Search Form route#
 any '/infosearch' => sub {
@@ -75,19 +108,29 @@ any '/infosearch' => sub {
             ORDER BY SpeciesInfo.speciesID';
    
     my $query2 = '
+            SELECT DISTINCT NeuroPepIsoInfo.isoID, NeuroPepIsoInfo.IsoformName, NeuropeptideInfo.NeuropeptideName, SpeciesInfo.SpeciesName, NeuroPepIsoInfo.GenBankAscNum, NeuroPepIsoInfo.GenBankAscNumURL, NeuropeptideInfo.neuropeptideID
+            FROM NeuroPepIsoInfo, NeuropeptideInfo, SpeciesInfo
+            WHERE NeuroPepIsoInfo.speciesID = SpeciesInfo.speciesID
+            AND NeuroPepIsoInfo.neuropeptideID = NeuropeptideInfo.neuropeptideID
+            AND ( SpeciesInfo.speciesID IN (' . join( ',', map { '?' } @species_array ) . ') AND NeuropeptideInfo.neuropeptideID IN (' . join( ',', map { '?' } @pep_array ) . '))
+            ORDER BY SpeciesInfo.speciesID';
+
+    my $query3 = '
             SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, NeuroPepGeneInfo.GenBankAscNum, NeuroPepGeneInfo.GenBankAscNumURL
             FROM NeuroPepGeneInfo, NeuropeptideInfo, SpeciesInfo
             WHERE NeuroPepGeneInfo.speciesID = SpeciesInfo.speciesID
             AND NeuroPepGeneInfo.neuropeptideID = NeuropeptideInfo.neuropeptideID
-            AND ( SpeciesInfo.speciesID IN (' . join( ',', map { '?' } @species_array ) . ') AND NeuropeptideInfo.neuropeptideID IN (' . join( ',', map { '?' } @pep_array ) . '))ORDER BY NeuropeptideInfo.neuropeptideID';
+            AND ( SpeciesInfo.speciesID IN (' . join( ',', map { '?' } @species_array ) . ') AND NeuropeptideInfo.neuropeptideID IN (' . join( ',', map { '?' } @pep_array ) . '))
+            ORDER BY SpeciesInfo.speciesID';
 
-    my $query3 = '
+    my $query4 = '
             SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, FuncCategories.FuncCategoryName, FuncInfo.FuncDescription, FuncInfo.FuncURL
             FROM NeuropeptideInfo, FuncCategories, FuncInfo , SpeciesInfo
             WHERE FuncInfo.speciesID = SpeciesInfo.speciesID
             AND FuncInfo.neuropeptideID = NeuropeptideInfo.neuropeptideID
             AND FuncInfo.funcID = FuncCategories.funcID
-            AND ( SpeciesInfo.speciesID IN (' . join( ',', map { '?' } @species_array ) . ') AND NeuropeptideInfo.neuropeptideID IN (' . join( ',', map { '?' } @pep_array ) . ') AND FuncCategories.funcID IN (' . join( ',', map { '?' } @func_array ) . ') )ORDER BY NeuropeptideInfo.neuropeptideID, FuncCategories.FuncCategoryName';
+            AND ( SpeciesInfo.speciesID IN (' . join( ',', map { '?' } @species_array ) . ') AND NeuropeptideInfo.neuropeptideID IN (' . join( ',', map { '?' } @pep_array ) . ') AND FuncCategories.funcID IN (' . join( ',', map { '?' } @func_array ) . '))
+            ORDER BY NeuropeptideInfo.neuropeptideID, FuncCategories.FuncCategoryName';
 
 
 
@@ -98,15 +141,19 @@ any '/infosearch' => sub {
 
     my $sth2 = $dbh->prepare($query2);  
     $sth2->execute(@species_array,@pep_array);
+
+    my $sth3 = $dbh->prepare($query3);  
+    $sth3->execute(@species_array,@pep_array);
     
-    my $sth3 = $dbh->prepare($query3);    
-    $sth3->execute(@species_array,@pep_array,@func_array);
+    my $sth4 = $dbh->prepare($query4);    
+    $sth4->execute(@species_array,@pep_array,@func_array);
     
     $self->stash(
         species => $species_array[0],
         results => $sth->fetchall_arrayref,
-        GenBankInfo => $sth2->fetchall_arrayref,
-        FuncCategories => $sth3->fetchall_arrayref
+        IsoformInfo => $sth2->fetchall_arrayref,
+        GenBankInfo => $sth3->fetchall_arrayref,
+        FuncCategories => $sth4->fetchall_arrayref
     );
     
     $self->render('infosearch');
@@ -198,6 +245,23 @@ any '/infosubmit' => sub {
 
         my $sth = $dbh->prepare($query);    
         $sth->execute($speciesID_gb,$neuropeptideID_gb,$GenBankAscNum,$GenBankAscNumURL);
+        $subsuccess = "Success";
+
+    }
+
+    my $speciesID_iso = $self->param('speciesID_iso');
+    my $neuropeptideID_iso = $self->param('neuropeptideID_iso');
+    my $IsoformName = $self->param('IsoformName');
+    my $IsoformAASeq = $self->param('IsoformAASeq');
+    my $GenBankAscNum_iso = $self->param('GenBankAscNum_iso');
+    my $GenBankAscNumURL_iso = $self->param('GenBankAscNumURL_iso');
+    
+    if($IsoformName){
+
+        my $query = 'INSERT INTO NeuroPepIsoInfo (speciesID,neuropeptideID,IsoformName,IsoformAASeq,GenBankAscNum,GenBankAscNumURL) VALUES (?,?,?,?,?,?)';
+
+        my $sth = $dbh->prepare($query);    
+        $sth->execute($speciesID_iso,$neuropeptideID_iso,$IsoformName,$IsoformAASeq,$GenBankAscNum_iso,$GenBankAscNumURL_iso);
         $subsuccess = "Success";
 
     }

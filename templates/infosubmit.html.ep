@@ -13,6 +13,9 @@
 %   my $sth5 = $dbh->prepare($query);    
 %   $sth5->execute();
 
+%   my $sth7 = $dbh->prepare($query);    
+%   $sth7->execute();
+
 %   #Query to get values for the Neuropeptides Select Dropdown
 %   my $query2 = "SELECT neuropeptideID, NeuropeptideName FROM NeuropeptideInfo ";
 %   my $sth2 = $dbh->prepare($query2);    
@@ -20,6 +23,9 @@
 
 %   my $sth6 = $dbh->prepare($query2);    
 %   $sth6->execute();
+
+%   my $sth8 = $dbh->prepare($query2);    
+%   $sth8->execute();
 
 %   #Query to get values for the Functionality Categories Select Dropdown
 %   my $query3 = "SELECT funcID, FuncCategoryName FROM FuncCategories ";
@@ -64,12 +70,12 @@
                             <label for="orderID">Select Order:</label>
                             <select class="form-control" name="orderID" data-error="Please select an Order" required>
                             <option value = "">Please Select </option>
-%                           while (my @row = $sth4->fetchrow_array()) {
-%                               my $value1 = $row[0]; 
-%                               my $value2 = $row[1]; 
+                            % while (my @row = $sth4->fetchrow_array()) {
+                                % my $value1 = $row[0]; 
+                                % my $value2 = $row[1]; 
                                 
                                 <option value = <%= $value1 %> > <%= $value2 %> </option>
-%                           }      
+                            % }      
                             </select>
                             <div class="help-block with-errors alert-message"></div>  
                         </div>
@@ -203,13 +209,89 @@
             </div>
         </div>
     </div>
+
+    <!-- Form for Isoform Info-->
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter new Isoform Information</a>
+        </h4>
+        </div>
+        
+        <div id="collapse3" class="panel-collapse collapse">
+            <div class="panel-body">
+                <form method = "post" action = "/infosubmit" data-toggle="validator" role="form">
+     
+                    <div class="form-group has-feedback">
+                        <label for="speciesID_iso">Select Species:</label>
+                        <select class="form-control" id="speciesID_iso" name="speciesID_iso" data-error="Please select the Species" required>
+                        <option value = "">Please Select </option>
+                        % while (my @row2 = $sth7->fetchrow_array()) {
+                            % my $value1 = $row2[0]; 
+                            % my $value2 = $row2[1]; 
+                            
+                            <option value = <%= $value1 %> > <%= $value2 %> </option>
+                        % }      
+                        </select>
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>
+            
+                    <div class="form-group has-feedback">
+                        <label for="neuropeptideID_iso">Select Neuropeptide:</label>
+                        <select class="form-control" id="neuropeptideID_iso" name="neuropeptideID_iso" data-error="Please select the Neuropeptide" required>
+                        <option value = "">Please Select </option>
+                        % while (my @row3 = $sth8->fetchrow_array()) {
+                            % my $value1 = $row3[0]; 
+                            % my $value2 = $row3[1]; 
+                            
+                            <option value = <%= $value1 %> > <%= $value2 %> </option>
+                        % } 
+                        </select>
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>
+                    
+                    <div class="form-group has-feedback">
+                        <label for="IsoformName">Isoform Name:</label>
+                        <input type="text" class="form-control" name="IsoformName" data-error="Please enter the Isoform Name" placeholder="Please enter the Isoform Name" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>     
+
+                    <div class="form-group has-feedback">
+                        <label for="IsoformAASeq">Isoform Amino Acid Sequence:</label>
+                        <input type="text" class="form-control" name="IsoformAASeq" data-error="Please enter the Isoform Amino Acid Sequence" placeholder="Please enter the Isoform Amino Acid Sequence" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>  
+
+                    <div class="form-group has-feedback">
+                        <label for="GenBankAscNum_iso">GenBank Ascension Number:</label>
+                        <input type="text" class="form-control" name="GenBankAscNum_iso" data-error="Please enter the GenBank Ascension Number" placeholder="Please enter the GenBank Ascension Number" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>
+            
+                    <div class="form-group has-feedback">
+                        <label for="GenBankAscNumURL_iso">GenBank Ascension Number URL :</label>
+                        <input type="text" class="form-control" name="GenBankAscNumURL_iso" data-error="Please enter the GenBank Ascension Number" placeholder="Please enter the GenBank Ascension Number" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div> 
+                    </div>   
+
+                    <button type="submit" class="formButton btn btn-default">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
+                    <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
+                </form>
+            </div>
+        </div>
+    </div>
     
     <!-- Form for GenBank Info-->
     <div class="panel panel-default">
 
         <div class="panel-heading">
         <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter new GenBank Information</a>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter new GenBank Information</a>
         </h4>
         </div>
         
@@ -232,8 +314,8 @@
                     </div>
             
                     <div class="form-group has-feedback">
-                        <label for="sel1">Select Neuropeptide:</label>
-                        <select class="form-control" id="sel2_gb" name="neuropeptideID_gb" data-error="Please select the Neuropeptide" required>
+                        <label for="neuropeptideID_gb">Select Neuropeptide:</label>
+                        <select class="form-control" id="neuropeptideID_gb" name="neuropeptideID_gb" data-error="Please select the Neuropeptide" required>
                         <option value = "">Please Select </option>
                         % while (my @row3 = $sth6->fetchrow_array()) {
                             % my $value1 = $row3[0]; 
@@ -271,7 +353,7 @@
 
         <div class="panel-heading">
             <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter new Neuropeptide Information</a>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter new Neuropeptide Information</a>
             </h4>
         </div>
         
@@ -306,7 +388,7 @@
 
         <div class="panel-heading">
             <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter new Order Information</a>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse6"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter new Order Information</a>
             </h4>
         </div>
         
@@ -332,7 +414,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapse6"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter a new Functionality Category</a>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse7"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter a new Functionality Category</a>
             </h4>
         </div>
 

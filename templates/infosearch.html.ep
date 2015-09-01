@@ -152,7 +152,55 @@
                         </div>
                     </div>
 
-                <h3> Gene Information </h3>
+                <h3> Isoform Information </h3>
+                    <div class="table-responsive">
+                        <div class="panel panel-default">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th> Isoform Name </th>
+                                        <th> Neuropeptide Name</th>
+                                        <th> Species Name</th>
+                                        <th> GenBank Ascension </th>
+                                        <th colspan="2" style="text-align:center"> FASTA Sequences</th>
+                                    </tr>
+                                </thead>
+                            
+                                <tbody>
+
+                                % foreach my $result (@{$IsoformInfo}) {
+                                    % my $value1 = $result->[0];
+                                    % my $value2 = $result->[1];
+                                    % my $value3 = $result->[2];
+                                    % my $value4 = $result->[3];
+                                    % my $value5 = $result->[4];
+                                    % my $value6 = $result->[5];
+                                    % my $value7 = $result->[6];
+
+                                    % my $fastalink = "/fasta?isoID=$value1";
+                                    % my $fastarel = "/fasta?neuropeptideID=$value7";
+
+                                    % if (!$value1) {
+                                        <h4> No results Found </h4>
+                                    % } else {
+                                        <tr>
+                                            <td><%= $value2 %></td>
+                                            <td><%= $value3 %></td>
+                                            <td><%= $value4 %></td>
+                                            <td><a target="_blank" href="<%= $value6 %> " data-toggle="tooltip" data-placement="bottom" title="Click to view external reference"><%= $value5 %></a></td>
+                                            <td style="text-align:center"><a target="_blank" href="<%= $fastalink %>" data-toggle="tooltip" data-placement="right" title="Click to obtain sequence in FASTA format"><button type="button" class="btn btn-success">Get FASTA</button></a></td>
+                                            <td style="text-align:center"><a target="_blank" href="<%= $fastarel %>" data-toggle="tooltip" data-placement="right" title="Click to obtain all related isoform sequences in FASTA format"><button type="button" class="btn btn-info">Get Related FASTA</button></a></td>
+                                        </tr>
+                                    % }
+
+                                % }
+        
+                                </tbody>
+                            </table>
+                        </div> 
+                    </div>  
+
+                <h3> GenBank Information </h3>
                     <div class="table-responsive">
                         <div class="panel panel-default">
                             <table class="table table-hover table-bordered">

@@ -1,0 +1,11 @@
+% layout 'plain';
+% title "nSP Quick Reference: FASTA File";
+
+% foreach my $result (@{$seqinfo}) {
+
+    % my $value1 = $result->[0];
+    % my $value2 = $result->[1];
+    
+    <p>&gt;<%= $value1 %><br>
+    <%= $value2 %></p>
+% }

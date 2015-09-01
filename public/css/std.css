@@ -52,3 +52,10 @@ h2 {
     padding-left: 0;
     margin: 20px 0 0;
 }
+
+#left, #right {
+    border: 1px solid white;
+    float: left;
+    min-height: 450px;
+    color: white;
+}
