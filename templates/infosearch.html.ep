@@ -48,9 +48,8 @@
                     <form method = "get" action = "/infosearch" data-toggle="validator" role="form">
      
                         <div class="form-group has-feedback">
-                            <label for="sel1">Select Species:</label>
-                            <select class="form-control" id="sel1" name="species" data-error="Please select a species" required>
-                            <option value = "">Please Select </option>
+                            <label for="sel1">Select Species:&nbsp;<a href="#" data-toggle="tooltip" title="For Windows, hold down the Ctrl button to select multiple options. For Mac, hold down the Cmd button to select multiple options."><span class="glyphicon glyphicon-info-sign"></span></a></label>
+                            <select multiple class="form-control" id="sel1" name="species" data-error="Please select a species" required>
                             % while (my @row = $sth->fetchrow_array()) {
                                 % my $value1 = $row[0]; 
                                 % my $value2 = $row[1]; 
@@ -61,9 +60,8 @@
                         </div>
 
                         <div class="form-group has-feedback">
-                            <label for="sel2">Select Neuropeptide:</label>
-                            <select class="form-control" id="sel2" name="neuropeptide" data-error="Please select a neuropeptide" required>
-                            <option value = "">Please Select </option>
+                            <label for="sel2">Select Neuropeptide:&nbsp;<a href="#" data-toggle="tooltip" title="For Windows, hold down the Ctrl button to select multiple options. For Mac, hold down the Cmd button to select multiple options."><span class="glyphicon glyphicon-info-sign"></span></a></label>
+                            <select multiple class="form-control" id="sel2" name="neuropeptide" data-error="Please select a neuropeptide" required>
                             % while (my @row2 = $sth2->fetchrow_array()) {
                                 % my $value1 = $row2[0]; 
                                 % my $value2 = $row2[1]; 
@@ -77,21 +75,16 @@
 
 
                         <div class="form-group has-feedback">
-                            <label for="sel3">Select Functionality:</label>
+                            <label for="sel3">Select Functionality:&nbsp;<a href="#" data-toggle="tooltip" title="For Windows, hold down the Ctrl button to select multiple options. For Mac, hold down the Cmd button to select multiple options."><span class="glyphicon glyphicon-info-sign"></span></a></label>
+                            <select multiple class="form-control" id="sel3" name="functionality" data-error="Please select at least one functionality" required>
                             % while (my @row3 = $sth3->fetchrow_array()) {
                                 % my $value1 = $row3[0]; 
                                 % my $value2 = $row3[1]; 
                         
-                                <div class="radio" >
-                                    <label><input type="radio" name="functionality" value=<%= $value1 %> data-error="Please select at least one functionality" required > <%= $value2 %> </label>
-                                </div>
+                                <option value = <%= $value1 %> > <%= $value2 %> </option>
                             % }  
+                            </select>
 
-                            <div class="radio" >
-                                <label><input type="radio" name="functionality" value="All" required> All functionalities</label>
-                            </div> 
-                            
-                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div>     
                         </div>
                             

@@ -4,6 +4,8 @@ use Mojolicious::Lite;
 use DBI;
 use DBD::mysql;
 
+use Data::Dumper;
+
 use Mojo::Parameters;
 
 app->config(hypnotoad => {listen => ['http://*:8080']});
@@ -37,71 +39,74 @@ app->attr(dbh => sub {
 any '/infosearch' => sub {
     my $self = shift;
 
-    my $functionality = "All";
-    my $species = $self->param('species');
-    my $neuropeptide = $self->param('neuropeptide');
-    $functionality = $self->param('functionality');
+    my $species = $self->every_param('species');
+    my $neuropeptide = $self->every_param('neuropeptide');
+    my $functionality = $self->every_param('functionality');
+
+    my (@species_array,@pep_array,@func_array);
+
+    foreach my $a(@{$species}){
+        push @species_array, $a;
+    }
+
+    my $species_list = join(',',@species_array);
+
+    foreach my $b(@{$neuropeptide}){
+        push @pep_array, $b;
+    }
     
+    my $neuropeptidelist = join(',',@pep_array);
+
+        foreach my $c(@{$functionality}){
+        push @func_array, $c;
+    }
+
+    my $functionality_list = join(',',@func_array);
+
+
     #Info Search Form Queries#
 
-    my ($cond1, $cond2, $cond3);
-
-    $cond1 = "SpeciesInfo.speciesID = ? ";
-    $cond2 = "NeuropeptideInfo.neuropeptideID = ? ";
-
-    if($functionality ne "All"){
-        $cond3 = "AND FuncCategories.funcID = ?";
-    }
-    else{
-        $cond3 = "";
-    }
-    
     my $query = '
             SELECT DISTINCT SpeciesInfo.SpeciesName, OrderInfo.OrderName, SpeciesInfo.CommonName, 
             SpeciesInfo.Importance, SpeciesInfo.GenomeSequence, SpeciesInfo.GenomeDatabase, SpeciesInfo.DatabaseURL, SpeciesInfo.SpeciesSource
             FROM SpeciesInfo, OrderInfo
             WHERE SpeciesInfo.orderID = OrderInfo.orderID
-            AND ('.$cond1.')
+            AND (SpeciesInfo.speciesID IN (' . join( ',', map { '?' } @species_array ) . '))
             ORDER BY SpeciesInfo.speciesID';
    
     my $query2 = '
+            SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, NeuroPepGeneInfo.GenBankAscNum, NeuroPepGeneInfo.GenBankAscNumURL
+            FROM NeuroPepGeneInfo, NeuropeptideInfo, SpeciesInfo
+            WHERE NeuroPepGeneInfo.speciesID = SpeciesInfo.speciesID
+            AND NeuroPepGeneInfo.neuropeptideID = NeuropeptideInfo.neuropeptideID
+            AND ( SpeciesInfo.speciesID IN (' . join( ',', map { '?' } @species_array ) . ') AND NeuropeptideInfo.neuropeptideID IN (' . join( ',', map { '?' } @pep_array ) . '))ORDER BY NeuropeptideInfo.neuropeptideID';
+
+    my $query3 = '
             SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, FuncCategories.FuncCategoryName, FuncInfo.FuncDescription, FuncInfo.FuncURL
             FROM NeuropeptideInfo, FuncCategories, FuncInfo , SpeciesInfo
             WHERE FuncInfo.speciesID = SpeciesInfo.speciesID
             AND FuncInfo.neuropeptideID = NeuropeptideInfo.neuropeptideID
             AND FuncInfo.funcID = FuncCategories.funcID
-            AND ( '.$cond1.'AND '.$cond2.$cond3.')ORDER BY NeuropeptideInfo.neuropeptideID, FuncCategories.FuncCategoryName';
+            AND ( SpeciesInfo.speciesID IN (' . join( ',', map { '?' } @species_array ) . ') AND NeuropeptideInfo.neuropeptideID IN (' . join( ',', map { '?' } @pep_array ) . ') AND FuncCategories.funcID IN (' . join( ',', map { '?' } @func_array ) . ') )ORDER BY NeuropeptideInfo.neuropeptideID, FuncCategories.FuncCategoryName';
 
-
-    my $query3 = '
-            SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, NeuroPepGeneInfo.GenBankAscNum, NeuroPepGeneInfo.GenBankAscNumURL
-            FROM NeuroPepGeneInfo, NeuropeptideInfo, SpeciesInfo
-            WHERE NeuroPepGeneInfo.speciesID = SpeciesInfo.speciesID
-            AND NeuroPepGeneInfo.neuropeptideID = NeuropeptideInfo.neuropeptideID
-            AND ( '.$cond1.'AND NeuropeptideInfo.neuropeptideID = ?)ORDER BY NeuropeptideInfo.neuropeptideID';
 
 
     my $dbh = $self->app->dbh;
 
     my $sth = $dbh->prepare($query);    
-    $sth->execute($species);
+    $sth->execute(@species_array);
 
     my $sth2 = $dbh->prepare($query2);  
-
-    if($functionality ne "All"){  
-        $sth2->execute($species,$neuropeptide,$functionality);
-    }
-    else{
-        $sth2->execute($species,$neuropeptide);
-    }
+    $sth2->execute(@species_array,@pep_array);
+    
     my $sth3 = $dbh->prepare($query3);    
-    $sth3->execute($species,$neuropeptide);
+    $sth3->execute(@species_array,@pep_array,@func_array);
     
     $self->stash(
-        species => $species,
+        species => $species_array[0],
         results => $sth->fetchall_arrayref,
-        FuncCategories => $sth2->fetchall_arrayref,
-        GenBankInfo => $sth3->fetchall_arrayref
+        GenBankInfo => $sth2->fetchall_arrayref,
+        FuncCategories => $sth3->fetchall_arrayref
     );
     
     $self->render('infosearch');
