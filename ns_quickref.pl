@@ -114,7 +114,7 @@ get '/infosearchw' => sub {
             ORDER BY SpeciesInfo.speciesID';
    
     my $query2 = '
-            SELECT DISTINCT NeuroPepIsoInfo.isoID, NeuroPepIsoInfo.IsoformName, NeuropeptideInfo.NeuropeptideName, SpeciesInfo.SpeciesName, NeuroPepIsoInfo.GenBankAscNum, NeuroPepIsoInfo.GenBankAscNumURL, NeuropeptideInfo.neuropeptideID
+            SELECT DISTINCT NeuroPepIsoInfo.isoID, NeuroPepIsoInfo.IsoformName, NeuroPepIsoInfo.IsoformAASeq, NeuroPepIsoInfo.Isoform_p_end, NeuroPepIsoInfo.Isoform_a_end, NeuropeptideInfo.NeuropeptideName, SpeciesInfo.SpeciesName, NeuroPepIsoInfo.GenBankAscNum, NeuroPepIsoInfo.GenBankAscNumURL, NeuropeptideInfo.neuropeptideID
             FROM NeuroPepIsoInfo, NeuropeptideInfo, SpeciesInfo
             WHERE NeuroPepIsoInfo.speciesID = SpeciesInfo.speciesID
             AND NeuroPepIsoInfo.neuropeptideID = NeuropeptideInfo.neuropeptideID
@@ -259,15 +259,17 @@ any '/infosubmit' => sub {
     my $neuropeptideID_iso = $self->param('neuropeptideID_iso');
     my $IsoformName = $self->param('IsoformName');
     my $IsoformAASeq = $self->param('IsoformAASeq');
+    my $Isoform_p_end = $self->param('Isoform_p_end');
+    my $Isoform_a_end = $self->param('Isoform_a_end');
     my $GenBankAscNum_iso = $self->param('GenBankAscNum_iso');
     my $GenBankAscNumURL_iso = $self->param('GenBankAscNumURL_iso');
     
     if($IsoformName){
 
-        my $query = 'INSERT INTO NeuroPepIsoInfo (speciesID,neuropeptideID,IsoformName,IsoformAASeq,GenBankAscNum,GenBankAscNumURL) VALUES (?,?,?,?,?,?)';
+        my $query = 'INSERT INTO NeuroPepIsoInfo (speciesID,neuropeptideID,IsoformName,IsoformAASeq,Isoform_p_end,Isoform_a_end,GenBankAscNum,GenBankAscNumURL) VALUES (?,?,?,?,?,?,?,?)';
 
         my $sth = $dbh->prepare($query);    
-        $sth->execute($speciesID_iso,$neuropeptideID_iso,$IsoformName,$IsoformAASeq,$GenBankAscNum_iso,$GenBankAscNumURL_iso);
+        $sth->execute($speciesID_iso,$neuropeptideID_iso,$IsoformName,$IsoformAASeq,$Isoform_p_end,$Isoform_a_end,$GenBankAscNum_iso,$GenBankAscNumURL_iso);
         $subsuccess = "Success";
 
     }

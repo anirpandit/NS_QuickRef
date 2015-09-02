@@ -183,6 +183,7 @@ optgroup {
 table {
   border-spacing: 0;
   border-collapse: collapse;
+  text-align:center
 }
 td,
 th {
@@ -2260,7 +2261,9 @@ caption {
   text-align: left;
 }
 th {
-  text-align: left;
+  text-align: center;
+  background-color: #6699CC;
+  color: #fff;
 }
 .table {
   width: 100%;

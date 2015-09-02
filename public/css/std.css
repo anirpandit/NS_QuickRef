@@ -1,3 +1,7 @@
+/* Colour of th header #6699CC */
+/* Body, Header, Navbar, etc, #003366 */
+
+
 body {
     color: #003366;
 }
@@ -56,4 +60,28 @@ h2 {
 .fastafont { 
   font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
   color: #000000;
+}
+
+ span.bold-red {
+    color: red;
+    font-weight: bold;
+}
+
+
+.btn-fasta {
+  background-color: hsl(209, 50%, 45%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#4b89c3", endColorstr="#3974ac");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#4b89c3), to(#3974ac));
+  background-image: -moz-linear-gradient(top, #4b89c3, #3974ac);
+  background-image: -ms-linear-gradient(top, #4b89c3, #3974ac);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4b89c3), color-stop(100%, #3974ac));
+  background-image: -webkit-linear-gradient(top, #4b89c3, #3974ac);
+  background-image: -o-linear-gradient(top, #4b89c3, #3974ac);
+  background-image: linear-gradient(#4b89c3, #3974ac);
+  border-color: #3974ac #3974ac hsl(209, 50%, 43%);
+  color: #fff !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.13);
+  -webkit-font-smoothing: antialiased;
+}
 }
