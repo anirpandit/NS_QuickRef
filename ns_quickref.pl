@@ -68,8 +68,14 @@ any '/fasta' => sub {
     $self->render('fasta');
 };
 
+
+get '/infosearch' => sub {
+    my $self = shift;
+    $self->render('infosearch');
+};
+
 #Gene Search Form route#
-any '/infosearch' => sub {
+get '/infosearchw' => sub {
     my $self = shift;
 
     my $species = $self->every_param('species');
@@ -137,7 +143,7 @@ any '/infosearch' => sub {
     my $dbh = $self->app->dbh;
 
     my $sth = $dbh->prepare($query);    
-    $sth->execute(@species_array);
+    if($species){$sth->execute(@species_array);}
 
     my $sth2 = $dbh->prepare($query2);  
     $sth2->execute(@species_array,@pep_array);
@@ -156,7 +162,7 @@ any '/infosearch' => sub {
         FuncCategories => $sth4->fetchall_arrayref
     );
     
-    $self->render('infosearch');
+    $self->render('infosearchw');
 };
 
 #Info Submit Form route#
