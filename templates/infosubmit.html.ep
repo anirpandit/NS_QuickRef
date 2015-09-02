@@ -106,14 +106,14 @@
 
                         <div class="form-group has-feedback">
                             <label for="GenomeDatabase">Genome Database :</label>
-                            <input type="text" class="form-control" name="GenomeDatabase" data-error="Please enter the Genome Database for this species" placeholder="Please enter the Genome Database for this species"required>
+                            <input type="text" class="form-control" name="GenomeDatabase" data-error="Please enter the Genome Database for this species (or &quot;NA&quot; if not available)" placeholder="Please enter the Genome Database for this species (or &quot;NA&quot; if not available)"required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div>   
                         </div>
                         
                         <div class="form-group has-feedback">
                             <label for="DatabaseURL">Genome Database URL :</label>
-                            <input type="text" class="form-control" name="DatabaseURL" data-error="Please enter the Genome Database URL for this species" placeholder="Please enter the Genome Database URL for this species" required>
+                            <input type="text" class="form-control" name="DatabaseURL" data-error="Please enter the Genome Database URL for this species (or &quot;NA&quot; if not available)" placeholder="Please enter the Genome Database URL for this species (or &quot;NA&quot; if not available)" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div>   
                         </div>   
@@ -190,14 +190,14 @@
 
                         <div class="form-group has-feedback">
                             <label for="FuncDescription">Functionality Description :</label>
-                            <input type="text" class="form-control" name="FuncDescription" data-error="Please enter the Functionality Description" placeholder="Please enter the Functionality Description"required>
+                            <input type="text" class="form-control" name="FuncDescription" data-error="Please enter the Functionality Description (or &quot;NA&quot; if not available)" placeholder="Please enter the Functionality Description (or &quot;NA&quot; if not available)"required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div>  
                         </div>
             
                         <div class="form-group has-feedback">
                             <label for="FuncURL">Functionality URL :</label>
-                            <input type="text" class="form-control" name="FuncURL" data-error="Please enter the Functionality URL" placeholder="Please enter the Functionality URL"required>
+                            <input type="text" class="form-control" name="FuncURL" data-error="Please enter the Functionality URL (or &quot;NA&quot; if not available)" placeholder="Please enter the Functionality URL (or &quot;NA&quot; if not available)"required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div>  
                         </div>   
@@ -268,25 +268,25 @@
                             </div>  
 
                             <div class="checkbox">
-                                <label for="Isoform_p_end"><input type="checkbox" name="Isoform_p_end" value="1">Does the sequence have a Polyglutamate end ?</label>
+                                <label for="Isoform_p_end"><input type="checkbox" name="Isoform_p_end" value="1">Please tick if the sequence has a Polyglutamate end </label>
                             </div>
 
                             <div class="checkbox">
-                                <label for="Isoform_a_end"><input type="checkbox" name="Isoform_a_end" value="1">Does the sequence have an Amidated end ?</label>
+                                <label for="Isoform_a_end"><input type="checkbox" name="Isoform_a_end" value="1">Please tick if the sequence has an Amidated end </label>
                             </div>
                         </div>
                     
 
                         <div class="form-group has-feedback">
                             <label for="GenBankAscNum_iso">GenBank Ascension Number:</label>
-                            <input type="text" class="form-control" name="GenBankAscNum_iso" data-error="Please enter the GenBank Ascension Number" placeholder="Please enter the GenBank Ascension Number" required>
+                            <input type="text" class="form-control" name="GenBankAscNum_iso" data-error="Please enter the GenBank Ascension Number (or &quot;NA&quot; if not available)" placeholder="Please enter the GenBank Ascension Number (or &quot;NA&quot; if not available)" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div>  
                         </div>
                 
                         <div class="form-group has-feedback">
                             <label for="GenBankAscNumURL_iso">GenBank Ascension Number URL :</label>
-                            <input type="text" class="form-control" name="GenBankAscNumURL_iso" data-error="Please enter the GenBank Ascension Number" placeholder="Please enter the GenBank Ascension Number" required>
+                            <input type="text" class="form-control" name="GenBankAscNumURL_iso" data-error="Please enter the GenBank Ascension Number (or &quot;NA&quot; if not available)" placeholder="Please enter the GenBank Ascension Number (or &quot;NA&quot; if not available)" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div> 
                         </div>   
@@ -307,7 +307,7 @@
             </h4>
             </div>
             
-            <div id="collapse3" class="panel-collapse collapse">
+            <div id="collapse4" class="panel-collapse collapse">
                 <div class="panel-body">
                     <form method = "post" action = "/infosubmit" data-toggle="validator" role="form">
          
@@ -341,14 +341,14 @@
 
                         <div class="form-group has-feedback">
                             <label for="GenBankAscNum">GenBank Ascension Number:</label>
-                            <input type="text" class="form-control" name="GenBankAscNum" data-error="Please enter the GenBank Ascension Number" placeholder="Please enter the GenBank Ascension Number" required>
+                            <input type="text" class="form-control" name="GenBankAscNum" data-error="Please enter the GenBank Ascension Number (or &quot;NA&quot; if not available)" placeholder="Please enter the GenBank Ascension Number (or &quot;NA&quot; if not available)" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div>  
                         </div>
                 
                         <div class="form-group has-feedback">
                             <label for="GenBankAscNumURL">GenBank Ascension Number URL :</label>
-                            <input type="text" class="form-control" name="GenBankAscNumURL" data-error="Please enter the GenBank Ascension Number" placeholder="Please enter the GenBank Ascension Number" required>
+                            <input type="text" class="form-control" name="GenBankAscNumURL" data-error="Please enter the GenBank Ascension Number (or &quot;NA&quot; if not available)" placeholder="Please enter the GenBank Ascension Number (or &quot;NA&quot; if not available)" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div> 
                         </div>   
@@ -369,7 +369,7 @@
                 </h4>
             </div>
             
-            <div id="collapse4" class="panel-collapse collapse">
+            <div id="collapse5" class="panel-collapse collapse">
                 <div class="panel-body">
                     <form method = "post" action = "/infosubmit" data-toggle="validator" role="form">
          
@@ -404,7 +404,7 @@
                 </h4>
             </div>
             
-            <div id="collapse5" class="panel-collapse collapse">
+            <div id="collapse6" class="panel-collapse collapse">
                 <div class="panel-body">
                     <form method = "post" action = "/infosubmit" data-toggle="validator" role="form">
          
@@ -431,7 +431,7 @@
             </div>
 
             
-            <div id="collapse6" class="panel-collapse collapse">
+            <div id="collapse7" class="panel-collapse collapse">
                 <div class="panel-body">
                     <form method = "post" action = "/infosubmit" data-toggle="validator" role="form">
          
