@@ -23,7 +23,7 @@
 %   my $collapseopt = "in";
 %   my $SearchFormTitle = "Perform a Search";
 
-%   if ($species) {
+%   if ($species || $neuropeptide || $functionality) {
 %       $collapseopt = "";
 %       $SearchFormTitle = "Click here to perform a new Search";
 %   }
@@ -99,7 +99,7 @@
 
 %   #If results found, they are displayed below
 
-% if ($species) {
+% if ($species || $neuropeptide || $functionality) {
     
     <div class="container">
         <div class="panel panel-default">

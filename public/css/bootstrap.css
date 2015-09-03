@@ -5012,11 +5012,13 @@ a.badge:focus {
   margin-left: 3px;
 }
 .jumbotron {
+  font-family: 'Syncopate', serif;
+  font-weight: bold;
   padding-top: 30px;
   padding-bottom: 30px;
   margin-bottom: 30px;
-  color: inherit;
-  background-color: #eee;
+  color: #ffffff;
+  background-color: #0088CE;
 }
 .jumbotron h1,
 .jumbotron .h1 {
@@ -5049,7 +5051,7 @@ a.badge:focus {
   }
   .jumbotron h1,
   .jumbotron .h1 {
-    font-size: 63px;
+    font-size: 50px;
   }
 }
 .thumbnail {
@@ -5517,6 +5519,7 @@ button.list-group-item-danger.active:focus {
   border-bottom: 1px solid transparent;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
+
 }
 .panel-heading > .dropdown .dropdown-toggle {
   color: inherit;
@@ -5525,7 +5528,7 @@ button.list-group-item-danger.active:focus {
   margin-top: 0;
   margin-bottom: 0;
   font-size: 16px;
-  color: #003366;
+  color: #ffffff;
 }
 .panel-title > a,
 .panel-title > small,
@@ -5741,7 +5744,7 @@ button.list-group-item-danger.active:focus {
 }
 .panel-default > .panel-heading {
   color: #333;
-  background-color: #f5f5f5;
+  background-color: #0088CE;
   border-color: #ddd;
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {

@@ -1,9 +1,11 @@
 /* Colour of th header #6699CC */
 /* Body, Header, Navbar, etc, #003366 */
+/* colour of jumbotron and panel headers #CAE5FF */
 
 
 body {
     color: #003366;
+    
 }
 
 h1 {

@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="/css/bootstrap.css">
         <link rel="stylesheet" href="/css/std.css">
         <link rel="shortcut icon" href="/img/favicon.ico" />
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Syncopate">
 
         <title><%= title %></title>
     </head>
