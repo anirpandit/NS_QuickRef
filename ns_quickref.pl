@@ -105,7 +105,7 @@ get '/infosearchw' => sub {
     my $dbh = $self->app->dbh;
     
     #Info Search Form Queries#
-    my $species_cond = "SELECT SpeciesInfo.speciesID FROM SpeciesInfo";
+    my $species_cond = "SELECT DISTINCT SpeciesInfo.speciesID FROM SpeciesInfo";
     
     if($species_array[0]){
         $species_cond = join( ',', map { '?' } @species_array );    
@@ -114,7 +114,11 @@ get '/infosearchw' => sub {
     my $pep_cond = "SELECT neuropeptideID FROM NeuropeptideInfo";
     
     if($pep_array[0]){
-        $pep_cond = join( ',', map { '?' } @pep_array );    
+        $pep_cond = join( ',', map { '?' } @pep_array );
+        my $pep_string = join(',', @pep_array);
+        if(!$species_array[0]){
+            $species_cond = 'SELECT DISTINCT NeuroPepIsoInfo.speciesID FROM NeuroPepIsoInfo WHERE NeuroPepIsoInfo.neuropeptideID IN ('.$pep_string.')';
+        }    
     }
 
 
@@ -124,10 +128,10 @@ get '/infosearchw' => sub {
         $func_cond = join( ',', map { '?' } @func_array ); 
         my $func_string = join(',',@func_array);
         if(!$pep_array[0]){
-            $pep_cond = 'SELECT FuncInfo.neuropeptideID FROM FuncInfo WHERE FuncInfo.funcID IN ('.$func_string.')';
+            $pep_cond = 'SELECT DISTINCT FuncInfo.neuropeptideID FROM FuncInfo WHERE FuncInfo.funcID IN ('.$func_string.')';
         }  
         if(!$species_array[0]){
-            $species_cond = 'SELECT FuncInfo.speciesID FROM FuncInfo WHERE FuncInfo.funcID IN ('.$func_string.')';
+            $species_cond = 'SELECT DISTINCT FuncInfo.speciesID FROM FuncInfo WHERE FuncInfo.funcID IN ('.$func_string.')';
         }
     }
 
