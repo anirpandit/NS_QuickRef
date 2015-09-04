@@ -26,6 +26,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
+                        <li><a href="home"> Home </a></li>
                         <li><a href="infosearch">Info Search</a></li>
                         <li><a href="infosubmit">Info Submit</a></li>
                     </ul>
@@ -33,13 +34,6 @@
             </div>
         </nav>
 
-        <div class="container">
-            <div class="row jumbotron">
-                <div class="col-sm-1"><img style="max-width:150px; align:center; valign:middle" src="/img/nsplogo.jpg"></div>
-                <div class="col-sm-11"><h1 align="center">nEUROSTRESSPEP Quick Reference Tool</h1></div>
-            </div>
-
-        </div>
         <div class="container-fluid">
             <%= content %>
         </div>

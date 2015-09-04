@@ -68,6 +68,29 @@ any '/fasta' => sub {
     $self->render('fasta');
 };
 
+any '/imagesearch' => sub {
+    my $self = shift;
+
+    my $idID = $self->param('linktoimage');
+    my $query = '
+            SELECT DISTINCT NeuropeptideInfo.NeuropeptideName, SpeciesInfo.SpeciesName, FuncInfo.ImageTitle, FuncInfo.ImageLegend
+            FROM FuncInfo, NeuropeptideInfo, SpeciesInfo
+            WHERE
+            FuncInfo.neuropeptideID = NeuropeptideInfo.neuropeptideID
+            AND FuncInfo.speciesID = SpeciesInfo.speciesID  
+            AND FuncInfo.idID = ?';
+
+    my $dbh = $self->app->dbh;
+    my $sth = $dbh->prepare($query);    
+    $sth->execute($idID);
+
+    $self->stash(
+        imginfo => $sth->fetchall_arrayref
+    );
+
+    $self->render('imagesearch');
+};
+
 
 get '/infosearch' => sub {
     my $self = shift;
@@ -160,7 +183,7 @@ get '/infosearchw' => sub {
             ORDER BY SpeciesInfo.speciesID';
 
     my $query4 = '
-            SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, FuncCategories.FuncCategoryName, FuncInfo.FuncDescription, FuncInfo.FuncURL
+            SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, FuncCategories.FuncCategoryName, FuncInfo.FuncDescription, FuncInfo.FuncURL, FuncInfo.idID
             FROM NeuropeptideInfo, FuncCategories, FuncInfo , SpeciesInfo
             WHERE FuncInfo.speciesID = SpeciesInfo.speciesID
             AND FuncInfo.neuropeptideID = NeuropeptideInfo.neuropeptideID
@@ -259,13 +282,23 @@ any '/infosubmit' => sub {
     my $funcID = $self->param('funcID');
     my $FuncDescription = $self->param('FuncDescription');
     my $FuncURL = $self->param('FuncURL');
+    my $ImageTitle = $self->param('ImageTitle');
+    my $ImageLegend = $self->param('ImageLegend');
+    my $ImageUpload = $self->req->upload('ImageUpload');
 
+    my $filename = '';
+    if($ImageUpload){
+        my $fileName = $ImageUpload->filename =~ s/[^\w\d\.]+/_/gr;    
+        $ImageUpload->move_to("/Users/Blackbelly/Sites/NS_QuickRef/public/npimages/$fileName");
+    }
+
+    
     if($FuncDescription){
 
-        my $query = 'INSERT INTO FuncInfo (speciesID,neuropeptideID,funcID,FuncDescription,FuncURL) VALUES (?,?,?,?,?)';
+        my $query = 'INSERT INTO FuncInfo (speciesID,neuropeptideID,funcID,FuncDescription,FuncURL,ImageTitle,ImageLegend) VALUES (?,?,?,?,?,?,?)';
 
         my $sth = $dbh->prepare($query);    
-        $sth->execute($speciesID,$neuropeptideID,$funcID,$FuncDescription,$FuncURL);
+        $sth->execute($speciesID,$neuropeptideID,$funcID,$FuncDescription,$FuncURL,$ImageTitle,$ImageLegend);
         $subsuccess = "Success";
 
     }

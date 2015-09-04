@@ -1,7 +1,6 @@
 % layout 'default';
 % title "nSP Quick Reference: Information Search";
 
-
 %   #Common $dbh helper
 %   my $dbh = $self->app->dbh;
 
@@ -147,7 +146,7 @@
                                             <td>-</td>
                                         % }
                                         % else {
-                                            <td><a target="_blank" href="<%= $DatabaseURL %> " data-toggle="tooltip" data-placement="right" title="Click to view external reference"><%= $GenomeDatabase %></a></td>
+                                            <td><a target="_blank" href="<%= $DatabaseURL %> " data-toggle="tooltip" data-placement="right" title="Click to view external reference"><button type="button" class="btn btn-default btn-block"><%= $GenomeDatabase %></button></a></td>
                                         % }
                                         <td><%= $SpeciesSource %></td>
                                     </tr>
@@ -227,8 +226,8 @@
                             <table class="table table-hover table-bordered">
                                 <thead>
                                     <tr>
-                                        <th> Species Name</th>
                                         <th> Neuropeptide Name</th>
+                                        <th> Species Name</th>
                                         <th> GenBank Ascension </th>
                                     </tr>
                                 </thead>
@@ -245,8 +244,8 @@
                                         <h4> No results Found </h4>
                                     % } else {
                                         <tr>
-                                            <td><%= $SpeciesName %></td>
                                             <td><%= $NeuropeptideName %></td>
+                                            <td><%= $SpeciesName %></td>
                                             % if($GenBankAscNum eq 'NA' || $GenBankAscNumURL eq 'NA'){
                                                 <td>-</td>
                                             % }
@@ -269,11 +268,12 @@
                             <table class="table table-hover table-bordered">
                                 <thead>
                                     <tr>
-                                        <th> Species Name</th>
                                         <th> Neuropeptide Name</th>
+                                        <th> Species Name</th>
                                         <th> Functionality Category</th>
                                         <th> Functionality Description </th>
-                                        <th> Reference </th>
+                                        <th> Functionality Reference </th>
+                                        <th> Image </th>
                                     </tr>
                                 </thead>
                                 
@@ -286,10 +286,13 @@
                                     % my $FuncCategoryName = $result->[2];
                                     % my $FuncDescription = $result->[3];
                                     % my $FuncURL = $result->[4];
+                                    % my $idID = $result->[5];
+
+                                    % my $imagelink = "/imagesearch?linktoimage=$idID";
 
                                     <tr>
-                                        <td><%= $SpeciesName %></td>
                                         <td><%= $NeuropeptideName %></td>
+                                        <td><%= $SpeciesName %></td>
                                         <td><%= $FuncCategoryName %></td>
                                         % if($FuncDescription eq 'NA' || $FuncURL eq 'NA'){
                                             <td>-</td>
@@ -298,7 +301,9 @@
                                         % else {
                                             <td><%= $FuncDescription %></td>
                                             <td><a target="_blank" href="<%= $FuncURL %> " data-toggle="tooltip" data-placement="right" title="Click to view external reference"><button type="button" class="btn btn-two">Get Reference</button></a></td>
-                                        % }                                        
+                                        % } 
+
+                                        <td><a target="_blank" href="<%= $imagelink %> " data-toggle="tooltip" data-placement="right" title="Click to view Image "><button type="button" class="btn btn-one">Get Image</button></a></td>                                      
                                         
                                     </tr>
                                 % } 

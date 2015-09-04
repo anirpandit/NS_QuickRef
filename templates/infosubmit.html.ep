@@ -143,7 +143,7 @@
         
             <div id="collapse2" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <form method = "post" action = "/infosubmit" data-toggle="validator" role="form">
+                    <form method = "post" action = "/infosubmit" data-toggle="validator" role="form" enctype="multipart/form-data">
      
                         <div class="form-group has-feedback">
                             <label for="speciesID">Select Species:</label>
@@ -200,7 +200,29 @@
                             <input type="text" class="form-control" name="FuncURL" data-error="Please enter the Functionality URL (or &quot;NA&quot; if not available)" placeholder="Please enter the Functionality URL (or &quot;NA&quot; if not available)"required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div>  
-                        </div>   
+                        </div>  
+
+                        <div class="form-group has-feedback">
+                            <label for="ImageTitle">Image Title :</label>
+                            <input type="text" class="form-control" name="ImageTitle" data-error="Please enter the Image Title (make sure it corresponds to the name of the Image File)" placeholder="Please enter the Image Title (make sure it corresponds to the name of the Image File)"required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>  
+                        </div>
+            
+                        <div class="form-group has-feedback">
+                            <label for="FuncURL">Image Legend :</label>
+                            <input type="text" class="form-control" name="ImageLegend" data-error="Please enter the legend or appropriate description for the image" placeholder="Please enter the legend or appropriate description for the image"required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>  
+                        </div>  
+
+                        <div class="form-group has-feedback">
+                            <label for="ImageUpload">Image Upload :</label>
+                            <input type="file" class="form-control" name="ImageUpload" data-error="" placeholder="" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>  
+                        </div>  
+
 
                         <button type="submit" class="formButton btn btn-default">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
                         <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>

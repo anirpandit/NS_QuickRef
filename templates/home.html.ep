@@ -2,19 +2,28 @@
 % title 'NeuroStressPep Quick Reference';
 
 <div class="container">
-<h1>Welcome</h1>
+    <div class="row jumbotron">
+        <div ><img class="img-responsive center-block" style="max-width:150px; align:center; valign:middle" src="/img/nsplogo.jpg"></div>
+        <div><h5 style="text-align:center">Novel biocontrol agents for insect pests from neuroendocrinology</h5></div>
+        <div><h1 align="center"><strong>nEUROSTRESSPEP Quick Reference Tool</strong></h1></div>
+    </div>
+</div>
+
+<div class="container">
+<h1>Welcome to nEUROSTRESSPEP</h1>
+
   <div class="row">
     <div class="col-md-3">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <p>nEUROSTRESSPEP is a Horizon 2020 grant, funded by the European Union. We are a large consortium of 14 collaborators, spanning both hemispheres, dedicated to identifying new and 'greener' ways of controlling pest insect populations in the context of integrated pest management.</p>
     </div>
     <div class="col-md-3">        
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>      
+      <p>Specifically, we plan to use the insects own neuropeptide hormones, or synthetic mimetics, to selectively control insect pests of agriculture, horticulture and forestry, while preserving beneficial insects (such as honeybees).</p>      
     </div>
     <div class="col-md-3">        
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>      
+      <p>Our consortium partners cover the full spectrum from research lab to test field.</p>      
     </div>
     <div class="col-md-3">        
-      <p><strong>Note: On a large screen the content will be displayed as a four-column layout. (Just enlarge the browser window to see the effect). However, the content will automatically adjust itself into a single-column layout on a small screen. So, with Bootstrap, our page is now responsive to the screen size and adjusts itself accordingly.</strong></p>
+      <p>This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 634361</p>
     </div>
   </div>
 </div>
