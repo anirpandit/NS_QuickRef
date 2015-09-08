@@ -1,0 +1,93 @@
+% layout 'default';
+% title "nSP Quick Reference: Information Search";
+
+
+%   #Common $dbh helper
+%   my $dbh = $self->app->dbh;
+
+%   #Query to get values for the Species Select Dropdown
+%   my $query = "SELECT speciesID, SpeciesName FROM SpeciesInfo ";
+%   my $sth = $dbh->prepare($query);    
+%   $sth->execute();
+
+%   #Query to get values for the Neuropeptides Select Dropdown
+%   my $query2 = "SELECT neuropeptideID, NeuropeptideName FROM NeuropeptideInfo ";
+%   my $sth2 = $dbh->prepare($query2);    
+%   $sth2->execute();
+
+%   #Query to get values for the Functionality Categories Select Dropdown
+%   my $query3 = "SELECT funcID, FuncCategoryName FROM FuncCategories ";
+%   my $sth3 = $dbh->prepare($query3);    
+%   $sth3->execute();
+
+%   my $collapseopt = "in";
+%   my $SearchFormTitle = "Perform a Search";
+
+<div class="container">
+    <h1>nSP Quick Reference: Information Search</h1>
+
+    <div class="row">
+        <div class="col-md-12"><p>The following form can be used to search for data currently held for the references to various functionalities per species per neuropeptide.</p></div>
+    </div>
+       
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default"> 
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><span class="glyphicon glyphicon-edit"></span>&nbsp;<%= $SearchFormTitle %></a>
+                </h4>
+            </div>
+            
+            <div id="collapse1" class="panel-collapse collapse <%= $collapseopt %>">
+                <div class="panel-body">
+                    <form method = "get" action = "/infosearchw" data-toggle="validator" role="form">
+     
+                        <div class="form-group has-feedback">
+                            <label for="sel1">Select Species:&nbsp;<a href="#" data-toggle="tooltip" title="For Windows, hold down the Ctrl button to select multiple options. For Mac, hold down the Cmd button to select multiple options."><span class="glyphicon glyphicon-info-sign"></span></a></label>
+                            <select multiple class="form-control" id="sel1" name="species" data-error="Please select a species" >
+                            % while (my @row = $sth->fetchrow_array()) {
+                                % my $value1 = $row[0]; 
+                                % my $value2 = $row[1]; 
+                                <option value = <%= $value1 %> > <%= $value2 %> </option>
+                            % }      
+                            </select>
+                            <div class="help-block with-errors alert-message"></div>        
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <label for="sel2">Select Neuropeptide:&nbsp;<a href="#" data-toggle="tooltip" title="For Windows, hold down the Ctrl button to select multiple options. For Mac, hold down the Cmd button to select multiple options."><span class="glyphicon glyphicon-info-sign"></span></a></label>
+                            <select multiple class="form-control" id="sel2" name="neuropeptide" data-error="Please select a neuropeptide" >
+                            % while (my @row2 = $sth2->fetchrow_array()) {
+                                % my $value1 = $row2[0]; 
+                                % my $value2 = $row2[1]; 
+                        
+                                <option value = <%= $value1 %> > <%= $value2 %> </option>
+                            % }         
+                            </select>
+                                
+                            <div class="help-block with-errors alert-message"></div>     
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <label for="sel3">Select Functionality:&nbsp;<a href="#" data-toggle="tooltip" title="For Windows, hold down the Ctrl button to select multiple options. For Mac, hold down the Cmd button to select multiple options."><span class="glyphicon glyphicon-info-sign"></span></a></label>
+                            <select multiple class="form-control" id="sel3" name="functionality" data-error="Please select at least one functionality" >
+                            % while (my @row3 = $sth3->fetchrow_array()) {
+                                % my $value1 = $row3[0]; 
+                                % my $value2 = $row3[1]; 
+                        
+                                <option value = <%= $value1 %> > <%= $value2 %> </option>
+                            % }  
+                            </select>
+
+                            <div class="help-block with-errors alert-message"></div>     
+                        </div>
+                            
+                        <button type="submit" class="formButton btn btn-default">Search&nbsp;<span class="glyphicon glyphicon-search"></span></button>
+                        <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove-sign"></span></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

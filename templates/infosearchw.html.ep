@@ -165,7 +165,7 @@
                                         <th style="text-align:center"> Isoform Name </th>
                                         <th> Neuropeptide Name</th>
                                         <th> Species Name</th>
-                                        <th> Amino Acid Sequence <span data-toggle="tooltip" data-placement="right" title="Please note : (Where applicable) the &quot;p&quot; prefix stands for Polyglutamate while the &quot;a&quot; stands for Amidation" class="glyphicon glyphicon-info-sign"></span></th>
+                                        <th> Amino Acid Sequence <span data-toggle="tooltip" data-placement="right" title="Please note : (Where applicable) the &quot;p&quot; prefix stands for Pyroglutamate while the &quot;a&quot; stands for Amidation" class="glyphicon glyphicon-info-sign"></span></th>
                                         <th colspan="2" > FASTA Sequences</th>
                                         <th> GenBank Ascension </th>
                                     </tr>
