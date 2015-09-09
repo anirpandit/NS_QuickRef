@@ -35,7 +35,7 @@
                                 <li><a href="get_iso_info">Isoform Information</a></li>
                                 <li><a href="get_gb_info">GenBank Information</a></li>
                                 <li><a href="get_np_info">Neuropeptide Information</a></li>
-                                <li><a href="get_order_info">Order Information</a></li>
+                                <li><a href="get_order">Order Information</a></li>
                                 <li><a href="get_func_cat">Functionality Category</a></li>
                             </ul>
                         </li>

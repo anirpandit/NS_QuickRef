@@ -26,7 +26,7 @@
                     % my $FuncCategoryName = $result->[1];
 
                     <tr>
-                    <td><button type="button" class="btn btn-danger round" data-href="/get_func_cat?del=1&funcID=<%= $funcID %>" data-toggle="modal" data-target="#confirm-delete"><span class="glyphicon glyphicon-trash"></span> D</button>
+                    <td class="col-md-2"><button type="button" class="btn btn-danger round" data-href="/get_func_cat?del=1&funcID=<%= $funcID %>" data-toggle="modal" data-target="#confirm-delete"><span class="glyphicon glyphicon-trash"></span> D</button>
                         <a href="/get_func_cat?edit=1&funcID=<%= $funcID %>"><button type="button" class="btn btn-info round" ><span class="glyphicon glyphicon-pencil"></span> E</button></a></td>
                         <td><%= $FuncCategoryName %></td>
                         
@@ -142,31 +142,9 @@
 
 % if($message_to_page){
 
-    <div class="container">
+    % use Subs qw(alertMessage);
+    % my ($message_alert)=Subs::alertMessage($message_to_page);
 
-        % if($message_to_page == 3){
-            <div class="alert alert-warning alert-fixed">
-        % }
-        % else{
-            <div class="alert alert-success alert-fixed">
-        % }
-
-        % if($message_to_page == 1){
-            <strong>Success!</strong> The record has been successfully created.
-        % }
-        % elsif($message_to_page == 2){
-            <strong>Success!</strong> The record has been successfully deleted.
-        % }
-        % elsif($message_to_page == 3){
-            <strong>Alert ! </strong> Please edit the record in the highlighted Edit Section.
-        % }
-        % elsif($message_to_page == 4){
-            <strong>Success ! </strong> The record has been successfully updated.
-        % }
-
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-
-            </div>
-    </div>
+    <div class="container"><%== $message_alert %></div>
 % }
 

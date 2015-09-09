@@ -1,8 +1,8 @@
 % layout 'default';
-% title "nSP Quick Reference: Functionality Category Management";
+% title "nSP Quick Reference: Order Management";
 
 <div class="container">
-    <h1> nSP Quick Reference: Functionality Category Management</h1>
+    <h1> nSP Quick Reference: Order Management</h1>
 
     <div class="row">
         <div class="col-md-12"><p>The following forms can be used to enter new data into the backed databases. Please use correct forms by clicking on the header for the information you would like to enter data for. Please make sure you have entered the correct information prior to submitting the form.</p></div>
@@ -15,20 +15,20 @@
                 <thead>
                     <tr>
                         <th> Operations </th>
-                        <th> Functionality Category</th>
+                        <th> Order Name</th>
 
                     </tr>
                 </thead>
 
                 <tbody>
-                % foreach my $result (@{$func_cat_info}) {
-                    % my $funcID = $result->[0];
-                    % my $FuncCategoryName = $result->[1];
+                % foreach my $result (@{$order_info}) {
+                    % my $orderID = $result->[0];
+                    % my $OrderName = $result->[1];
 
                     <tr>
-                    <td><button type="button" class="btn btn-danger round" data-href="/get_func_cat?del=1&funcID=<%= $funcID %>" data-toggle="modal" data-target="#confirm-delete"><span class="glyphicon glyphicon-trash"></span> D</button>
-                        <a href="/get_func_cat?edit=1&funcID=<%= $funcID %>"><button type="button" class="btn btn-info round" ><span class="glyphicon glyphicon-pencil"></span> E</button></a></td>
-                        <td><%= $FuncCategoryName %></td>
+                    <td class="col-md-2"><button type="button" class="btn btn-danger round" data-href="/get_order?del=1&orderID=<%= $orderID %>" data-toggle="modal" data-target="#confirm-delete"><span class="glyphicon glyphicon-trash"></span> D</button>
+                        <a href="/get_order?edit=1&orderID=<%= $orderID %>"><button type="button" class="btn btn-info round" ><span class="glyphicon glyphicon-pencil"></span> E</button></a></td>
+                        <td><%= $OrderName %></td>
                         
                     </tr>
                 % }  
@@ -61,7 +61,7 @@
     </div>
 
 
-% if(defined $func_cat_edit_array){
+% if(defined $order_edit_array){
 
     <div class="panel-group" id="accordion">
 
@@ -69,7 +69,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Functionality Category</a>
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Order Name</a>
                 </h4>
             </div>
 
@@ -77,16 +77,16 @@
             <div id="collapse1" class="panel-collapse collapse in">
                 <div class="panel-body-warning">
                 
-                % foreach my $result (@{$func_cat_edit_array}) {
-                    % my $funcID = $result->[0];
-                    % my $FuncCategoryName = $result->[1];
+                % foreach my $result (@{$order_edit_array}) {
+                    % my $orderID = $result->[0];
+                    % my $OrderName = $result->[1];
                     
-                    <form method = "post" action = "/get_func_cat?update=1" data-toggle="validator" role="form">
+                    <form method = "post" action = "/get_order?update=1" data-toggle="validator" role="form">
          
                         <div class="form-group has-feedback">
-                            <label for="FuncCategoryName">Functionality Category :</label>
-                            <input type="hidden" name = "funcID" value = "<%= $funcID%>">
-                            <input type="text" class="form-control" name="FuncCategoryName" value = "<%= $FuncCategoryName %>" data-error="Please enter the Functionality Category" placeholder="Please enter the Functionality Category" required>
+                            <label for="OrderName">Order Name :</label>
+                            <input type="hidden" name = "orderID" value = "<%= $orderID%>">
+                            <input type="text" class="form-control" name="OrderName" value = "<%= $OrderName %>" data-error="Please enter the Order" placeholder="Please enter the Order" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div> 
                         </div>
@@ -98,7 +98,7 @@
 
                     <div class="panel-footer-delete">
                         <p style="text-align:center" class="text-danger"> You may also delete this record if it is no longer applicable&nbsp;
-                        <button type="delete" data-href="/get_func_cat?del=1&funcID=<%= $funcID %>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger round">Delete&nbsp;<span class="glyphicon glyphicon-trash"></span></button>    
+                        <button type="delete" data-href="/get_order?del=1&orderID=<%= $orderID %>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger round">Delete&nbsp;<span class="glyphicon glyphicon-trash"></span></button>    
                         </p>
                     </div>
                 % }
@@ -116,18 +116,18 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse7"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter a new Functionality Category (Click here)</a>
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse7"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter a new Order Name (Click here)</a>
                 </h4>
             </div>
 
             
             <div id="collapse7" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <form method = "post" action = "/get_func_cat?new=1" data-toggle="validator" role="form">
+                    <form method = "post" action = "/get_order?new=1" data-toggle="validator" role="form">
          
                         <div class="form-group has-feedback">
-                            <label for="FuncCategoryName">Functionality Category :</label>
-                            <input type="text" class="form-control" name="FuncCategoryName" data-error="Please enter the Functionality Category" placeholder="Please enter the Functionality Category" required>
+                            <label for="OrderName">Order Name :</label>
+                            <input type="text" class="form-control" name="OrderName" data-error="Please enter the Order Name" placeholder="Please enter the Order Name" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div> 
                         </div>
@@ -142,31 +142,11 @@
 
 % if($message_to_page){
 
-    <div class="container">
+    % use Subs qw(alertMessage);
+    % my ($message_alert)=Subs::alertMessage($message_to_page);
 
-        % if($message_to_page == 3){
-            <div class="alert alert-warning alert-fixed">
-        % }
-        % else{
-            <div class="alert alert-success alert-fixed">
-        % }
-
-        % if($message_to_page == 1){
-            <strong>Success!</strong> The record has been successfully created.
-        % }
-        % elsif($message_to_page == 2){
-            <strong>Success!</strong> The record has been successfully deleted.
-        % }
-        % elsif($message_to_page == 3){
-            <strong>Alert ! </strong> Please edit the record in the highlighted Edit Section.
-        % }
-        % elsif($message_to_page == 4){
-            <strong>Success ! </strong> The record has been successfully updated.
-        % }
-
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-
-            </div>
-    </div>
+    <div class="container"><%== $message_alert %></div>
 % }
+
+
 

@@ -85,6 +85,7 @@ h2 {
   color: #fff !important;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.13);
   -webkit-font-smoothing: antialiased;
+    border-radius: 10px;
 }
 
 .btn-two {
@@ -102,6 +103,7 @@ h2 {
   color: #fff !important;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.16);
   -webkit-font-smoothing: antialiased;
+    border-radius: 10px;
 }
 
 
@@ -112,5 +114,13 @@ h2 {
 .panel-body-warning {
   padding: 15px;
   background: #fcf8e3;
+}
+
+.panel-footer-delete {
+  padding: 10px 10px;
+  background-color: #fff;
+  border-color: #ebccd1;
+  border-style: solid;
+  border-radius: 10px;
 }
 

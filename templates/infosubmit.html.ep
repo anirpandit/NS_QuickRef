@@ -417,67 +417,6 @@
         </div>
 
 
-        <!-- Form for Order Info-->
-        <div class="panel panel-default">
 
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse6"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter new Order Information</a>
-                </h4>
-            </div>
-            
-            <div id="collapse6" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <form method = "post" action = "/infosubmit" data-toggle="validator" role="form">
-         
-                        <div class="form-group has-feedback">
-                            <label for="OrderName">Insect Order :</label>
-                            <input type="text" class="form-control" name="OrderName" data-error="Please enter the Order Name" placeholder="Please enter the Order Name" required>
-                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
-                            <div class="help-block with-errors alert-message"></div> 
-                        </div>
 
-                        <button type="submit" class="formButton btn btn-default">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
-                        <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Form for Functionality Category-->
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse7"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter a new Functionality Category</a>
-                </h4>
-            </div>
-
-            
-            <div id="collapse7" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <form method = "post" action = "/infosubmit" data-toggle="validator" role="form">
-         
-                        <div class="form-group has-feedback">
-                            <label for="FuncCategoryName">Functionality Category :</label>
-                            <input type="text" class="form-control" name="FuncCategoryName" data-error="Please enter the Functionality Category" placeholder="Please enter the Functionality Category" required>
-                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
-                            <div class="help-block with-errors alert-message"></div> 
-                        </div>
-
-                        <button type="submit" class="formButton btn btn-default">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
-                        <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-%if($submitteddetails eq "Success"){
-    <div class="container">
-        <div class="alert alert-success alert-fixed">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Success!</strong> The information has been successfully submitted.
-        </div>
-    </div>
-%}
 
