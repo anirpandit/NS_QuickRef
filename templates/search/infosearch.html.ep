@@ -6,17 +6,17 @@
 %   my $dbh = $self->app->dbh;
 
 %   #Query to get values for the Species Select Dropdown
-%   my $query = "SELECT speciesID, SpeciesName FROM SpeciesInfo ";
+%   my $query = "SELECT speciesID, SpeciesName FROM SpeciesInfo ORDER BY SpeciesName ASC";
 %   my $sth = $dbh->prepare($query);    
 %   $sth->execute();
 
 %   #Query to get values for the Neuropeptides Select Dropdown
-%   my $query2 = "SELECT neuropeptideID, NeuropeptideName FROM NeuropeptideInfo ";
+%   my $query2 = "SELECT neuropeptideID, NeuropeptideName FROM NeuropeptideInfo ORDER BY NeuropeptideName ASC";
 %   my $sth2 = $dbh->prepare($query2);    
 %   $sth2->execute();
 
 %   #Query to get values for the Functionality Categories Select Dropdown
-%   my $query3 = "SELECT funcID, FuncCategoryName FROM FuncCategories ";
+%   my $query3 = "SELECT funcID, FuncCategoryName FROM FuncCategories ORDER BY FuncCategoryName ASC";
 %   my $sth3 = $dbh->prepare($query3);    
 %   $sth3->execute();
 
@@ -40,7 +40,7 @@
             
             <div id="collapse1" class="panel-collapse collapse <%= $collapseopt %>">
                 <div class="panel-body">
-                    <form method = "get" action = "/infosearchw" data-toggle="validator" role="form">
+                    <form method = "get" action = "/infosearchw" data-toggle="validator">
      
                         <div class="form-group has-feedback">
                             <label for="sel1">Select Species:&nbsp;<a href="#" data-toggle="tooltip" title="For Windows, hold down the Ctrl button to select multiple options. For Mac, hold down the Cmd button to select multiple options."><span class="glyphicon glyphicon-info-sign"></span></a></label>

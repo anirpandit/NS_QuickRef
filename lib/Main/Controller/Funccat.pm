@@ -15,6 +15,7 @@ sub getfunccat {
     
     my $funcID = $self->param('funcID');
     my $FuncCategoryName = $self->param('FuncCategoryName');
+    my $FuncCategoryName_ed = $self->param('FuncCategoryName_ed');
     
     my $message_to_page=0; my $sth2; my $func_cat_edit_array;
     
@@ -42,7 +43,7 @@ sub getfunccat {
         WHERE FuncCategories.funcID = ? ';
         
         my $sth3 = $dbh->prepare($query3);
-        $sth3->execute($FuncCategoryName,$funcID);
+        $sth3->execute($FuncCategoryName_ed,$funcID);
         
         $message_to_page = 4;
         

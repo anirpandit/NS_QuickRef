@@ -85,7 +85,7 @@ sub infosearchw {
             ORDER BY SpeciesInfo.speciesID';
 
     my $query3 = '
-            SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, NeuroPepGeneInfo.GenBankAscNum, NeuroPepGeneInfo.GenBankAscNumURL
+            SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, NeuropeptideInfo.NeuropeptideDesc, NeuroPepGeneInfo.GenBankAscNum, NeuroPepGeneInfo.GenBankAscNumURL
             FROM NeuroPepGeneInfo, NeuropeptideInfo, SpeciesInfo
             WHERE NeuroPepGeneInfo.speciesID = SpeciesInfo.speciesID
             AND NeuroPepGeneInfo.neuropeptideID = NeuropeptideInfo.neuropeptideID
@@ -119,7 +119,7 @@ sub infosearchw {
         functionality => $func_array[0],
         results => $sth->fetchall_arrayref,
         IsoformInfo => $sth2->fetchall_arrayref,
-        GenBankInfo => $sth3->fetchall_arrayref,
+        NPInfo => $sth3->fetchall_arrayref,
         FuncCategories => $sth4->fetchall_arrayref
     );
     

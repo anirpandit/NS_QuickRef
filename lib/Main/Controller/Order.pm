@@ -15,6 +15,7 @@ sub getorder {
     
     my $orderID = $self->param('orderID');
     my $OrderName = $self->param('OrderName');
+    my $OrderName_ed = $self->param('OrderName_ed');
     
     my $message_to_page=0; my $sth2; my $order_edit_array;
     
@@ -42,7 +43,7 @@ sub getorder {
         WHERE OrderInfo.orderID = ? ';
         
         my $sth3 = $dbh->prepare($query3);
-        $sth3->execute($OrderName,$orderID);
+        $sth3->execute($OrderName_ed,$orderID);
         
         $message_to_page = 4;
         

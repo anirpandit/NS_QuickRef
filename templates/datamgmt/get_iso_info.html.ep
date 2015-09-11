@@ -1,0 +1,327 @@
+% layout 'default';
+% title "nSP Quick Reference: Isoform Information Management";
+
+% use Subs qw(alertMessage);
+
+% if($message_to_page){
+    
+    % my ($message_alert)=Subs::alertMessage($message_to_page);
+
+    <div class="container"><%== $message_alert %></div>
+% }
+
+% my ($modaldelete)=Subs::modaldelete();
+<div class="container"><%== $modaldelete %></div>
+
+% # Form Start #
+
+%   #Common $dbh helper
+%   my $dbh = $self->app->dbh;
+
+%   #Query to get values for the Species Select Dropdown
+%   my $query = "SELECT speciesID, SpeciesName FROM SpeciesInfo ";
+%   my $sth = $dbh->prepare($query);    
+%   $sth->execute();
+
+%   my $sth2 = $dbh->prepare($query);    
+%   $sth2->execute();
+
+%   #Query to get values for the Neuropeptides Select Dropdown
+%   my $query2 = "SELECT neuropeptideID, NeuropeptideName FROM NeuropeptideInfo ";
+%   my $sth3 = $dbh->prepare($query2);    
+%   $sth3->execute();
+
+%   my $sth4 = $dbh->prepare($query2);    
+%   $sth4->execute();
+
+<div class="container">
+    <h1> nSP Quick Reference: Isoform Information Management</h1>
+
+    <div class="row">
+        <div class="col-md-12"><p>The following forms can be used to enter new data into the backed databases. Please use correct forms by clicking on the header for the information you would like to enter data for. Please make sure you have entered the correct information prior to submitting the form.</p></div>
+    </div>
+
+
+    <div class="table-responsive">
+        <div class="panel panel-default">
+            <table class="table table-hover table-bordered display">
+                <thead>
+                    <tr>
+                        <th> Operations </th>
+                        <th> Isoform Name</th>
+                        <th> Neuropeptide&nbsp;&nbsp;</th>
+                        <th> Species Name</th>
+                        <th> Amino Acid Sequence <span data-toggle="tooltip" data-placement="right" title="Please note : (Where applicable) the &amp;quot;pQ&amp;quot; prefix stands for Pyroglutamate while the &amp;quot;amide&amp;quot; stands for Amidation" class="glyphicon glyphicon-info-sign"></span></th>
+                        <th> FASTA Sequence</th>
+                        <th> GenBank Reference </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                % foreach my $result (@{$iso_info_info}) {
+                    % my $isoID = $result->[0]; 
+                    % my $IsoformName = $result->[1];
+                    % my $IsoformAASeq = $result->[2];
+                    % my $Isoform_p_end = $result->[3];
+                    % my $Isoform_a_end = $result->[4];
+                    % my $NeuropeptideName = $result->[5];
+                    % my $SpeciesName = $result->[6];
+                    % my $GenBankAscNum = $result->[7];
+                    % my $GenBankAscNumURL = $result->[8];
+                    % my $neuropeptideID = $result->[9];
+
+                    % my $fastalink = "/fasta?isoID=$isoID";
+
+                    % my ($pend,$aend);
+
+                    % if ($Isoform_p_end){ $pend = 'pQ';}
+                    % if ($Isoform_a_end){ $aend = 'amide';}
+
+                    <tr>
+                    <td class="col-md-2"><button type="button" class="btn btn-danger round" data-href="/get_iso_info?del=1&amp;isoID=<%= $isoID %>" data-toggle="modal" data-target="#confirm-delete"><span class="glyphicon glyphicon-trash"></span> D</button>
+                    <a href="/get_iso_info?edit=1&amp;isoID=<%= $isoID %>" class="btn btn-info round" ><span class="glyphicon glyphicon-pencil"></span> E</a></td>
+                    <td><%= $IsoformName %></td>
+                    <td><%= $NeuropeptideName %></td>
+                    <td><%= $SpeciesName %></td>
+                    <td><span class="bold-red"><b><%= $pend %></b></span><%= $IsoformAASeq %><span class="bold-red"><b><%= $aend %></b></span></td>
+                    <td><a target="_blank" href="<%= $fastalink %>" data-toggle="tooltip" data-placement="right" title="Click to obtain isoform sequence in FASTA format" class="btn btn-one">Get FASTA</a></td>
+                    
+                    % if($GenBankAscNum eq 'NA' || $GenBankAscNumURL eq 'NA'){
+                        <td>-</td>
+                    % }
+                    % else {
+                        <td><a target="_blank" href="<%= $GenBankAscNumURL %> " data-toggle="tooltip" data-placement="right" title="Click to view external reference" class="btn btn-two"><%= $GenBankAscNum %></a></td>
+                    % }
+                    </tr>
+                % }  
+
+                </tbody>
+            </table> 
+        </div>
+    </div>
+
+
+% if(defined $iso_info_edit_array){
+
+    <div class="panel-group" id="accordion">
+
+        <!-- Form for Functionality Category EDIT -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Neuropeptide Information Record</a>
+                </h4>
+            </div>
+
+            
+            <div id="collapse1" class="panel-collapse collapse in">
+                <div class="panel-body-warning">
+                
+                % foreach my $result (@{$iso_info_edit_array}) {
+                    % my $isoID = $result->[0]; 
+                    % my $speciesID_ed = $result->[1];
+                    % my $neuropeptideID_ed = $result->[2];
+                    % my $IsoformName_ed = $result->[3];
+                    % my $IsoformAASeq_ed = $result->[4];
+                    % my $Isoform_p_end_ed = $result->[5];
+                    % my $Isoform_a_end_ed = $result->[6];
+                    % my $GenBankAscNum_ed = $result->[7];
+                    % my $GenBankAscNumURL_ed = $result->[8];
+                    
+
+                    % my $fastalink = "/fasta?isoID=$isoID";
+
+                    % my ($pend,$aend);
+
+                    % if ($Isoform_p_end_ed){ $pend = 'pQ';}
+                    % if ($Isoform_a_end_ed){ $aend = 'amide';}
+                    
+                    <form method = "post" action = "/get_iso_info?update=1" data-toggle="validator">
+                    
+                    <input type="hidden" name = "isoID" value = "<%= $isoID%>">
+                    <div class="form-group has-feedback">
+                        <label for="speciesID_ed">Select Species:</label>
+                        <select class="form-control" id="speciesID_ed" name="speciesID_ed" data-error="Please select the Species" required>
+                        <option value = "">Please Select </option>
+                        % while (my @row2 = $sth->fetchrow_array()) {
+                            % my $value1 = $row2[0]; 
+                            % my $value2 = $row2[1]; 
+                            
+                            % my $ck = '';
+                            % if($speciesID_ed == $value1){$ck = "selected";}
+
+                            <option value = <%= $value1 %> <%= $ck %> > <%= $value2 %> </option>
+                        % }      
+                        </select>
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>
+                
+                    <div class="form-group has-feedback">
+                        <label for="neuropeptideID_ed">Select Neuropeptide:</label>
+                        <select class="form-control" id="neuropeptideID_ed" name="neuropeptideID_ed" data-error="Please select the Neuropeptide" required>
+                        <option value = "">Please Select </option>
+                        % while (my @row3 = $sth3->fetchrow_array()) {
+                            % my $value1 = $row3[0]; 
+                            % my $value2 = $row3[1]; 
+                            
+                            % my $ck = '';
+                            % if($neuropeptideID_ed == $value1){$ck = "selected";}
+
+                            <option value = <%= $value1 %> <%= $ck %> > <%= $value2 %> </option>
+                        % } 
+                        </select>
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>
+                    
+                    <div class="form-group has-feedback">
+                        <label for="IsoformName_ed">Isoform Name:</label>
+                        <input type="text" class="form-control" id="IsoformName_ed" name="IsoformName_ed" value="<%= $IsoformName_ed %>" data-error="Please enter the Isoform Name" placeholder="Please enter the Isoform Name" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>     
+
+                    
+                    <div class="panel panel-body">
+                        <div class="form-group has-feedback">
+                            <label for="IsoformAASeq_ed">Isoform Amino Acid Sequence:</label>
+                            <input type="text" class="form-control" id="IsoformAASeq_ed" name="IsoformAASeq_ed" value="<%= $IsoformAASeq_ed %>" data-error="Please enter the Isoform Amino Acid Sequence" placeholder="Please enter the Isoform Amino Acid Sequence" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>  
+                        </div>  
+
+                        % my $ck1 = ''; my $ck2 = ''; 
+                        % if($Isoform_p_end_ed == 1 ){$ck1 = "checked";} 
+                        % if($Isoform_a_end_ed == 1 ){$ck2 = "checked";} 
+
+                        <div class="checkbox">
+                            <label for="Isoform_p_end_ed"><input type="checkbox" id="Isoform_p_end_ed" name="Isoform_p_end_ed" value=1 <%= $ck1 %> >Please tick if the sequence has a Pyroglutamate end (pQ-)</label>
+                        </div>
+
+                        <div class="checkbox">
+                            <label for="Isoform_a_end_ed"><input type="checkbox" id="Isoform_a_end_ed" name="Isoform_a_end_ed" value=1 <%= $ck2 %> >Please tick if the sequence has an Amidated end (-amide)</label>
+                        </div>
+                    </div>
+                    
+
+                    <div class="form-group has-feedback">
+                        <label for="GenBankAscNum_ed">GenBank Ascension Number:</label>
+                        <input type="text" class="form-control" id="GenBankAscNum_ed" name="GenBankAscNum_ed" value="<%= $GenBankAscNum_ed %>" data-error="Please enter the GenBank Ascension Number (or &amp;quot;NA&amp;quot; if not available)" placeholder="Please enter the GenBank Ascension Number (or &amp;quot;NA&amp;quot; if not available)" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>
+            
+                    <div class="form-group has-feedback">
+                        <label for="GenBankAscNumURL_ed">GenBank Ascension Number URL :</label>
+                        <input type="text" class="form-control" id="GenBankAscNumURL_ed" name="GenBankAscNumURL_ed" value="<%= $GenBankAscNumURL_ed %>" data-error="Please enter the GenBank Ascension Number (or &amp;quot;NA&amp;quot; if not available)" placeholder="Please enter the GenBank Ascension Number (or &amp;quot;NA&amp;quot; if not available)" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div> 
+                    </div>   
+         
+                        <button type="submit" class="formButton btn btn-warning round">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
+                    </form>
+                    
+                    <div><hr></div>
+
+                    <div class="panel-footer-delete">
+                        <p style="text-align:center" class="text-danger"> You may also delete this record if it is no longer applicable&nbsp;
+                        <button type="button" data-href="/get_iso_info?del=1&amp;isoID=<%= $isoID %>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger round">Delete&nbsp;<span class="glyphicon glyphicon-trash"></span></button>    
+                        </p>
+                    </div>
+                % }
+                
+
+                </div>
+            </div>
+        </div>
+    </div>
+% }
+
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter new Isoform Information (Click here)</a>
+        </h4>
+        </div>
+        
+        <div id="collapse4" class="panel-collapse collapse">
+            <div class="panel-body">
+                <form method = "post" action = "/get_iso_info?new=1" data-toggle="validator">
+     
+                    <div class="form-group has-feedback">
+                        <label for="speciesID">Select Species:</label>
+                        <select class="form-control" id="speciesID" name="speciesID" data-error="Please select the Species" required>
+                        <option value = "">Please Select </option>
+                        % while (my @row2 = $sth2->fetchrow_array()) {
+                            % my $value1 = $row2[0]; 
+                            % my $value2 = $row2[1]; 
+                            
+                            <option value = <%= $value1 %> > <%= $value2 %> </option>
+                        % }      
+                        </select>
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>
+                
+                    <div class="form-group has-feedback">
+                        <label for="neuropeptideID">Select Neuropeptide:</label>
+                        <select class="form-control" id="neuropeptideID" name="neuropeptideID" data-error="Please select the Neuropeptide" required>
+                        <option value = "">Please Select </option>
+                        % while (my @row3 = $sth4->fetchrow_array()) {
+                            % my $value1 = $row3[0]; 
+                            % my $value2 = $row3[1]; 
+                            
+                            <option value = <%= $value1 %> > <%= $value2 %> </option>
+                        % } 
+                        </select>
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>
+                    
+                    <div class="form-group has-feedback">
+                        <label for="IsoformName">Isoform Name:</label>
+                        <input type="text" class="form-control" id="IsoformName" name="IsoformName" data-error="Please enter the Isoform Name" placeholder="Please enter the Isoform Name" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>     
+
+                    <div class="panel panel-body">
+                        <div class="form-group has-feedback">
+                            <label for="IsoformAASeq">Isoform Amino Acid Sequence:</label>
+                            <input type="text" class="form-control" id="IsoformAASeq" name="IsoformAASeq" data-error="Please enter the Isoform Amino Acid Sequence" placeholder="Please enter the Isoform Amino Acid Sequence" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>  
+                        </div>  
+
+                        <div class="checkbox">
+                            <label for="Isoform_p_end"><input type="checkbox" id="Isoform_p_end" name="Isoform_p_end" value="1">Please tick if the sequence has a Pyroglutamate end (pQ-)</label>
+                        </div>
+
+                        <div class="checkbox">
+                            <label for="Isoform_a_end"><input type="checkbox" id="Isoform_a_end" name="Isoform_a_end" value="1">Please tick if the sequence has an Amidated end (-amide)</label>
+                        </div>
+                    </div>
+                    
+
+                    <div class="form-group has-feedback">
+                        <label for="GenBankAscNum">GenBank Ascension Number:</label>
+                        <input type="text" class="form-control" id="GenBankAscNum" name="GenBankAscNum" data-error="Please enter the GenBank Ascension Number (or &amp;quot;NA&amp;quot; if not available)" placeholder="Please enter the GenBank Ascension Number (or &amp;quot;NA&amp;quot; if not available)" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>
+            
+                    <div class="form-group has-feedback">
+                        <label for="GenBankAscNumURL">GenBank Ascension Number URL :</label>
+                        <input type="text" class="form-control" id="GenBankAscNumURL" name="GenBankAscNumURL" data-error="Please enter the GenBank Ascension Number (or &amp;quot;NA&amp;quot; if not available)" placeholder="Please enter the GenBank Ascension Number (or &amp;quot;NA&amp;quot; if not available)" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div> 
+                    </div>   
+
+                    <button type="submit" class="formButton btn btn-default">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
+                    <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

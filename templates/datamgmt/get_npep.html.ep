@@ -1,0 +1,157 @@
+% layout 'default';
+% title "nSP Quick Reference: Neuropeptide Information Management";
+
+% use Subs qw(alertMessage);
+
+% if($message_to_page){
+    
+    % my ($message_alert)=Subs::alertMessage($message_to_page);
+
+    <div class="container"><%== $message_alert %></div>
+% }
+
+% my ($modaldelete)=Subs::modaldelete();
+<div class="container"><%== $modaldelete %></div>
+
+
+
+% # Form Start #
+<div class="container">
+    <h1> nSP Quick Reference: Neuropeptide Information Management</h1>
+
+    <div class="row">
+        <div class="col-md-12"><p>The following forms can be used to enter new data into the backed databases. Please use correct forms by clicking on the header for the information you would like to enter data for. Please make sure you have entered the correct information prior to submitting the form.</p></div>
+    </div>
+
+
+    <div class="table-responsive">
+        <div class="panel panel-default">
+            <table class="table table-hover table-bordered display">
+                <thead>
+                    <tr>
+                        <th> Operations </th>
+                        <th> Neuropeptide</th>
+                        <th> Neuropeptide Description</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                % foreach my $result (@{$npep_info}) {
+                    % my $neuropeptideID = $result->[0];
+                    % my $NeuropeptideName = $result->[1];
+                    % my $NeuropeptideInfo = $result->[2];
+
+                    <tr>
+                    <td class="col-md-2"><button type="button" class="btn btn-danger round" data-href="/get_npep?del=1&amp;neuropeptideID=<%= $neuropeptideID %>" data-toggle="modal" data-target="#confirm-delete"><span class="glyphicon glyphicon-trash"></span> D</button>
+                        <a href="/get_npep?edit=1&amp;neuropeptideID=<%= $neuropeptideID %>" class="btn btn-info round" ><span class="glyphicon glyphicon-pencil"></span> E</a></td>
+                        <td><%= $NeuropeptideName %></td>
+                        <td><%= $NeuropeptideInfo %></td>
+                        
+                    </tr>
+                % }  
+                </tbody>
+            </table> 
+        </div>
+    </div>
+
+
+
+
+
+% if(defined $npep_edit_array){
+
+    <div class="panel-group" id="accordion">
+
+        <!-- Form for Functionality Category EDIT -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Neuropeptide Information Record</a>
+                </h4>
+            </div>
+
+            
+            <div id="collapse1" class="panel-collapse collapse in">
+                <div class="panel-body-warning">
+                
+                % foreach my $result (@{$npep_edit_array}) {
+                    % my $neuropeptideID = $result->[0];
+                    % my $NeuropeptideName_ed = $result->[1];
+                    % my $NeuropeptideDesc_ed = $result->[2];
+                    
+                    <form method = "post" action = "/get_npep?update=1" data-toggle="validator">
+         
+                        <div class="form-group has-feedback">
+                            <label for="NeuropeptideName_ed">Neuropeptide :</label>
+                            <input type="hidden" name = "neuropeptideID" value = "<%= $neuropeptideID%>">
+                            <input type="text" class="form-control" id="NeuropeptideName_ed" name="NeuropeptideName_ed" value = "<%= $NeuropeptideName_ed %>" data-error="Please enter the Neuropeptide" placeholder="Please enter the Neuropeptide" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div> 
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <label for="NeuropeptideDesc_ed">Neuropeptide Description :</label>
+                            <input type="text" class="form-control" id="NeuropeptideDesc_ed" name="NeuropeptideDesc_ed" value = "<%= $NeuropeptideDesc_ed %>" data-error="Please enter the Neuropeptide Description" placeholder="Please enter the Neuropeptide Description"  required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div> 
+                        </div>
+
+                        <button type="submit" class="formButton btn btn-warning round">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
+                    </form>
+                    
+                    <div><hr></div>
+
+                    <div class="panel-footer-delete">
+                        <p style="text-align:center" class="text-danger"> You may also delete this record if it is no longer applicable&nbsp;
+                        <button type="button" data-href="/get_npep?del=1&amp;neuropeptideID=<%= $neuropeptideID %>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger round">Delete&nbsp;<span class="glyphicon glyphicon-trash"></span></button>    
+                        </p>
+                    </div>
+                % }
+                
+
+                </div>
+            </div>
+        </div>
+    </div>
+% }
+
+
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter new Neuropeptide Information (Click here)</a>
+            </h4>
+        </div>
+        
+        <div id="collapse5" class="panel-collapse collapse">
+            <div class="panel-body">
+                <form method = "post" action = "/get_npep?new=1" data-toggle="validator">
+     
+                    <div class="form-group has-feedback">
+                        <label for="NeuropeptideName">Neuropeptide :</label>
+                        <input type="text" class="form-control" id="NeuropeptideName" name="NeuropeptideName" data-error="Please enter the Neuropeptide" placeholder="Please enter the Neuropeptide" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div> 
+                    </div>
+
+                    <div class="form-group has-feedback">
+                        <label for="NeuropeptideDesc">Neuropeptide Description :</label>
+                        <input type="text" class="form-control" id="NeuropeptideDesc" name="NeuropeptideDesc" data-error="Please enter the Neuropeptide Description" placeholder="Please enter the Neuropeptide Description"  required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div> 
+                    </div>
+              
+                    <button type="submit" class="formButton btn btn-default round">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
+                    <button type="reset" class="formButton btn btn-default round">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+

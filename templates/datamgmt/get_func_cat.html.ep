@@ -1,6 +1,20 @@
 % layout 'default';
 % title "nSP Quick Reference: Functionality Category Management";
 
+% use Subs qw(alertMessage);
+
+% if($message_to_page){
+    
+    % my ($message_alert)=Subs::alertMessage($message_to_page);
+
+    <div class="container"><%== $message_alert %></div>
+% }
+
+% my ($modaldelete)=Subs::modaldelete();
+<div class="container"><%== $modaldelete %></div>
+
+% # Form Start #
+
 <div class="container">
     <h1> nSP Quick Reference: Functionality Category Management</h1>
 
@@ -11,7 +25,7 @@
 
     <div class="table-responsive">
         <div class="panel panel-default">
-            <table class="table table-hover table-bordered">
+            <table class="table table-hover table-bordered display">
                 <thead>
                     <tr>
                         <th> Operations </th>
@@ -26,37 +40,14 @@
                     % my $FuncCategoryName = $result->[1];
 
                     <tr>
-                    <td class="col-md-2"><button type="button" class="btn btn-danger round" data-href="/get_func_cat?del=1&funcID=<%= $funcID %>" data-toggle="modal" data-target="#confirm-delete"><span class="glyphicon glyphicon-trash"></span> D</button>
-                        <a href="/get_func_cat?edit=1&funcID=<%= $funcID %>"><button type="button" class="btn btn-info round" ><span class="glyphicon glyphicon-pencil"></span> E</button></a></td>
+                    <td class="col-md-2"><button type="button" class="btn btn-danger round" data-href="/get_func_cat?del=1&amp;funcID=<%= $funcID %>" data-toggle="modal" data-target="#confirm-delete"><span class="glyphicon glyphicon-trash"></span> D</button>
+                        <a href="/get_func_cat?edit=1&amp;funcID=<%= $funcID %>" class="btn btn-info round" ><span class="glyphicon glyphicon-pencil"></span> E</a></td>
                         <td><%= $FuncCategoryName %></td>
                         
                     </tr>
                 % }  
                 </tbody>
             </table> 
-        </div>
-    </div>
-
-
-    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Confirm Deletion of Record</h4>
-                </div>
-            
-                <div class="modal-body">
-                    <p>You are about to delete one record, this process is irreversible.</p>
-                    <p>Do you want to proceed?</p>
-                </div>
-                
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default round" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-danger btn-ok round">Delete</a>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -79,14 +70,14 @@
                 
                 % foreach my $result (@{$func_cat_edit_array}) {
                     % my $funcID = $result->[0];
-                    % my $FuncCategoryName = $result->[1];
+                    % my $FuncCategoryName_ed = $result->[1];
                     
-                    <form method = "post" action = "/get_func_cat?update=1" data-toggle="validator" role="form">
+                    <form method = "post" action = "/get_func_cat?update=1" data-toggle="validator">
          
                         <div class="form-group has-feedback">
-                            <label for="FuncCategoryName">Functionality Category :</label>
+                            <label for="FuncCategoryName_ed">Functionality Category :</label>
                             <input type="hidden" name = "funcID" value = "<%= $funcID%>">
-                            <input type="text" class="form-control" name="FuncCategoryName" value = "<%= $FuncCategoryName %>" data-error="Please enter the Functionality Category" placeholder="Please enter the Functionality Category" required>
+                            <input type="text" class="form-control" id="FuncCategoryName_ed" name="FuncCategoryName_ed" value = "<%= $FuncCategoryName_ed %>" data-error="Please enter the Functionality Category" placeholder="Please enter the Functionality Category" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div> 
                         </div>
@@ -98,7 +89,7 @@
 
                     <div class="panel-footer-delete">
                         <p style="text-align:center" class="text-danger"> You may also delete this record if it is no longer applicable&nbsp;
-                        <button type="delete" data-href="/get_func_cat?del=1&funcID=<%= $funcID %>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger round">Delete&nbsp;<span class="glyphicon glyphicon-trash"></span></button>    
+                        <button type="button" data-href="/get_func_cat?del=1&amp;funcID=<%= $funcID %>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger round">Delete&nbsp;<span class="glyphicon glyphicon-trash"></span></button>    
                         </p>
                     </div>
                 % }
@@ -110,7 +101,7 @@
     </div>
 % }
 
-    <div class="panel-group" id="accordion">
+    <div class="panel-group" id="accordion1">
 
         <!-- Form for Functionality Category-->
         <div class="panel panel-default">
@@ -123,11 +114,11 @@
             
             <div id="collapse7" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <form method = "post" action = "/get_func_cat?new=1" data-toggle="validator" role="form">
+                    <form method = "post" action = "/get_func_cat?new=1" data-toggle="validator">
          
                         <div class="form-group has-feedback">
                             <label for="FuncCategoryName">Functionality Category :</label>
-                            <input type="text" class="form-control" name="FuncCategoryName" data-error="Please enter the Functionality Category" placeholder="Please enter the Functionality Category" required>
+                            <input type="text" class="form-control" id="FuncCategoryName" name="FuncCategoryName" data-error="Please enter the Functionality Category" placeholder="Please enter the Functionality Category" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div> 
                         </div>
@@ -139,12 +130,4 @@
             </div>
         </div>
     </div>
-
-% if($message_to_page){
-
-    % use Subs qw(alertMessage);
-    % my ($message_alert)=Subs::alertMessage($message_to_page);
-
-    <div class="container"><%== $message_alert %></div>
-% }
-
+</div>
