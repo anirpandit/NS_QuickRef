@@ -47,8 +47,8 @@
                     <form method = "get" action = "/infosearchw" data-toggle="validator">
      
                         <div class="form-group has-feedback">
-                            <label for="sel1">Select Species:&nbsp;<a href="#" data-toggle="tooltip" title="For Windows, hold down the Ctrl button to select multiple options. For Mac, hold down the Cmd button to select multiple options."><span class="glyphicon glyphicon-info-sign"></span></a></label>
-                            <select multiple class="form-control" id="sel1" name="species" data-error="Please select a species" >
+                            <label for="sel1">Select Species:&nbsp;</label>
+                            <select multiple class="form-control chosen-select" id="sel1" name="species" data-placeholder="Click here to select species" data-error="Please select a species" >
                             % while (my @row = $sth->fetchrow_array()) {
                                 % my $value1 = $row[0]; 
                                 % my $value2 = $row[1]; 

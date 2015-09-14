@@ -36,7 +36,7 @@ sub alertMessage {
 
 sub modaldelete{
 
-    $modaldelete.=qq~
+    $modaldelete=qq~
         <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

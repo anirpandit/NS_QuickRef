@@ -37,6 +37,8 @@ sub startup {
 
 
 	#Data Management Subsections#
+    $r -> any([qw(GET POST)] => '/get_species')->to(controller => 'species', action => 'getspecies');
+    $r -> any([qw(GET POST)] => '/get_func')->to(controller => 'func', action => 'getfunc');
     $r -> any([qw(GET POST)] => '/get_iso_info')->to(controller => 'isoinfo', action => 'getisoinfo');
     $r -> any([qw(GET POST)] => '/get_gbank')->to(controller => 'gbank', action => 'getgbank');
     $r -> any([qw(GET POST)] => '/get_npep')->to(controller => 'npep', action => 'getnpep');

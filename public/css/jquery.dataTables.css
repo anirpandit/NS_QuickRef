@@ -7,6 +7,7 @@ table.dataTable {
   clear: both;
   border-collapse: separate;
   border-spacing: 0;
+
   /*
    * Header and footer styles
    */
@@ -46,21 +47,7 @@ table.dataTable thead .sorting_desc_disabled {
   background-repeat: no-repeat;
   background-position: center right;
 }
-table.dataTable thead .sorting {
-  background-image: url("../img/sort_both.png");
-}
-table.dataTable thead .sorting_asc {
-  background-image: url("../img/sort_asc.png");
-}
-table.dataTable thead .sorting_desc {
-  background-image: url("../img/sort_desc.png");
-}
-table.dataTable thead .sorting_asc_disabled {
-  background-image: url("../img/sort_asc_disabled.png");
-}
-table.dataTable thead .sorting_desc_disabled {
-  background-image: url("../img/sort_desc_disabled.png");
-}
+
 table.dataTable tbody tr {
   background-color: #ffffff;
 }
@@ -280,10 +267,13 @@ table.dataTable td {
 }
 .dataTables_wrapper .dataTables_length {
   float: left;
+  padding: 0.40em;
+  color: #003366;
 }
 .dataTables_wrapper .dataTables_filter {
   float: right;
   text-align: right;
+  padding: 0.40em;
 }
 .dataTables_wrapper .dataTables_filter input {
   margin-left: 0.5em;
@@ -291,12 +281,12 @@ table.dataTable td {
 .dataTables_wrapper .dataTables_info {
   clear: both;
   float: left;
-  padding-top: 0.755em;
+  padding: 0.40em;
 }
 .dataTables_wrapper .dataTables_paginate {
   float: right;
   text-align: right;
-  padding-top: 0.25em;
+  padding: 0.40em;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button {
   box-sizing: border-box;
@@ -308,12 +298,12 @@ table.dataTable td {
   text-decoration: none !important;
   cursor: pointer;
   *cursor: hand;
-  color: #333 !important;
+  color: #003366 !important;
   border: 1px solid transparent;
   border-radius: 2px;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-  color: #333 !important;
+  color: #003366 !important;
   border: 1px solid #979797;
   background-color: white;
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #dcdcdc));
@@ -397,7 +387,7 @@ table.dataTable td {
 .dataTables_wrapper .dataTables_info,
 .dataTables_wrapper .dataTables_processing,
 .dataTables_wrapper .dataTables_paginate {
-  color: #333;
+  color: #003366;
 }
 .dataTables_wrapper .dataTables_scroll {
   clear: both;
