@@ -35,7 +35,7 @@
 %   $sth4->execute();
 
 <div class="container">
-    <h1> nSP Quick Reference: Isoform Information Management</h1>
+    <h1>Isoform Information Management</h1>
 
     <div class="row">
         <div class="col-md-12"><p>The following forms can be used to enter new data into the backed databases. Please use correct forms by clicking on the header for the information you would like to enter data for. Please make sure you have entered the correct information prior to submitting the form.</p></div>

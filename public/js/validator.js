@@ -310,6 +310,7 @@
     $.fn.validator = old
     return this
   }
+  
 
 
   // VALIDATOR DATA-API

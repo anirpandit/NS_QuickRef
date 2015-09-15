@@ -8,7 +8,6 @@
         <link rel="stylesheet" href="/css/jquery.dataTables.css">
         <link rel="stylesheet" href="/css/dataTables.bootstrap.css">
         <link rel="stylesheet" href="/css/bootstrap.css">
-        <link rel="stylesheet" href="/css/bootstrap.css">
         <link rel="stylesheet" href="/css/std.css">
         <link rel="shortcut icon" href="/img/favicon.ico" />
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Syncopate">
@@ -49,6 +48,11 @@
 
         <%= content %>
 
+
+        <div class="container">
+            <p style="height:300px">&nbsp;<p>
+        </div>
+
         <div class = "navbar navbar-default navbar-fixed-bottom" >
             <div class= "container">
                 <div class="footer" >&copy; Dow-Davies Lab, 2015</div>
@@ -60,8 +64,11 @@
         <script src="/js/jquery.dataTables.js"></script>
         <script src="/js/chosen.jquery.js"></script>
         <script src="/js/validator.js"></script>
+        <script src="/js/jquery.validate.min.js"></script>
+        <script src="/js/additional-methods.min.js"></script>
         <script src="/js/tooltip.js"></script>
         <script src="/js/misc.js"></script>
+        <script src="/js/chval.js"></script>
     </body>
 </html>
 

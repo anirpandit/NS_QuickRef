@@ -12,6 +12,20 @@ $(document).ready(function() {
 	$('table.display').DataTable();
 });
 
+
+$('a[href^="#"]').on('click', function(event) {
+
+    var target = $( $(this).attr('href') );
+
+    if( target.length ) {
+        event.preventDefault();
+        $('html, body').animate({
+            scrollTop: target.offset().top
+        }, 1000);
+    }
+
+});
+
 //Code for Chosen Jquery plugin//
 var config = {
     '.chosen-select'           : {},
@@ -23,3 +37,20 @@ var config = {
 for (var selector in config) {
 	$(selector).chosen(config[selector]);
 }
+
+
+function checkFields(form) {
+        var checks_radios = form.find(':checkbox, :radio'),
+            inputs = form.find(':input').not(checks_radios).not('[type="submit"],[type="button"],[type="reset"]'); 
+        
+        var checked = checks_radios.filter(':checked');
+        var filled = inputs.filter(function(){
+            return $.trim($(this).val()).length > 0;
+        });
+        
+        if(checked.length + filled.length === 0) {
+            return false;
+        }
+        
+        return true;
+    }

@@ -2,7 +2,7 @@
 % title "nSP Quick Reference: Image Search Result";
 
 <div class="container">
-    <h1>nSP Quick Reference: Image Search Result </h1>  
+    <h1>Image Search Result </h1>  
 
 % foreach my $result (@{$imginfo}) {
 

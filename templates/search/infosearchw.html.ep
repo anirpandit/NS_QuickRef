@@ -27,13 +27,243 @@
 %       $SearchFormTitle = "Click here to perform a new Search";
 %   }
 
+
 <div class="container">
-    <h1>nSP Quick Reference: Information Search</h1>
+    <h1>Information Search</h1>
 
     <div class="row">
-        <div class="col-md-12"><p>The following form can be used to search for data currently held for the references to various functionalities per species per neuropeptide.</p></div>
+        <div class="col-md-12"><h3>Your search results are displayed below</h3></div>
+        <div class="col-md-6" style="text-align:left;padding-bottom:5px">Some blah blah about the results search could go here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent scelerisque elit eget elit aliquam sollicitudin. </div>
+        <div class="col-md-6" style="text-align:right;padding-bottom:5px"><a href="#newsearch" id="top" class="btn btn-two"><span class="glyphicon glyphicon-search"></span>&nbsp;Click here to Start a new search </a></div>
     </div>
-       
+
+</div>
+
+%   #If results found, they are displayed below
+
+% if ($species || $neuropeptide || $functionality) {
+    
+    <div class="container">
+        <div class="panel-group" id="accordion2">
+            <div class="panel panel-default">
+        
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion2" href="#collapse"><span class="glyphicon glyphicon-search"></span>&nbsp;Search Results:</a>
+                    </h4>
+                </div>
+
+                <div class="panel-body">
+                    <h3> General Information </h3>
+
+                        <div class="table-responsive">
+                            <div class="panel panel-default">
+                                <table class="table table-hover table-bordered display">
+                                    <thead>
+                                        <tr>
+                                            <th> Species Name</th>
+                                            <th> Order</th>
+                                            <th> Common Name </th>
+                                            <th> Importance </th>
+                                            <th> Genome Sequence Available</th>
+                                            <th> Genome Database</th>
+                                            <th> Species Source</th>
+                                        </tr>
+                                    </thead>
+            
+                                    <tbody>
+                                    % foreach my $result (@{$results}) {
+                                        % my $SpeciesName = $result->[0];
+                                        % my $OrderName = $result->[1];
+                                        % my $CommonName = $result->[2];
+                                        % my $Importance = $result->[3];
+                                        % my $GenomeSequence = $result->[4];
+                                        % my $GenomeDatabase = $result->[5];
+                                        % my $DatabaseURL = $result->[6];
+                                        % my $SpeciesSource = $result->[7];
+
+                                        <tr>
+                                            <td><%= $SpeciesName %></td>
+                                            <td><%= $OrderName %></td>
+                                            <td><%= $CommonName %></td>
+                                            <td><%= $Importance %></td>
+                                            <td><%= $GenomeSequence %></td>
+                                            % if($GenomeDatabase eq 'NA' || $DatabaseURL eq 'NA'){
+                                                <td>-</td>
+                                            % }
+                                            % else {
+                                                <td><a target="_blank" href="<%= $DatabaseURL %> " data-toggle="tooltip" data-placement="right" title="Click to view external reference" class="btn btn-default btn-block"><%= $GenomeDatabase %></a></td>
+                                            % }
+                                            <td><%= $SpeciesSource %></td>
+                                        </tr>
+                                    % }  
+                                    </tbody>
+                                </table> 
+                            </div>
+                        </div>
+
+                        <h3> Neuropeptide Information </h3>
+                        <div class="table-responsive">
+                            <div class="panel panel-default">
+                                <table class="table table-hover table-bordered display">
+                                    <thead>
+                                        <tr>
+                                            <th> Neuropeptide</th>
+                                            <th> Species Name</th>
+                                            <th> GenBank Ascension </th>
+                                        </tr>
+                                    </thead>
+                                
+                                    <tbody>
+
+                                    % foreach my $result (@{$NPInfo}) {
+                                        % my $SpeciesName = $result->[0];
+                                        % my $NeuropeptideName = $result->[1];
+                                        % my $NeuropeptideDesc = $result->[2];
+                                        % my $GenBankAscNum = $result->[3];
+                                        % my $GenBankAscNumURL = $result->[4];
+                                        <tr>
+                                            <td><%= $NeuropeptideName %>&nbsp;&nbsp;&nbsp;&nbsp;<span data-toggle="tooltip" data-placement="right" title="<%= $NeuropeptideDesc %>" class="glyphicon glyphicon-info-sign"></span></td>
+                                            <td><%= $SpeciesName %></td>
+                                            % if($GenBankAscNum eq 'NA' || $GenBankAscNumURL eq 'NA'){
+                                                <td>-</td>
+                                            % }
+                                            % else {
+                                                <td><a target="_blank" href="<%= $GenBankAscNumURL %> " data-toggle="tooltip" data-placement="right" title="Click to view external reference" class="btn btn-two"><%= $GenBankAscNum %></a></td>
+                                            % }
+                                        </tr>
+                                    % }
+            
+                                    </tbody>
+                                </table>
+                            </div> 
+                        </div> 
+
+                        <h3> Isoform Information </h3>
+                        <div class="table-responsive">
+                            <div class="panel panel-default">
+                                <table class="table table-hover table-bordered display">
+                                    <thead>
+                                        <tr>
+                                            <th> Isoform Name </th>
+                                            <th> Neuropeptide&nbsp;&nbsp;</th>
+                                            <th> Species Name</th>
+                                            <th> Amino Acid Sequence <span data-toggle="tooltip" data-placement="right" title="Please note : (Where applicable) the &quot;pQ&quot; prefix stands for Pyroglutamate while the &quot;amide&quot; stands for Amidation" class="glyphicon glyphicon-info-sign"></span></th>
+                                            <th > FASTA Sequences</th>
+                                            <th > RELATED FASTA Sequences</th>
+                                            <th> GenBank Ascension </th>
+                                        </tr>
+                                    </thead>
+                                
+                                    <tbody>
+
+                                    % foreach my $result (@{$IsoformInfo}) {
+                                        % my $isoID = $result->[0]; 
+                                        % my $IsoformName = $result->[1];
+                                        % my $IsoformAASeq = $result->[2];
+                                        % my $Isoform_p_end = $result->[3];
+                                        % my $Isoform_a_end = $result->[4];
+                                        % my $NeuropeptideName = $result->[5];
+                                        % my $SpeciesName = $result->[6];
+                                        % my $GenBankAscNum = $result->[7];
+                                        % my $GenBankAscNumURL = $result->[8];
+                                        % my $neuropeptideID = $result->[9];
+
+                                        % my $fastalink = "/fasta?isoID=$isoID";
+                                        % my $fastarel = "/fasta?neuropeptideID=$neuropeptideID";
+
+                                        % my ($pend,$aend);
+
+                                        % if ($Isoform_p_end){ $pend = 'pQ';}
+                                        % if ($Isoform_a_end){ $aend = 'amide';}
+
+                                        <tr>
+                                            <td><%= $IsoformName %></td>
+                                            <td><%= $NeuropeptideName %></td>
+                                            <td><%= $SpeciesName %></td>
+                                            <td><span class="bold-red"><%= $pend %></span><%= $IsoformAASeq %><span class="bold-red"><%= $aend %></span></td>
+                                            <td><a target="_blank" href="<%= $fastalink %>" data-toggle="tooltip" data-placement="right" title="Click to obtain isoform sequence in FASTA format" class="btn btn-one">Get FASTA</a></td>
+                                            <td><a target="_blank" href="<%= $fastarel %>" data-toggle="tooltip" data-placement="right" title="Click to obtain all related isoform sequences in FASTA format" class="btn btn-one">Get Related FASTA</a></td>
+
+                                            % if($GenBankAscNum eq 'NA' || $GenBankAscNumURL eq 'NA'){
+                                                <td>-</td>
+                                            % }
+                                            % else {
+                                                <td><a target="_blank" href="<%= $GenBankAscNumURL %> " data-toggle="tooltip" data-placement="right" title="Click to view external reference" class="btn btn-two"><%= $GenBankAscNum %></a></td>
+                                            % }
+                                        </tr>
+                                    % }
+            
+                                    </tbody>
+                                </table>
+                            </div> 
+                        </div>    
+
+                        <h3> Functionality Information </h3>
+                        <div class="table-responsive">
+                            <div class="panel panel-default">
+                                <table class="table table-hover table-bordered display">
+                                    <thead>
+                                        <tr>
+                                            <th> Neuropeptide </th>
+                                            <th> Species Name</th>
+                                            <th> Functionality Category</th>
+                                            <th> Functionality Description </th>
+                                            <th> Functionality Reference </th>
+                                            <th> Image </th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+
+                                    % foreach my $result (@{$FuncCategories}) {
+
+                                        % my $SpeciesName = $result->[0];
+                                        % my $NeuropeptideName = $result->[1];
+                                        % my $FuncCategoryName = $result->[2];
+                                        % my $FuncDescription = $result->[3];
+                                        % my $FuncURL = $result->[4];
+                                        % my $idID = $result->[5];
+
+                                        % my $imagelink = "/imagesearch?linktoimage=$idID";
+
+                                        <tr>
+                                            <td><%= $NeuropeptideName %></td>
+                                            <td><%= $SpeciesName %></td>
+                                            <td><%= $FuncCategoryName %></td>
+                                            % if($FuncDescription eq 'NA' || $FuncURL eq 'NA'){
+                                                <td>-</td>
+                                                <td>-</td>
+                                            % }
+                                            % else {
+                                                <td><%= $FuncDescription %></td>
+                                                <td><a target="_blank" href="<%= $FuncURL %> " data-toggle="tooltip" data-placement="right" title="Click to view external reference" class="btn btn-two">Get Reference</a></td>
+                                            % } 
+
+                                            <td><a target="_blank" href="<%= $imagelink %> " data-toggle="tooltip" data-placement="right" title="Click to view Image " class="btn btn-one">Get Image</a></td>                                      
+                                            
+                                        </tr>
+                                    % } 
+            
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> 
+
+                    </div>
+                </div>
+            </div>
+        </div>
+% }
+
+
+<div class="container">
+
+    <div class="row">
+    <div class="col-md-12" id="newsearch"><h3>New Search</h3></div>
+        <div class="col-md-12" style="padding-bottom:5px">Some blah blah about the how to search could go here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent scelerisque elit eget elit aliquam sollicitudin. Aliquam commodo mollis iaculis. In condimentum eleifend posuere. Mauris mollis, ex a lacinia facilisis, purus ex ornare mi, nec semper nulla mauris vitae ligula. Quisque sodales nec magna quis dictum. In hac habitasse platea dictumst. </div>
+    </div>
+   
     <div class="panel-group" id="accordion">
         <div class="panel panel-default"> 
             <div class="panel-heading">
@@ -42,13 +272,13 @@
                 </h4>
             </div>
             
-            <div id="collapse1" class="panel-collapse collapse <%= $collapseopt %>">
+            <div id="collapse1" class="panel-collapse collapse in">
                 <div class="panel-body">
-                    <form method = "get" action = "/infosearchw" data-toggle="validator">
+                    <form method = "get" action = "/infosearchw" data-toggle="validator" id="searchform">
      
                         <div class="form-group has-feedback">
                             <label for="sel1">Select Species:&nbsp;</label>
-                            <select multiple class="form-control chosen-select" id="sel1" name="species" data-placeholder="Click here to select species" data-error="Please select a species" >
+                            <select multiple class="form-control chosen-select searchformval" id="sel1" name="species" data-placeholder="Click here to select species" data-error="Please select a species">
                             % while (my @row = $sth->fetchrow_array()) {
                                 % my $value1 = $row[0]; 
                                 % my $value2 = $row[1]; 
@@ -59,8 +289,8 @@
                         </div>
 
                         <div class="form-group has-feedback">
-                            <label for="sel2">Select Neuropeptide:&nbsp;<a href="#" data-toggle="tooltip" title="For Windows, hold down the Ctrl button to select multiple options. For Mac, hold down the Cmd button to select multiple options."><span class="glyphicon glyphicon-info-sign"></span></a></label>
-                            <select multiple class="form-control" id="sel2" name="neuropeptide" data-error="Please select a neuropeptide" >
+                            <label for="sel2">Select Neuropeptide:&nbsp;</label>
+                            <select multiple class="form-control chosen-select searchformval" id="sel2" name="neuropeptide" data-placeholder="Click here to select neuropeptide" data-error="Please select a neuropeptide" >
                             % while (my @row2 = $sth2->fetchrow_array()) {
                                 % my $value1 = $row2[0]; 
                                 % my $value2 = $row2[1]; 
@@ -72,10 +302,9 @@
                             <div class="help-block with-errors alert-message"></div>     
                         </div>
 
-
                         <div class="form-group has-feedback">
-                            <label for="sel3">Select Functionality:&nbsp;<a href="#" data-toggle="tooltip" title="For Windows, hold down the Ctrl button to select multiple options. For Mac, hold down the Cmd button to select multiple options."><span class="glyphicon glyphicon-info-sign"></span></a></label>
-                            <select multiple class="form-control" id="sel3" name="functionality" data-error="Please select at least one functionality" >
+                            <label for="sel3">Select Functionality:&nbsp;</label>
+                            <select multiple class="form-control chosen-select searchformval" id="sel3" name="functionality" data-placeholder="Click here to select functionality" data-error="Please select at least one functionality" >
                             % while (my @row3 = $sth3->fetchrow_array()) {
                                 % my $value1 = $row3[0]; 
                                 % my $value2 = $row3[1]; 
@@ -92,221 +321,9 @@
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 
-%   #If results found, they are displayed below
 
-% if ($species || $neuropeptide || $functionality) {
-    
-    <div class="container">
-        <div class="panel panel-default">
-        
-            <div class="panel-heading">
-                <h4 class="panel-title"><span class="glyphicon glyphicon-search"></span>&nbsp;Search Results:</h4>
-            </div>
-
-            <div class="panel-body">
-                <h3> General Information </h3>
-
-                    <div class="table-responsive">
-                        <div class="panel panel-default">
-                            <table class="table table-hover table-bordered display">
-                                <thead>
-                                    <tr>
-                                        <th> Species Name</th>
-                                        <th> Order</th>
-                                        <th> Common Name </th>
-                                        <th> Importance </th>
-                                        <th> Genome Sequence Available</th>
-                                        <th> Genome Database</th>
-                                        <th> Species Source</th>
-                                    </tr>
-                                </thead>
-        
-                                <tbody>
-                                % foreach my $result (@{$results}) {
-                                    % my $SpeciesName = $result->[0];
-                                    % my $OrderName = $result->[1];
-                                    % my $CommonName = $result->[2];
-                                    % my $Importance = $result->[3];
-                                    % my $GenomeSequence = $result->[4];
-                                    % my $GenomeDatabase = $result->[5];
-                                    % my $DatabaseURL = $result->[6];
-                                    % my $SpeciesSource = $result->[7];
-
-                                    <tr>
-                                        <td><%= $SpeciesName %></td>
-                                        <td><%= $OrderName %></td>
-                                        <td><%= $CommonName %></td>
-                                        <td><%= $Importance %></td>
-                                        <td><%= $GenomeSequence %></td>
-                                        % if($GenomeDatabase eq 'NA' || $DatabaseURL eq 'NA'){
-                                            <td>-</td>
-                                        % }
-                                        % else {
-                                            <td><a target="_blank" href="<%= $DatabaseURL %> " data-toggle="tooltip" data-placement="right" title="Click to view external reference" class="btn btn-default btn-block"><%= $GenomeDatabase %></a></td>
-                                        % }
-                                        <td><%= $SpeciesSource %></td>
-                                    </tr>
-                                % }  
-                                </tbody>
-                            </table> 
-                        </div>
-                    </div>
-
-                    <h3> Neuropeptide Information </h3>
-                    <div class="table-responsive">
-                        <div class="panel panel-default">
-                            <table class="table table-hover table-bordered display">
-                                <thead>
-                                    <tr>
-                                        <th> Neuropeptide</th>
-                                        <th> Species Name</th>
-                                        <th> GenBank Ascension </th>
-                                    </tr>
-                                </thead>
-                            
-                                <tbody>
-
-                                % foreach my $result (@{$NPInfo}) {
-                                    % my $SpeciesName = $result->[0];
-                                    % my $NeuropeptideName = $result->[1];
-                                    % my $NeuropeptideDesc = $result->[2];
-                                    % my $GenBankAscNum = $result->[3];
-                                    % my $GenBankAscNumURL = $result->[4];
-                                    <tr>
-                                        <td><%= $NeuropeptideName %>&nbsp;&nbsp;&nbsp;&nbsp;<span data-toggle="tooltip" data-placement="right" title="<%= $NeuropeptideDesc %>" class="glyphicon glyphicon-info-sign"></span></td>
-                                        <td><%= $SpeciesName %></td>
-                                        % if($GenBankAscNum eq 'NA' || $GenBankAscNumURL eq 'NA'){
-                                            <td>-</td>
-                                        % }
-                                        % else {
-                                            <td><a target="_blank" href="<%= $GenBankAscNumURL %> " data-toggle="tooltip" data-placement="right" title="Click to view external reference" class="btn btn-two"><%= $GenBankAscNum %></a></td>
-                                        % }
-                                    </tr>
-                                % }
-        
-                                </tbody>
-                            </table>
-                        </div> 
-                    </div> 
-
-                    <h3> Isoform Information </h3>
-                    <div class="table-responsive">
-                        <div class="panel panel-default">
-                            <table class="table table-hover table-bordered display">
-                                <thead>
-                                    <tr>
-                                        <th> Isoform Name </th>
-                                        <th> Neuropeptide&nbsp;&nbsp;</th>
-                                        <th> Species Name</th>
-                                        <th> Amino Acid Sequence <span data-toggle="tooltip" data-placement="right" title="Please note : (Where applicable) the &quot;pQ&quot; prefix stands for Pyroglutamate while the &quot;amide&quot; stands for Amidation" class="glyphicon glyphicon-info-sign"></span></th>
-                                        <th > FASTA Sequences</th>
-                                        <th > RELATED FASTA Sequences</th>
-                                        <th> GenBank Ascension </th>
-                                    </tr>
-                                </thead>
-                            
-                                <tbody>
-
-                                % foreach my $result (@{$IsoformInfo}) {
-                                    % my $isoID = $result->[0]; 
-                                    % my $IsoformName = $result->[1];
-                                    % my $IsoformAASeq = $result->[2];
-                                    % my $Isoform_p_end = $result->[3];
-                                    % my $Isoform_a_end = $result->[4];
-                                    % my $NeuropeptideName = $result->[5];
-                                    % my $SpeciesName = $result->[6];
-                                    % my $GenBankAscNum = $result->[7];
-                                    % my $GenBankAscNumURL = $result->[8];
-                                    % my $neuropeptideID = $result->[9];
-
-                                    % my $fastalink = "/fasta?isoID=$isoID";
-                                    % my $fastarel = "/fasta?neuropeptideID=$neuropeptideID";
-
-                                    % my ($pend,$aend);
-
-                                    % if ($Isoform_p_end){ $pend = 'pQ';}
-                                    % if ($Isoform_a_end){ $aend = 'amide';}
-
-                                    <tr>
-                                        <td><%= $IsoformName %></td>
-                                        <td><%= $NeuropeptideName %></td>
-                                        <td><%= $SpeciesName %></td>
-                                        <td><span class="bold-red"><%= $pend %></span><%= $IsoformAASeq %><span class="bold-red"><%= $aend %></span></td>
-                                        <td><a target="_blank" href="<%= $fastalink %>" data-toggle="tooltip" data-placement="right" title="Click to obtain isoform sequence in FASTA format" class="btn btn-one">Get FASTA</a></td>
-                                        <td><a target="_blank" href="<%= $fastarel %>" data-toggle="tooltip" data-placement="right" title="Click to obtain all related isoform sequences in FASTA format" class="btn btn-one">Get Related FASTA</a></td>
-
-                                        % if($GenBankAscNum eq 'NA' || $GenBankAscNumURL eq 'NA'){
-                                            <td>-</td>
-                                        % }
-                                        % else {
-                                            <td><a target="_blank" href="<%= $GenBankAscNumURL %> " data-toggle="tooltip" data-placement="right" title="Click to view external reference" class="btn btn-two"><%= $GenBankAscNum %></a></td>
-                                        % }
-                                    </tr>
-                                % }
-        
-                                </tbody>
-                            </table>
-                        </div> 
-                    </div>    
-
-                <h3> Functionality Information </h3>
-                    <div class="table-responsive">
-                        <div class="panel panel-default">
-                            <table class="table table-hover table-bordered display">
-                                <thead>
-                                    <tr>
-                                        <th> Neuropeptide </th>
-                                        <th> Species Name</th>
-                                        <th> Functionality Category</th>
-                                        <th> Functionality Description </th>
-                                        <th> Functionality Reference </th>
-                                        <th> Image </th>
-                                    </tr>
-                                </thead>
-                                
-                                <tbody>
-
-                                % foreach my $result (@{$FuncCategories}) {
-
-                                    % my $SpeciesName = $result->[0];
-                                    % my $NeuropeptideName = $result->[1];
-                                    % my $FuncCategoryName = $result->[2];
-                                    % my $FuncDescription = $result->[3];
-                                    % my $FuncURL = $result->[4];
-                                    % my $idID = $result->[5];
-
-                                    % my $imagelink = "/imagesearch?linktoimage=$idID";
-
-                                    <tr>
-                                        <td><%= $NeuropeptideName %></td>
-                                        <td><%= $SpeciesName %></td>
-                                        <td><%= $FuncCategoryName %></td>
-                                        % if($FuncDescription eq 'NA' || $FuncURL eq 'NA'){
-                                            <td>-</td>
-                                            <td>-</td>
-                                        % }
-                                        % else {
-                                            <td><%= $FuncDescription %></td>
-                                            <td><a target="_blank" href="<%= $FuncURL %> " data-toggle="tooltip" data-placement="right" title="Click to view external reference" class="btn btn-two">Get Reference</a></td>
-                                        % } 
-
-                                        <td><a target="_blank" href="<%= $imagelink %> " data-toggle="tooltip" data-placement="right" title="Click to view Image " class="btn btn-one">Get Image</a></td>                                      
-                                        
-                                    </tr>
-                                % } 
-        
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>  
-
-                </div>
-        </div>
-    </div>
-% }
 
