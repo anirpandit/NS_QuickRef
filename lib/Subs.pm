@@ -62,5 +62,4 @@ sub modaldelete{
 
     return ($modaldelete);
 }
-
 1;

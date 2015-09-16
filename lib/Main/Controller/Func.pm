@@ -18,17 +18,12 @@ sub getfunc {
     my $funcID = $self->param('funcID');
     my $FuncDescription = $self->param('FuncDescription');
     my $FuncURL = $self->param('FuncURL');
-    my $ImageTitle = $self->param('ImageTitle');
-    my $ImageLegend = $self->param('ImageLegend');
 
     my $speciesID_ed = $self->param('speciesID_ed');
     my $neuropeptideID_ed = $self->param('neuropeptideID_ed');
     my $funcID_ed = $self->param('funcID_ed');
     my $FuncDescription_ed = $self->param('FuncDescription_ed');
     my $FuncURL_ed = $self->param('FuncURL_ed');
-    my $ImageTitle_ed = $self->param('ImageTitle_ed');
-    my $ImageLegend_ed = $self->param('ImageLegend_ed');
-
 
     my $message_to_page=0; my $sth2; my $func_edit_array;
     
@@ -36,7 +31,7 @@ sub getfunc {
     
     if(defined $func_edit){
         my $query2 = '
-        SELECT DISTINCT FuncInfo.idID, FuncInfo.speciesID, FuncInfo.neuropeptideID, FuncInfo.funcID, FuncInfo.FuncDescription,FuncInfo.FuncURL,FuncInfo.ImageTitle, FuncInfo.ImageLegend
+        SELECT DISTINCT FuncInfo.idID, FuncInfo.speciesID, FuncInfo.neuropeptideID, FuncInfo.funcID, FuncInfo.FuncDescription,FuncInfo.FuncURL
         FROM FuncInfo
         WHERE FuncInfo.idID = ? ';
         
@@ -57,12 +52,10 @@ sub getfunc {
             FuncInfo.funcID = ?,
             FuncInfo.FuncDescription = ?,
             FuncInfo.FuncURL = ?,
-            FuncInfo.ImageTitle = ?,
-            FuncInfo.ImageLegend = ?
             WHERE FuncInfo.idID = ? ';
         
          my $sth3 = $dbh->prepare($query3);
-         $sth3->execute($speciesID_ed,$neuropeptideID_ed,$funcID_ed,$FuncDescription_ed,$FuncURL_ed,$ImageTitle_ed,$ImageLegend_ed,$idID);
+         $sth3->execute($speciesID_ed,$neuropeptideID_ed,$funcID_ed,$FuncDescription_ed,$FuncURL_ed,$idID);
         
          $message_to_page = 4;
        
@@ -79,9 +72,9 @@ sub getfunc {
     }
     
     if(defined $func_new){
-        my $query4 = 'INSERT INTO FuncInfo (speciesID,neuropeptideID,funcID,FuncDescription,FuncURL,ImageTitle,ImageLegend) VALUES (?,?,?,?,?,?,?)';
+        my $query4 = 'INSERT INTO FuncInfo (speciesID,neuropeptideID,funcID,FuncDescription,FuncURL) VALUES (?,?,?,?,?)';
         my $sth4 = $dbh->prepare($query4);
-        $sth4->execute($speciesID,$neuropeptideID,$funcID,$FuncDescription,$FuncURL,$ImageTitle,$ImageLegend);
+        $sth4->execute($speciesID,$neuropeptideID,$funcID,$FuncDescription,$FuncURL);
         
         $message_to_page = 1;
     }

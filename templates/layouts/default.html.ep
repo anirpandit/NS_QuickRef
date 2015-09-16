@@ -34,6 +34,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="get_species">Species Information</a></li>
                                 <li><a href="get_func">Functionality Information</a></li>
+                                <li><a href="get_image">Image Information</a></li>
                                 <li><a href="get_iso_info">Isoform Information</a></li>
                                 <li><a href="get_npep">Neuropeptide Information</a></li>
                                 <li><a href="get_gbank">GenBank Information</a></li>

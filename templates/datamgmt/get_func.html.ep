@@ -120,8 +120,6 @@
                     % my $funcID_ed = $result->[3];
                     % my $FuncDescription_ed = $result->[4];
                     % my $FuncURL_ed = $result->[5];
-                    % my $ImageTitle_ed = $result->[6];
-                    % my $ImageLegend_ed = $result->[7];
   
                     <form method = "post" action = "/get_func?update=1" data-toggle="validator">
                     
