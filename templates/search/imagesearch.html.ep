@@ -11,7 +11,7 @@
     % my $ImageTitle = $result->[2];
     % my $ImageLegend = $result->[3];
 
-    % my $ImgSrc = "/npimages/".$ImageTitle.".jpg";
+    % my $ImgSrc = "/npimages/".$ImageTitle;
 
     % $ImgSrc =~s/ /%20/g;
     

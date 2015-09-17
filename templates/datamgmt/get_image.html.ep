@@ -60,9 +60,8 @@
                         <th> Neuropeptide&nbsp;&nbsp;</th>
                         <th> Species Name</th>
                         <th> Functionality Category</th>
-                        <th> Image Title</th>
                         <th> Image Legend</th>
-                        <th> Image </th>
+                        <th> Image File</th>
                     </tr>
                 </thead>
 
@@ -84,9 +83,8 @@
                             <td><%= $NeuropeptideName %></td>
                             <td><%= $SpeciesName %></td>
                             <td><%= $FuncCategoryName %></td>
-                            <td><%= $ImageTitle %></td>
                             <td><%= $ImageLegend %></td>
-                            <td><a target="_blank" href="<%= $imagelink %> " data-toggle="tooltip" data-placement="bottom" title="Click to view Image " class="btn btn-one">Get Image</a></td> 
+                            <td><a target="_blank" href="<%= $imagelink %> " data-toggle="tooltip" data-placement="bottom" title="Click to view Image " class="btn btn-one"><%= $ImageTitle %></a></td> 
                             
                         </tr>
                     % }  
@@ -176,24 +174,18 @@
                         </div>
 
                         <div class="form-group has-feedback">
-                            <label for="ImageTitle_ed">Image Title :</label>
-                            <input type="text" class="form-control" name="ImageTitle_ed" value="<%= $ImageTitle_ed %>" data-error="Please enter the Image Title (make sure it corresponds to the name of the Image File)" placeholder="Please enter the Image Title (make sure it corresponds to the name of the Image File)" required>
-                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
-                            <div class="help-block with-errors alert-message"></div>  
-                        </div>
-            
-                        <div class="form-group has-feedback">
                             <label for="ImageLegend_ed">Image Legend :</label>
                             <input type="text" class="form-control" name="ImageLegend_ed" value="<%= $ImageLegend_ed %>" data-error="Please enter the legend or appropriate description for the image" placeholder="Please enter the legend or appropriate description for the image" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div>  
                         </div>  
 
-                        % my $basepath = "/Users/Blackbelly/Sites/NS_QuickRef/public/npimages/".$ImageTitle_ed.".jpg";
+                        % my $imagelink = "/imagesearch?linktoimage=$imageID";
+                        % my $basepath = "/Users/Blackbelly/Sites/NS_QuickRef/public/npimages/".$ImageTitle_ed;
                         % if(-e $basepath){
                             <div class="form-group has-feedback">
                                 <label for="Uploaded Image">Uploaded Image :</label>
-                                <p style="text-align:left"> <%= $ImageTitle_ed %>&nbsp;
+                                <p style="text-align:left"> <a target="_blank" href="<%= $imagelink %> " data-toggle="tooltip" data-placement="bottom" title="Click to view Image " class="btn btn-one"><%= $ImageTitle_ed %></a>
                                 <button type="button" data-href="/get_image?edit=2&amp;imageID=<%= $imageID %>&amp;ImageTitle=<%= $ImageTitle_ed %>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger round">Delete&nbsp;<span class="glyphicon glyphicon-trash"></span></button>    
                                 </p>
                                 <p class="text-warning"><em><strong>N.B.</strong>If you want to amend the image, first delete the current one. You will then be able to enter a new image.</em></p>
@@ -282,13 +274,7 @@
                         <div class="help-block with-errors alert-message"></div>   
                     </div>
 
-                    <div class="form-group has-feedback">
-                        <label for="ImageTitle">Image Title :</label>
-                        <input type="text" class="form-control" id="ImageTitle" name="ImageTitle" data-error="Please enter the Image Title (make sure it corresponds to the name of the Image File)" placeholder="Please enter the Image Title (make sure it corresponds to the name of the Image File)" required>
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
-                        <div class="help-block with-errors alert-message"></div>  
-                    </div>
-        
+
                     <div class="form-group has-feedback">
                         <label for="ImageLegend">Image Legend :</label>
                         <input type="text" class="form-control" id="ImageLegend" name="ImageLegend" data-error="Please enter the legend or appropriate description for the image" placeholder="Please enter the legend or appropriate description for the image" required>
@@ -296,7 +282,7 @@
                         <div class="help-block with-errors alert-message"></div>  
                     </div>  
 
-
+  
                     <div class="form-group has-feedback">
                         <label for="ImageUpload">Image Upload :</label>
                         <input type="file" class="form-control" id="ImageUpload" name="ImageUpload" data-error="" required>

@@ -2,8 +2,6 @@
 package Main::Controller::Image;
 use Mojo::Base 'Mojolicious::Controller';
 
-use Data::Dumper;
-
 # Action
 sub getimage {
     
@@ -23,13 +21,6 @@ sub getimage {
     my $ImageLegend = $self->param('ImageLegend');
     my $ImageUpload = $self->req->upload('ImageUpload');
 
-    my $filename = '';
-
-    if($ImageUpload){
-        my $fileName = $ImageUpload->filename =~ s/[^\w\d\.]+/_/gr; 
-        $ImageUpload->move_to("/Users/Blackbelly/Sites/NS_QuickRef/public/npimages/$fileName");
-    }
-
     my $speciesID_ed = $self->param('speciesID_ed');
     my $neuropeptideID_ed = $self->param('neuropeptideID_ed');
     my $funcID_ed = $self->param('funcID_ed');
@@ -44,7 +35,7 @@ sub getimage {
     if(defined $image_edit){
 
         if($image_edit == 2){
-            unlink("/Users/Blackbelly/Sites/NS_QuickRef/public/npimages/".$ImageTitle.".jpg");
+            unlink("/Users/Blackbelly/Sites/NS_QuickRef/public/npimages/".$ImageTitle);
         }
 
         my $query2 = '
@@ -63,6 +54,9 @@ sub getimage {
     }
     
      if(defined $image_update){
+
+        ($ImageUpload)?$ImageTitle_ed=imageupload($ImageUpload):'';
+
         my $query3 = '
             UPDATE ImageInfo SET
             ImageInfo.speciesID = ?,
@@ -74,6 +68,8 @@ sub getimage {
         
          my $sth3 = $dbh->prepare($query3);
          $sth3->execute($speciesID_ed,$neuropeptideID_ed,$funcID_ed,$ImageTitle_ed,$ImageLegend_ed,$imageID);
+
+        
         
          $message_to_page = 4;
        
@@ -88,14 +84,16 @@ sub getimage {
         
         $message_to_page = 2;
 
-        unlink("/Users/Blackbelly/Sites/NS_QuickRef/public/npimages/".$ImageTitle.".jpg");
+        unlink("/Users/Blackbelly/Sites/NS_QuickRef/public/npimages/".$ImageTitle);
     }
     
     if(defined $image_new){
+        ($ImageUpload)?$ImageTitle=imageupload($ImageUpload):'';
+
         my $query4 = 'INSERT INTO ImageInfo (speciesID,neuropeptideID,funcID,ImageTitle,ImageLegend) VALUES (?,?,?,?,?)';
         my $sth4 = $dbh->prepare($query4);
         $sth4->execute($speciesID,$neuropeptideID,$funcID,$ImageTitle,$ImageLegend);
-        
+
         $message_to_page = 1;
     }
     
@@ -118,4 +116,13 @@ sub getimage {
     
     $self->render('/datamgmt/get_image');
 }
+
+sub imageupload{
+    my ($ImageUpload) = @_;
+    my $fileName = $ImageUpload->filename =~ s/[^\w\d\-.]+//gr; 
+    $ImageUpload->move_to("/Users/Blackbelly/Sites/NS_QuickRef/public/npimages/$fileName");  
+
+    return $fileName; 
+}
+ 
 1;
