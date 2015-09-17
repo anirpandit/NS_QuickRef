@@ -54,3 +54,10 @@ function checkFields(form) {
         
         return true;
     }
+    
+    
+$(function() {
+    $("#rondellThumbnails").rondell({
+      preset: "thumbGallery"
+    });
+});

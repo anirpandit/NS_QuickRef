@@ -34,7 +34,7 @@
     <div class="row">
         <div class="col-md-12"><h3>Your search results are displayed below</h3></div>
         <div class="col-md-6" style="text-align:left;padding-bottom:5px">Some blah blah about the results search could go here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent scelerisque elit eget elit aliquam sollicitudin. </div>
-        <div class="col-md-6" style="text-align:right;padding-bottom:5px"><a href="#newsearch" id="top" class="btn btn-two"><span class="glyphicon glyphicon-search"></span>&nbsp;Click here to Start a new search </a></div>
+        <div class="col-md-6" style="text-align:right;padding-bottom:5px"><a href="#newsearch" class="btn btn-two" id="top"><span class="glyphicon glyphicon-search"></span>&nbsp;Click here to Start a new search </a></div>
     </div>
 
 </div>
@@ -54,6 +54,16 @@
                 </div>
 
                 <div class="panel-body">
+                    <div class="row">   
+                        <ul class="nav nav-pills">
+                            <li><a href="#" class="btn btn-two"><span class="glyphicon glyphicon-chevron-down"></span>&nbsp;General Information</a></li>
+                            <li><a href="#npinfo" class="btn btn-two" ><span class="glyphicon glyphicon-chevron-down"></span>&nbsp;Neuropeptide Information</a></li>
+                            <li><a href="#isoforminfo" class="btn btn-two"><span class="glyphicon glyphicon-chevron-down"></span>&nbsp;Isoform Information</a></li>
+                            <li><a href="#funcinfo" class="btn btn-two"><span class="glyphicon glyphicon-chevron-down"></span>&nbsp;Functionality Information</a></li>
+                            <li><a href="#imageresults" class="btn btn-two"><span class="glyphicon glyphicon-chevron-down"></span>&nbsp;Image Results</a></li>
+                        </ul>
+                    </div>
+                    
                     <h3> General Information </h3>
 
                         <div class="table-responsive">
@@ -88,7 +98,7 @@
                                             <td><%= $CommonName %></td>
                                             <td><%= $Importance %></td>
                                             <td><%= $GenomeSequence %></td>
-                                            % if($GenomeDatabase eq 'NA' || $DatabaseURL eq 'NA'){
+                                            % if(defined $GenomeDatabase eq 'NA' || defined $DatabaseURL eq 'NA'){
                                                 <td>-</td>
                                             % }
                                             % else {
@@ -99,10 +109,13 @@
                                     % }  
                                     </tbody>
                                 </table> 
+                                <div style="text-align:right;padding:10px">
+                                    <a href="#" class="btn btn-one" data-toggle="tooltip" data-placement="right" title="Back to Top"><span class="glyphicon glyphicon-chevron-up"></span></a>
+                                </div>
                             </div>
                         </div>
 
-                        <h3> Neuropeptide Information </h3>
+                        <h3 id="npinfo"> Neuropeptide Information</h3>
                         <div class="table-responsive">
                             <div class="panel panel-default">
                                 <table class="table table-hover table-bordered display">
@@ -125,7 +138,7 @@
                                         <tr>
                                             <td><%= $NeuropeptideName %>&nbsp;&nbsp;&nbsp;&nbsp;<span data-toggle="tooltip" data-placement="right" title="<%= $NeuropeptideDesc %>" class="glyphicon glyphicon-info-sign"></span></td>
                                             <td><%= $SpeciesName %></td>
-                                            % if($GenBankAscNum eq 'NA' || $GenBankAscNumURL eq 'NA'){
+                                            % if(defined $GenBankAscNum eq 'NA' || defined $GenBankAscNumURL eq 'NA'){
                                                 <td>-</td>
                                             % }
                                             % else {
@@ -136,10 +149,13 @@
             
                                     </tbody>
                                 </table>
+                                <div style="text-align:right;padding:10px">
+                                    <a href="#" class="btn btn-one" data-toggle="tooltip" data-placement="right" title="Back to Top"><span class="glyphicon glyphicon-chevron-up"></span></a>
+                                </div>
                             </div> 
                         </div> 
 
-                        <h3> Isoform Information </h3>
+                        <h3 id="isoforminfo"> Isoform Information </h3>
                         <div class="table-responsive">
                             <div class="panel panel-default">
                                 <table class="table table-hover table-bordered display">
@@ -185,7 +201,7 @@
                                             <td><a target="_blank" href="<%= $fastalink %>" data-toggle="tooltip" data-placement="right" title="Click to obtain isoform sequence in FASTA format" class="btn btn-one">Get FASTA</a></td>
                                             <td><a target="_blank" href="<%= $fastarel %>" data-toggle="tooltip" data-placement="right" title="Click to obtain all related isoform sequences in FASTA format" class="btn btn-one">Get Related FASTA</a></td>
 
-                                            % if($GenBankAscNum eq 'NA' || $GenBankAscNumURL eq 'NA'){
+                                            % if(defined $GenBankAscNum eq 'NA' || defined $GenBankAscNumURL eq 'NA'){
                                                 <td>-</td>
                                             % }
                                             % else {
@@ -196,10 +212,13 @@
             
                                     </tbody>
                                 </table>
+                                <div style="text-align:right;padding:10px">
+                                    <a href="#" class="btn btn-one" data-toggle="tooltip" data-placement="right" title="Back to Top"><span class="glyphicon glyphicon-chevron-up"></span></a>
+                                </div>
                             </div> 
                         </div>    
 
-                        <h3> Functionality Information </h3>
+                        <h3 id="funcinfo"> Functionality Information </h3>
                         <div class="table-responsive">
                             <div class="panel panel-default">
                                 <table class="table table-hover table-bordered display">
@@ -210,7 +229,6 @@
                                             <th> Functionality Category</th>
                                             <th> Functionality Description </th>
                                             <th> Functionality Reference </th>
-                                            <th> Image </th>
                                         </tr>
                                     </thead>
                                     
@@ -225,13 +243,11 @@
                                         % my $FuncURL = $result->[4];
                                         % my $idID = $result->[5];
 
-                                        % my $imagelink = "/imagesearch?linktoimage=$idID";
-
                                         <tr>
                                             <td><%= $NeuropeptideName %></td>
                                             <td><%= $SpeciesName %></td>
                                             <td><%= $FuncCategoryName %></td>
-                                            % if($FuncDescription eq 'NA' || $FuncURL eq 'NA'){
+                                            % if(defined $FuncDescription eq 'NA' || defined $FuncURL eq 'NA'){
                                                 <td>-</td>
                                                 <td>-</td>
                                             % }
@@ -239,15 +255,51 @@
                                                 <td><%= $FuncDescription %></td>
                                                 <td><a target="_blank" href="<%= $FuncURL %> " data-toggle="tooltip" data-placement="right" title="Click to view external reference" class="btn btn-two">Get Reference</a></td>
                                             % } 
-
-                                            <td><a target="_blank" href="<%= $imagelink %> " data-toggle="tooltip" data-placement="right" title="Click to view Image " class="btn btn-one">Get Image</a></td>                                      
-                                            
                                         </tr>
                                     % } 
             
                                     </tbody>
                                 </table>
+                                <div style="text-align:right;padding:10px">
+                                    <a href="#" class="btn btn-one" data-toggle="tooltip" data-placement="right" title="Back to Top"><span class="glyphicon glyphicon-chevron-up"></span></a>
+                                </div>                                
                             </div>
+                        </div> 
+
+                        <h3 id="imageresults"> Image Results </h3>
+                        <div class="panel panel-default">
+                            <div>
+                                <p style="padding:10px"><strong>Instructions:</strong> Please click on the thumbnails to see main image. You may use the slider at the bottom to scroll through all the images. Click on the main image for better view. Once open, you may click on More to view on a new page.</p>
+                            </div>
+
+                            %if(@{$ImageResults}){
+                                                            <div id="rondellThumbnails">
+                                % foreach my $result (@{$ImageResults}) {
+
+                                        % my $SpeciesName_img = $result->[0];
+                                        % my $NeuropeptideName_img = $result->[1];
+                                        % my $FuncCategoryName_img = $result->[2];
+                                        % my $ImageTitle_img = $result->[3];
+                                        % my $ImageLegend_img = $result->[4];
+                                        % my $imageID = $result->[5];
+
+                                        % my $imagelink = "/imagesearch?linktoimage=$imageID";
+
+                                        <a target="_blank" href="<%= $imagelink %> "><img src="npimages/<%= $ImageTitle_img %>" alt="<%= $ImageTitle_img %>" title="<%= $NeuropeptideName_img %> (<%= $SpeciesName_img %>) : <%= $ImageLegend_img %>"></a>
+                                    % } 
+                            </div>
+
+                           % }
+                           % else{
+                                <div>
+                                    <p style="padding:10px"><strong>No Results Found</strong> </p>
+                                </div>
+                            % }
+
+                            <div style="text-align:right;padding:10px">
+                                <a href="#" class="btn btn-one" data-toggle="tooltip" data-placement="right" title="Back to Top"><span class="glyphicon glyphicon-chevron-up"></span></a>
+                            </div>
+
                         </div> 
 
                     </div>
@@ -260,7 +312,7 @@
 <div class="container">
 
     <div class="row">
-    <div class="col-md-12" id="newsearch"><h3>New Search</h3></div>
+        <div class="col-md-12" id="newsearch"><h3>New Search</h3></div>
         <div class="col-md-12" style="padding-bottom:5px">Some blah blah about the how to search could go here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent scelerisque elit eget elit aliquam sollicitudin. Aliquam commodo mollis iaculis. In condimentum eleifend posuere. Mauris mollis, ex a lacinia facilisis, purus ex ornare mi, nec semper nulla mauris vitae ligula. Quisque sodales nec magna quis dictum. In hac habitasse platea dictumst. </div>
     </div>
    

@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/css/jquery.dataTables.css">
         <link rel="stylesheet" href="/css/dataTables.bootstrap.css">
+        <link rel="stylesheet" href="/css/jquery.rondell.min.css">
         <link rel="stylesheet" href="/css/bootstrap.css">
         <link rel="stylesheet" href="/css/std.css">
         <link rel="shortcut icon" href="/img/favicon.ico" />
@@ -14,6 +15,60 @@
 
         <title><%= title %></title>
     </head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
     <body>
         <nav class="navbar navbar-default">
@@ -64,12 +119,15 @@
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script src="/js/jquery.dataTables.js"></script>
         <script src="/js/chosen.jquery.js"></script>
+        <script src="/js/jquery.rondell.min.js"></script>
+        <script src="/js/modernizr-2.0.6.min.js"></script>
         <script src="/js/validator.js"></script>
         <script src="/js/jquery.validate.min.js"></script>
         <script src="/js/additional-methods.min.js"></script>
         <script src="/js/tooltip.js"></script>
         <script src="/js/misc.js"></script>
         <script src="/js/chval.js"></script>
+
     </body>
 </html>
 
