@@ -1,5 +1,5 @@
 % layout 'default';
-% title "nSP Quick Reference: Isoform Information Management";
+% title 'nEUROSTRESSPEP: Isoform Information Management';
 
 % use Subs qw(alertMessage);
 

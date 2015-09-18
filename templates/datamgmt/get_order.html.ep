@@ -1,5 +1,5 @@
 % layout 'default';
-% title "nSP Quick Reference: Order Management";
+% title 'nEUROSTRESSPEP: Order Management';
 
 % use Subs qw(alertMessage);
 

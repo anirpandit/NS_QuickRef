@@ -1,4 +1,4 @@
-# Controller
+#Controller
 package Main::Controller::Image;
 use Mojo::Base 'Mojolicious::Controller';
 
@@ -30,12 +30,14 @@ sub getimage {
 
     my $message_to_page=0; my $sth2; my $image_edit_array;
     
+    my $basepath = getbasepath();
+    
     my $dbh = $self->app->dbh;
     
     if(defined $image_edit){
 
         if($image_edit == 2){
-            unlink("/Users/Blackbelly/Sites/NS_QuickRef/public/npimages/".$ImageTitle);
+            unlink($basepath.$ImageTitle);
         }
 
         my $query2 = '
@@ -84,7 +86,7 @@ sub getimage {
         
         $message_to_page = 2;
 
-        unlink("/Users/Blackbelly/Sites/NS_QuickRef/public/npimages/".$ImageTitle);
+        unlink($basepath.$ImageTitle);
     }
     
     if(defined $image_new){
@@ -118,11 +120,19 @@ sub getimage {
 }
 
 sub imageupload{
+    my $basepath = getbasepath();
     my ($ImageUpload) = @_;
     my $fileName = $ImageUpload->filename =~ s/[^\w\d\-.]+//gr; 
-    $ImageUpload->move_to("/Users/Blackbelly/Sites/NS_QuickRef/public/npimages/$fileName");  
+    $ImageUpload->move_to("$basepath.$fileName");  
 
     return $fileName; 
+}
+
+sub getbasepath{
+        my $self = shift;
+        my $config = $self->plugin('Config');
+        my $basepath = $config->{basepath};
+        return $basepath;
 }
  
 1;

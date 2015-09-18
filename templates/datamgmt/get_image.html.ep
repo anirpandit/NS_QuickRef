@@ -1,5 +1,5 @@
 % layout 'default';
-% title "nSP Quick Reference: Image Information Management";
+% title 'nEUROSTRESSPEP: Image Information Management';
 
 % use Subs qw(alertMessage);
 % use Subs qw(imagesearch);
@@ -42,6 +42,9 @@
 
 %   my $sth6 = $dbh->prepare($query3);    
 %   $sth6->execute();
+
+
+%   my $basepath = $config->{basepath};
 
 <div class="container">
     <h1>Image Information Management</h1>
@@ -181,8 +184,9 @@
                         </div>  
 
                         % my $imagelink = "/imagesearch?linktoimage=$imageID";
-                        % my $basepath = "/Users/Blackbelly/Sites/NS_QuickRef/public/npimages/".$ImageTitle_ed;
-                        % if(-e $basepath){
+
+                        % my $hasimage = $basepath.$ImageTitle_ed;
+                        % if(-e $hasimage){
                             <div class="form-group has-feedback">
                                 <label for="Uploaded Image">Uploaded Image :</label>
                                 <p style="text-align:left"> <a target="_blank" href="<%= $imagelink %> " data-toggle="tooltip" data-placement="bottom" title="Click to view Image " class="btn btn-one"><%= $ImageTitle_ed %></a>

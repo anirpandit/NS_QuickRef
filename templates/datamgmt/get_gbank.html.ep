@@ -1,5 +1,5 @@
 % layout 'default';
-% title "nSP Quick Reference: GenBank Information Management";
+% title 'nEUROSTRESSPEP: GenBank Information Management';
 
 % use Subs qw(alertMessage);
 

@@ -1,5 +1,5 @@
 % layout 'default';
-% title "nSP Quick Reference: Species Information Management";
+% title 'nEUROSTRESSPEP: Species Information Management';
 
 % use Subs qw(alertMessage);
 

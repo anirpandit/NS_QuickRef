@@ -1,0 +1,32 @@
+% layout 'default';
+% title 'nEUROSTRESSPEP: About the Project';
+
+<div class="container">
+    <div class="row jumbotron">
+        <div ><img class="img-responsive center-block" style="max-width:150px; align:center; valign:middle" src="/img/nsplogo.jpg" alt="nEUROSTRESSPEP logo"></div>
+        <div><h5 style="text-align:center">Novel biocontrol agents for insect pests from neuroendocrinology</h5></div>
+        <div><h1 style="text-align:center"><strong>nEUROSTRESSPEP</strong></h1></div>
+    </div>
+</div>
+
+<div class="container">
+<h1>About the Project</h1>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <h3>Feeding the 9 billion</h3>
+        <p>The human population is growing at an unprecedented rate. To feed them, we must maintain high productivity in our agriculture. At present, we lose about 20% or our world productivity to insect attack. However, we can't simply try to eliminate insects because they play key positive roles, for example in pollination.</p>
+        <p>Insects are typically controlled at multiple levels under an 'integrated pest management' protocol, which relies on insecticides only as a last resort when other measures have proved inadequate. Nevertheless, there is a problem with insecticide resistance; field resistance has been detected to every major class of insecticide. Additionally, several mainstay insecticides are being limited or withdrawn due to tighter legislation. There is thus a compelling need, not just for new insecticides to which insects are not resistant, but also more selective (and thus "greener") insecticides.</p>
+
+      <h3>Our Approach</h3>
+        <p>Like us, insects control their bodily processes with a number of chemical messengers -hormones- that circulate in their blood. Many of these are short strings of amino acids, called neuropeptides - a human example is insulin. Insect neuropeptides are quite different from human neuropeptides, and not all insects use the same signals. SO our approach is to datamine the genomes of insects, identify neuropeptides that are shared by agricultural pests but not by good insects, and use these as the basis for designing new chemicals that resemble the structures of these peptides.</p>
+ 
+      <h3>Our Aim</h3>
+        <p>Our 4-year Horizon 2020 grant is intended to move from laboratory to field. Our partners cover the full range of expertise, from world-leading neuropeptide specialists, so SMEs, to field  trial specialists and end-user consortia. By the end of the grant, we hope to have new, rationally designed and selective peptides in field trials.</p>
+
+    </div>
+  </div>
+</div>
+
+

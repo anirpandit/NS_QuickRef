@@ -1,0 +1,22 @@
+% layout 'default';
+% title 'nEUROSTRESSPEP: Consortium';
+
+<div class="container">
+    <div class="row jumbotron">
+        <div ><img class="img-responsive center-block" style="max-width:150px; align:center; valign:middle" src="/img/nsplogo.jpg" alt="nEUROSTRESSPEP logo"></div>
+        <div><h5 style="text-align:center">Novel biocontrol agents for insect pests from neuroendocrinology</h5></div>
+        <div><h1 style="text-align:center"><strong>nEUROSTRESSPEP</strong></h1></div>
+    </div>
+</div>
+
+<div class="container">
+<h1>nEUROSTRESSPEP Consortium</h1>
+
+  <div class="row" style="padding-top:20px">
+    <div class="col-md-12">
+      <img class="img-responsive center-block" src="/img/partner_logos.jpg" alt="nEUROSTRESSPEP Consortium" title="nEUROSTRESSPEP Consortium"> 
+    </div>
+  </div>
+</div>
+
+

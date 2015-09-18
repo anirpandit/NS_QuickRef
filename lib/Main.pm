@@ -25,7 +25,11 @@ sub startup {
 	#Routes to Controllers#
 
 	#Home#
-	$r -> get('/home') -> to(controller => 'home', action => 'gohome');	
+	$r -> get('/home') -> to(controller => 'sitepages', action => 'gohome');
+   	$r -> get('/project/about') -> to(controller => 'sitepages', action => 'getabout');
+    $r -> get('/project/board') -> to(controller => 'sitepages', action => 'getboard');
+    $r -> get('/project/consortium') -> to(controller => 'sitepages', action => 'getconsortium');
+    $r -> get('/contact') -> to(controller => 'sitepages', action => 'getcontact');
 
 	#Information Search#
 	$r -> get('/infosearch') -> to(controller => 'infosearch', action => 'infosearch');	

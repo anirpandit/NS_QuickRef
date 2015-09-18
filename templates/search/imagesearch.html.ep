@@ -1,5 +1,6 @@
 % layout 'default';
-% title "nSP Quick Reference: Image Search Result";
+% title 'nEUROSTRESSPEP: Image Search Result';
+
 
 <div class="container">
     <h1>Image Search Result </h1>  
