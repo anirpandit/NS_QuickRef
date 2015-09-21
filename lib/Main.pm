@@ -4,6 +4,8 @@ use Mojo::Base 'Mojolicious';
 use DBI;
 use DBD::mysql;
 
+use Main::Model::Users;
+
 sub startup {
 	my $self = shift;
 
@@ -19,6 +21,8 @@ sub startup {
 	my $config = $self->plugin('Config');
     
     
+    $self->secrets(['Mojolicious rocks']);
+    $self->helper(users => sub { state $users = Main::Model::Users->new });
 
 	#For Routes#
 	my $r = $self->routes;
@@ -37,6 +41,14 @@ sub startup {
 	$r -> get('/infosearch') -> to(controller => 'infosearch', action => 'infosearch');	
 	$r -> get('/infosearchw') -> to(controller => 'infosearch', action => 'infosearchw');	
 
+    #Login Routes#
+    $r->any('/login')->to('login#index')->name('index');
+    
+    my $logged_in = $r->under('/')->to('login#logged_in');
+    $logged_in->get('/protected')->to('login#protected');
+    
+    $r->get('/logout')->to('login#logout');
+    
 	#Additional modules to Information Search#
 	$r -> get('/fasta') -> to(controller => 'common', action => 'fasta');
 	$r -> get('/imagesearch') -> to(controller => 'common', action => 'imagesearch');
