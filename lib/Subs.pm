@@ -62,4 +62,15 @@ sub modaldelete{
 
     return ($modaldelete);
 }
+
+sub get_npimagepath{
+    use Config::Tiny;
+    my $Config = Config::Tiny->new;
+    
+    $Config = Config::Tiny->read( 'config.ini' );
+    
+    my $npimagepath = $Config->{dev}->{NPIMAGE_PATH};
+    
+    return $npimagepath;
+}
 1;

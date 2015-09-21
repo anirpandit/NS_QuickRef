@@ -4,6 +4,8 @@
 % use Subs qw(alertMessage);
 % use Subs qw(imagesearch);
 
+% use Subs qw(get_npimagepath);
+
 % if($message_to_page){
     
     % my ($message_alert)=Subs::alertMessage($message_to_page);
@@ -44,7 +46,7 @@
 %   $sth6->execute();
 
 
-%   my $basepath = $config->{basepath};
+%   my $basepath = Subs::get_npimagepath();
 
 <div class="container">
     <h1>Image Information Management</h1>
@@ -186,6 +188,7 @@
                         % my $imagelink = "/imagesearch?linktoimage=$imageID";
 
                         % my $hasimage = $basepath.$ImageTitle_ed;
+
                         % if(-e $hasimage){
                             <div class="form-group has-feedback">
                                 <label for="Uploaded Image">Uploaded Image :</label>

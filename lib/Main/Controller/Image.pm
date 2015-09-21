@@ -2,8 +2,11 @@
 package Main::Controller::Image;
 use Mojo::Base 'Mojolicious::Controller';
 
+
 # Action
 sub getimage {
+    
+    use Subs qw(get_npimagepath);
     
     my $self = shift;
    
@@ -29,15 +32,16 @@ sub getimage {
 
 
     my $message_to_page=0; my $sth2; my $image_edit_array;
+
+    my $npimagepath = Subs::get_npimagepath();
     
-    my $basepath = getbasepath();
-    
+  
     my $dbh = $self->app->dbh;
     
     if(defined $image_edit){
 
         if($image_edit == 2){
-            unlink($basepath.$ImageTitle);
+            unlink($npimagepath.$ImageTitle);
         }
 
         my $query2 = '
@@ -86,7 +90,7 @@ sub getimage {
         
         $message_to_page = 2;
 
-        unlink($basepath.$ImageTitle);
+         unlink($npimagepath.$ImageTitle);
     }
     
     if(defined $image_new){
@@ -120,19 +124,13 @@ sub getimage {
 }
 
 sub imageupload{
-    my $basepath = getbasepath();
+    
     my ($ImageUpload) = @_;
     my $fileName = $ImageUpload->filename =~ s/[^\w\d\-.]+//gr; 
-    $ImageUpload->move_to("$basepath.$fileName");  
+
+    my $npimagepath=Subs::get_npimagepath();
+    $ImageUpload->move_to($npimagepath.$fileName);  
 
     return $fileName; 
 }
-
-sub getbasepath{
-        my $self = shift;
-        my $config = $self->plugin('Config');
-        my $basepath = $config->{basepath};
-        return $basepath;
-}
- 
 1;

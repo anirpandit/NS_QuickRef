@@ -17,6 +17,8 @@ sub startup {
 
 	#For Hypnotoad, config file call#
 	my $config = $self->plugin('Config');
+    
+    
 
 	#For Routes#
 	my $r = $self->routes;
