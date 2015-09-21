@@ -1,5 +1,5 @@
 % layout 'plain';
-% title "nSP Quick Reference: FASTA File";
+% title 'nEUROSTRESSPEP: FASTA File';
 
 % foreach my $result (@{$seqinfo}) {
 

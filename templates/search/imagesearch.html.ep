@@ -1,8 +1,9 @@
 % layout 'default';
-% title "nSP Quick Reference: Image Search Result";
+% title 'nEUROSTRESSPEP: Image Search Result';
+
 
 <div class="container">
-    <h1>nSP Quick Reference: Image Search Result </h1>  
+    <h1>Image Search Result </h1>  
 
 % foreach my $result (@{$imginfo}) {
 
@@ -11,12 +12,14 @@
     % my $ImageTitle = $result->[2];
     % my $ImageLegend = $result->[3];
 
-    % my $ImgSrc = "/npimages/".$ImageTitle.".jpg";
+    % my $ImgSrc = "/npimages/".$ImageTitle;
+
+    % $ImgSrc =~s/ /%20/g;
     
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading"><h4 class="panel-title"><%= $NeuropeptideName %>&nbsp;( <em><%= $SpeciesName %> </em>)</h4></div>
-            <div class="panel-body" ><img src=<%= $ImgSrc %> class="img-responsive center-block" alt="<%= $ImageTitle %>" style="padding-bottom:10px"></div>
+            <div class="panel-body" ><img src="<%= $ImgSrc %>" class="img-responsive center-block" alt="<%= $ImageTitle %>" style="padding-bottom:10px"></div>
             <div class="panel-footer"><h6><em><strong>Legend</strong> : <%= $ImageLegend %></em></h6></div>
         </div>
     </div>

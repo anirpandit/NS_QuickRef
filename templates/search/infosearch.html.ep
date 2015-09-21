@@ -1,22 +1,22 @@
 % layout 'default';
-% title "nSP Quick Reference: Information Search";
+% title 'nEUROSTRESSPEP: Information Search';
 
 
 %   #Common $dbh helper
 %   my $dbh = $self->app->dbh;
 
 %   #Query to get values for the Species Select Dropdown
-%   my $query = "SELECT speciesID, SpeciesName FROM SpeciesInfo ";
+%   my $query = "SELECT speciesID, SpeciesName FROM SpeciesInfo ORDER BY SpeciesName ASC";
 %   my $sth = $dbh->prepare($query);    
 %   $sth->execute();
 
 %   #Query to get values for the Neuropeptides Select Dropdown
-%   my $query2 = "SELECT neuropeptideID, NeuropeptideName FROM NeuropeptideInfo ";
+%   my $query2 = "SELECT neuropeptideID, NeuropeptideName FROM NeuropeptideInfo ORDER BY NeuropeptideName ASC";
 %   my $sth2 = $dbh->prepare($query2);    
 %   $sth2->execute();
 
 %   #Query to get values for the Functionality Categories Select Dropdown
-%   my $query3 = "SELECT funcID, FuncCategoryName FROM FuncCategories ";
+%   my $query3 = "SELECT funcID, FuncCategoryName FROM FuncCategories ORDER BY FuncCategoryName ASC";
 %   my $sth3 = $dbh->prepare($query3);    
 %   $sth3->execute();
 
@@ -24,10 +24,10 @@
 %   my $SearchFormTitle = "Perform a Search";
 
 <div class="container">
-    <h1>nSP Quick Reference: Information Search</h1>
+    <h1>Information Search</h1>
 
     <div class="row">
-        <div class="col-md-12"><p>The following form can be used to search for data currently held for the references to various functionalities per species per neuropeptide.</p></div>
+        <div class="col-md-12" style="padding-bottom:5px">Some blah blah about the how to search could go here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent scelerisque elit eget elit aliquam sollicitudin. Aliquam commodo mollis iaculis. In condimentum eleifend posuere. Mauris mollis, ex a lacinia facilisis, purus ex ornare mi, nec semper nulla mauris vitae ligula. Quisque sodales nec magna quis dictum. In hac habitasse platea dictumst. </div>
     </div>
        
     <div class="panel-group" id="accordion">
@@ -40,11 +40,11 @@
             
             <div id="collapse1" class="panel-collapse collapse <%= $collapseopt %>">
                 <div class="panel-body">
-                    <form method = "get" action = "/infosearchw" data-toggle="validator" role="form">
+                    <form method = "get" action = "/infosearchw" data-toggle="validator" id="searchform" class="validate">
      
                         <div class="form-group has-feedback">
-                            <label for="sel1">Select Species:&nbsp;<a href="#" data-toggle="tooltip" title="For Windows, hold down the Ctrl button to select multiple options. For Mac, hold down the Cmd button to select multiple options."><span class="glyphicon glyphicon-info-sign"></span></a></label>
-                            <select multiple class="form-control" id="sel1" name="species" data-error="Please select a species" >
+                            <label for="sel1">Select Species:&nbsp;</label>
+                            <select multiple class="form-control chosen-select searchformval" id="sel1" name="species" data-placeholder="Click here to select species" data-error="Please select a species" >
                             % while (my @row = $sth->fetchrow_array()) {
                                 % my $value1 = $row[0]; 
                                 % my $value2 = $row[1]; 
@@ -55,8 +55,8 @@
                         </div>
 
                         <div class="form-group has-feedback">
-                            <label for="sel2">Select Neuropeptide:&nbsp;<a href="#" data-toggle="tooltip" title="For Windows, hold down the Ctrl button to select multiple options. For Mac, hold down the Cmd button to select multiple options."><span class="glyphicon glyphicon-info-sign"></span></a></label>
-                            <select multiple class="form-control" id="sel2" name="neuropeptide" data-error="Please select a neuropeptide" >
+                            <label for="sel2">Select Neuropeptide:&nbsp;</label>
+                            <select multiple class="form-control chosen-select searchformval" id="sel2" name="neuropeptide" data-placeholder="Click here to select neuropeptide" data-error="Please select a neuropeptide" >
                             % while (my @row2 = $sth2->fetchrow_array()) {
                                 % my $value1 = $row2[0]; 
                                 % my $value2 = $row2[1]; 
@@ -69,8 +69,8 @@
                         </div>
 
                         <div class="form-group has-feedback">
-                            <label for="sel3">Select Functionality:&nbsp;<a href="#" data-toggle="tooltip" title="For Windows, hold down the Ctrl button to select multiple options. For Mac, hold down the Cmd button to select multiple options."><span class="glyphicon glyphicon-info-sign"></span></a></label>
-                            <select multiple class="form-control" id="sel3" name="functionality" data-error="Please select at least one functionality" >
+                            <label for="sel3">Select Functionality:&nbsp;</label>
+                            <select multiple class="form-control chosen-select searchformval" id="sel3" name="functionality" data-placeholder="Click here to select functionality" data-error="Please select at least one functionality" >
                             % while (my @row3 = $sth3->fetchrow_array()) {
                                 % my $value1 = $row3[0]; 
                                 % my $value2 = $row3[1]; 

@@ -1,0 +1,298 @@
+% layout 'default';
+% title 'nEUROSTRESSPEP: Species Information Management';
+
+% use Subs qw(alertMessage);
+
+% if($message_to_page){
+    
+    % my ($message_alert)=Subs::alertMessage($message_to_page);
+
+    <div class="container"><%== $message_alert %></div>
+% }
+
+% my ($modaldelete)=Subs::modaldelete();
+<div class="container"><%== $modaldelete %></div>
+
+
+%   #Common $dbh helper
+%   my $dbh = $self->app->dbh;
+
+%   #Query to get values for the Order Values for  Select Dropdown
+%   my $query = "SELECT orderID, OrderName FROM OrderInfo ";
+%   my $sth = $dbh->prepare($query);    
+%   $sth->execute();
+
+%   my $sth2 = $dbh->prepare($query);    
+%   $sth2->execute();
+
+% # Form Start #
+
+<div class="container">
+    <h1>Species Information Management</h1>
+
+    <div class="row">
+        <div class="col-md-12"><p>The following forms can be used to enter new data into the backed databases. Please use correct forms by clicking on the header for the information you would like to enter data for. Please make sure you have entered the correct information prior to submitting the form.</p></div>
+    </div>
+
+
+    <div class="table-responsive">
+        <div class="panel panel-default">
+            <table class="table table-hover table-bordered display">
+                <thead>
+                    <tr>
+                        <th> Operations </th>
+                        <th> Species Name</th>
+                        <th> Order</th>
+                        <th> Common Name </th>
+                        <th> Importance </th>
+                        <th> Genome Sequence Available</th>
+                        <th> Genome Database</th>
+                        <th> Species Source</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    % foreach my $result (@{$species_info}) {
+                        % my $SpeciesName = $result->[0];
+                        % my $OrderName = $result->[1];
+                        % my $CommonName = $result->[2];
+                        % my $Importance = $result->[3];
+                        % my $GenomeSequence = $result->[4];
+                        % my $GenomeDatabase = $result->[5];
+                        % my $DatabaseURL = $result->[6];
+                        % my $SpeciesSource = $result->[7];
+                        % my $speciesID = $result->[8];
+
+                        <tr>
+                            <td class="col-md-2"><button type="button" class="btn btn-danger round" data-href="/get_species?del=1&amp;speciesID=<%= $speciesID %>" data-toggle="modal" data-target="#confirm-delete"><span class="glyphicon glyphicon-trash"></span> D</button>
+                            <a href="/get_species?edit=1&amp;speciesID=<%= $speciesID %>" class="btn btn-info round" ><span class="glyphicon glyphicon-pencil"></span> E</a></td>
+                            <td><%= $SpeciesName %></td>
+                            <td><%= $OrderName %></td>
+                            <td><%= $CommonName %></td>
+                            <td><%= $Importance %></td>
+                            <td><%= $GenomeSequence %></td>
+                            % if($GenomeDatabase eq 'NA' || $DatabaseURL eq 'NA'){
+                                <td>-</td>
+                            % }
+                            % else {
+                                <td><a target="_blank" href="<%= $DatabaseURL %> " data-toggle="tooltip" data-placement="bottom" title="Click to view external reference" class="btn btn-default btn-block"><%= $GenomeDatabase %></a></td>
+                            % }
+                            <td><%= $SpeciesSource %></td>
+                        </tr>
+                    % }  
+                </tbody>
+            </table> 
+        </div>
+    </div>
+
+
+% if(defined $species_edit_array){
+
+    <div class="panel-group" id="accordion">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Species Information</a>
+                </h4>
+            </div>
+
+            
+            <div id="collapse1" class="panel-collapse collapse in">
+                <div class="panel-body-warning">
+                
+                % foreach my $result (@{$species_edit_array}) {
+                    % my $speciesID = $result->[0];
+                    % my $orderID_ed = $result->[1];
+                    % my $SpeciesName_ed = $result->[2];
+                    % my $CommonName_ed = $result->[3];
+                    % my $Importance_ed = $result->[4];
+                    % my $GenomeSequence_ed = $result->[5];
+                    % my $GenomeDatabase_ed = $result->[6];
+                    % my $DatabaseURL_ed = $result->[7];
+                    % my $SpeciesSource_ed = $result->[8];
+
+                    
+                    <form method = "post" action = "/get_species?update=1" data-toggle="validator">
+                        
+                        <input type="hidden" name = "speciesID" value = "<%= $speciesID%>">
+                        <div class="form-group has-feedback">
+                            <label for="SpeciesName_ed">Species Name :</label>
+                            <input type="text" class="form-control" name="SpeciesName_ed" value="<%= $SpeciesName_ed %>" data-error="Please enter the Species name" placeholder = "Please enter the Species name" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>
+                    
+                        <div class="form-group has-feedback">
+                            <label for="orderID_ed">Select Order:</label>
+                            <select class="form-control" name="orderID_ed" data-error="Please select an Order" required>
+                            <option value = "">Please Select </option>
+                            % while (my @row = $sth2->fetchrow_array()) {
+                                % my $value1 = $row[0]; 
+                                % my $value2 = $row[1]; 
+                                
+                                % my $ck = '';
+                                % if($orderID_ed == $value1){$ck = "selected";}
+
+                                <option value = <%= $value1 %> <%= $ck %> > <%= $value2 %> </option>
+                            % }      
+                            </select>
+                            <div class="help-block with-errors alert-message"></div>  
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <label for="CommonName_ed">Common Name :</label>
+                            <input type="text" class="form-control" name="CommonName_ed" value="<%= $CommonName_ed%>" data-error="Please enter a Common Name" placeholder = "Please enter a Common Name" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>
+                        
+                        <div class="form-group has-feedback">
+                            <label for="Importance_ed">Importance :</label>
+                            <input type="text" class="form-control" id="Importance_ed" name="Importance_ed" value="<%= $Importance_ed %>" data-error="Please enter the Importance" placeholder = "Please enter the Importance" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>
+                
+                        % my @opts=('Yes',"No");
+
+                        <div class="form-group has-feedback">
+                            <label for="GenomeSequence_ed">Genome Sequence Available:</label>
+                            <select class="form-control" id="GenomeSequence_ed" name="GenomeSequence_ed" data-error="Please state Genome Sequence availability" required>
+                            <option value = "">Please Select </option>
+                            
+                            % foreach my $k(@opts){
+                                % my $ck = ($GenomeSequence_ed eq $k)?" Selected":'';
+                                <option value = "<%= $k %>" <%= $ck %>><%= $k %></option>
+                            % }
+                            </select>
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>   
+
+                        <div class="form-group has-feedback">
+                            <label for="GenomeDatabase_ed">Genome Database :</label>
+                            <input type="text" class="form-control" id="GenomeDatabase_ed" name="GenomeDatabase_ed" value="<%= $GenomeDatabase_ed %>" data-error="Please enter the Genome Database for this species (or &quot;NA&quot; if not available)" placeholder="Please enter the Genome Database for this species (or &quot;NA&quot; if not available)" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>
+                        
+                        <div class="form-group has-feedback">
+                            <label for="DatabaseURL_ed">Genome Database URL :</label>
+                            <input type="text" class="form-control" id="DatabaseURL_ed" name="DatabaseURL_ed" value="<%= $DatabaseURL_ed %>" data-error="Please enter the Genome Database URL for this species (or &quot;NA&quot; if not available)" placeholder="Please enter the Genome Database URL for this species (or &quot;NA&quot; if not available)" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>   
+
+                        <div class="form-group has-feedback">
+                            <label for="SpeciesSource_ed">Species Source :</label>
+                            <input type="text" class="form-control" id="SpeciesSource_ed" name="SpeciesSource_ed" value="<%= $SpeciesSource_ed %>" data-error="Please enter the Species Source for this species" placeholder="Please enter the Species Source for this species" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>  
+
+                        <button type="submit" class="formButton btn btn-warning round">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
+                    </form>
+                    
+                    <div><hr></div>
+
+                    <div class="panel-footer-delete">
+                        <p style="text-align:center" class="text-danger"> You may also delete this record if it is no longer applicable&nbsp;
+                        <button type="button" data-href="/get_species?del=1&amp;speciesID=<%= $speciesID %>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger round">Delete&nbsp;<span class="glyphicon glyphicon-trash"></span></button>    
+                        </p>
+                    </div>
+                % }
+                
+
+                </div>
+            </div>
+        </div>
+    </div>
+% }
+
+    <div class="panel-group" id="accordion1">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse7"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter new Species Information (Click here)</a>
+                </h4>
+            </div>
+
+            <div id="collapse7" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form method = "post" action = "/get_species?new=1" data-toggle="validator">
+         
+                        <div class="form-group has-feedback">
+                            <label for="SpeciesName">Species Name :</label>
+                            <input type="text" class="form-control" id="SpeciesName" name="SpeciesName" data-error="Please enter the Species name" placeholder = "Please enter the Species name" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>
+                    
+                        <div class="form-group has-feedback">
+                            <label for="orderID">Select Order:</label>
+                            <select class="form-control" id="orderID" name="orderID" data-error="Please select an Order" required>
+                            <option value = "">Please Select </option>
+                            % while (my @row = $sth->fetchrow_array()) {
+                                % my $value1 = $row[0]; 
+                                % my $value2 = $row[1]; 
+                                
+                                <option value = <%= $value1 %> > <%= $value2 %> </option>
+                            % }      
+                            </select>
+                            <div class="help-block with-errors alert-message"></div>  
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <label for="CommonName">Common Name :</label>
+                            <input type="text" class="form-control" id="CommonName" name="CommonName" data-error="Please enter a Common Name" placeholder = "Please enter a Common Name" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>
+                        
+                        <div class="form-group has-feedback">
+                            <label for="Importance">Importance :</label>
+                            <input type="text" class="form-control" id="Importance" name="Importance" data-error="Please enter the Importance" placeholder = "Please enter the Importance" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>
+                
+                        <div class="form-group has-feedback">
+                            <label for="GenomeSequence">Genome Sequence Available:</label>
+                            <select class="form-control" id="GenomeSequence" name="GenomeSequence" data-error="Please state Genome Sequence availability" required>
+                            <option value = "">Please Select </option>
+                            <option value = "Yes" >Yes</option>
+                            <option value = "No" >No</option>
+                            </select>
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>   
+
+                        <div class="form-group has-feedback">
+                            <label for="GenomeDatabase">Genome Database :</label>
+                            <input type="text" class="form-control" id="GenomeDatabase" name="GenomeDatabase" data-error="Please enter the Genome Database for this species (or &quot;NA&quot; if not available)" placeholder="Please enter the Genome Database for this species (or &quot;NA&quot; if not available)" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>
+                        
+                        <div class="form-group has-feedback">
+                            <label for="DatabaseURL">Genome Database URL :</label>
+                            <input type="text" class="form-control" id="DatabaseURL" name="DatabaseURL" data-error="Please enter the Genome Database URL for this species (or &quot;NA&quot; if not available)" placeholder="Please enter the Genome Database URL for this species (or &quot;NA&quot; if not available)" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>   
+
+                        <div class="form-group has-feedback">
+                            <label for="SpeciesSource">Species Source :</label>
+                            <input type="text" class="form-control" id="SpeciesSource" name="SpeciesSource" data-error="Please enter the Species Source for this species" placeholder="Please enter the Species Source for this species" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>  
+
+                        <button type="submit" class="formButton btn btn-default round">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
+                        <button type="reset" class="formButton btn btn-default round">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

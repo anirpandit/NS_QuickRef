@@ -1,0 +1,28 @@
+% layout 'default';
+% title 'nEUROSTRESSPEP: Expert Advisory Board';
+
+<div class="container">
+    <div class="row jumbotron">
+        <div ><img class="img-responsive center-block" style="max-width:150px; align:center; valign:middle" src="/img/nsplogo.jpg" alt="nEUROSTRESSPEP logo"></div>
+        <div><h5 style="text-align:center">Novel biocontrol agents for insect pests from neuroendocrinology</h5></div>
+        <div><h1 style="text-align:center"><strong>nEUROSTRESSPEP</strong></h1></div>
+    </div>
+</div>
+
+<div class="container">
+<h1>Expert Advisory Board</h1>
+
+  <div class="row">
+    <div class="col-md-12">
+
+        <p>We are fortunate to have obtained agreement from world-leading academic scientists and industry leaders:</p>
+          <ul>
+            <li>Professor May Berenbaum, University of Illinois</li>
+            <li>Dr Ronald Nachman, USDA</li>
+            <li>Dr Sarah Thompson, BASF</li>
+          </ul> 
+    </div>
+  </div>
+</div>
+
+

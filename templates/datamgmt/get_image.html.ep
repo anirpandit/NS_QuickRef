@@ -1,0 +1,309 @@
+% layout 'default';
+% title 'nEUROSTRESSPEP: Image Information Management';
+
+% use Subs qw(alertMessage);
+% use Subs qw(imagesearch);
+
+% use Subs qw(get_npimagepath);
+
+% if($message_to_page){
+    
+    % my ($message_alert)=Subs::alertMessage($message_to_page);
+
+    <div class="container"><%== $message_alert %></div>
+% }
+
+% my ($modaldelete)=Subs::modaldelete();
+<div class="container"><%== $modaldelete %></div>
+
+% # Form Start #
+
+%   #Common $dbh helper
+%   my $dbh = $self->app->dbh;
+
+%   #Query to get values for the Species Select Dropdown
+%   my $query = "SELECT speciesID, SpeciesName FROM SpeciesInfo ";
+%   my $sth = $dbh->prepare($query);    
+%   $sth->execute();
+
+%   my $sth2 = $dbh->prepare($query);    
+%   $sth2->execute();
+
+%   #Query to get values for the Neuropeptides Select Dropdown
+%   my $query2 = "SELECT neuropeptideID, NeuropeptideName FROM NeuropeptideInfo ";
+%   my $sth3 = $dbh->prepare($query2);    
+%   $sth3->execute();
+
+%   my $sth4 = $dbh->prepare($query2);    
+%   $sth4->execute();
+
+%   #Query to get values for the Functionality Categories Select Dropdown
+%   my $query3 = "SELECT funcID, FuncCategoryName FROM FuncCategories ORDER BY FuncCategoryName ASC";
+%   my $sth5 = $dbh->prepare($query3);    
+%   $sth5->execute();
+
+%   my $sth6 = $dbh->prepare($query3);    
+%   $sth6->execute();
+
+
+%   my $basepath = Subs::get_npimagepath();
+
+<div class="container">
+    <h1>Image Information Management</h1>
+
+    <div class="row">
+        <div class="col-md-12"><p>The following forms can be used to enter new data into the backend databases. Please use correct forms by clicking on the header for the information you would like to enter data for. Please make sure you have entered the correct information prior to submitting the form.</p></div>
+    </div>
+
+
+    <div class="table-responsive">
+        <div class="panel panel-default">
+            <table class="table table-hover table-bordered display">
+                <thead>
+                    <tr>
+                        <th> Operations </th>
+                        <th> Neuropeptide&nbsp;&nbsp;</th>
+                        <th> Species Name</th>
+                        <th> Functionality Category</th>
+                        <th> Image Legend</th>
+                        <th> Image File</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    % foreach my $result (@{$image_info}) {
+
+                        % my $SpeciesName = $result->[0];
+                        % my $NeuropeptideName = $result->[1];
+                        % my $FuncCategoryName = $result->[2];
+                        % my $ImageTitle = $result->[3];
+                        % my $ImageLegend = $result->[4];
+                        % my $imageID = $result->[5];
+
+                        % my $imagelink = "/imagesearch?linktoimage=$imageID";
+
+                        <tr>
+                            <td class="col-md-2"><button type="button" class="btn btn-danger round" data-href="/get_image?del=1&amp;imageID=<%= $imageID %>&amp;ImageTitle=<%= $ImageTitle %>" data-toggle="modal" data-target="#confirm-delete"><span class="glyphicon glyphicon-trash"></span> D</button>
+                            <a href="/get_image?edit=1&amp;imageID=<%= $imageID %>" class="btn btn-info round" ><span class="glyphicon glyphicon-pencil"></span> E</a></td>
+                            <td><%= $NeuropeptideName %></td>
+                            <td><%= $SpeciesName %></td>
+                            <td><%= $FuncCategoryName %></td>
+                            <td><%= $ImageLegend %></td>
+                            <td><a target="_blank" href="<%= $imagelink %> " data-toggle="tooltip" data-placement="bottom" title="Click to view Image " class="btn btn-one"><%= $ImageTitle %></a></td> 
+                            
+                        </tr>
+                    % }  
+
+                </tbody>
+            </table> 
+        </div>
+    </div>
+
+
+% if(defined $image_edit_array){
+
+    <div class="panel-group" id="accordion">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Image Information Record</a>
+                </h4>
+            </div>
+
+            
+            <div id="collapse1" class="panel-collapse collapse in">
+                <div class="panel-body-warning">
+                
+                % foreach my $result (@{$image_edit_array}) {
+                    % my $imageID = $result->[0]; 
+                    % my $speciesID_ed = $result->[1];
+                    % my $neuropeptideID_ed = $result->[2];
+                    % my $funcID_ed = $result->[3];
+                    % my $ImageTitle_ed = $result->[4];
+                    % my $ImageLegend_ed = $result->[5];
+  
+                    <form method = "post" action = "/get_image?update=1" data-toggle="validator" enctype="multipart/form-data">
+                    
+                    <input type="hidden" name = "imageID" value = "<%= $imageID %>">
+                        <div class="form-group has-feedback">
+                            <label for="speciesID_ed">Select Species:</label>
+                            <select class="form-control" id="speciesID_ed" name="speciesID_ed" data-error="Please select the Species" required>
+                            <option value = "">Please Select </option>
+                            % while (my @row = $sth2->fetchrow_array()) {
+                                % my $value1 = $row[0]; 
+                                % my $value2 = $row[1]; 
+                        
+                                % my $ck = '';
+                                % if($speciesID_ed == $value1){$ck = "selected";}
+
+                                <option value = <%= $value1 %> <%= $ck %> > <%= $value2 %> </option>
+                            % }      
+                            </select>
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>
+            
+                        <div class="form-group has-feedback">
+                            <label for="neuropeptideID_ed">Select Neuropeptide:</label>
+                            <select class="form-control" id="neuropeptideID_ed" name="neuropeptideID_ed" data-error="Please select the Neuropeptide" required>
+                            <option value = "">Please Select </option>
+                            % while (my @row = $sth4->fetchrow_array()) {
+                                % my $value1 = $row[0]; 
+                                % my $value2 = $row[1]; 
+                        
+                                % my $ck = '';
+                                % if($neuropeptideID_ed == $value1){$ck = "selected";}
+
+                                <option value = <%= $value1 %> <%= $ck %> > <%= $value2 %> </option>
+                            % }      
+                            </select>
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>
+
+
+                        <div class="form-group has-feedback">
+                            <label for="funcID_ed">Select Functionality:</label>
+                            <select class="form-control" id="funcID_ed" name="funcID_ed" data-error="Please select the Functionality" required>
+                            <option value = "">Please Select </option>
+                            % while (my @row = $sth6->fetchrow_array()) {
+                                % my $value1 = $row[0]; 
+                                % my $value2 = $row[1]; 
+                        
+                                % my $ck = '';
+                                % if($funcID_ed == $value1){$ck = "selected";}
+
+                                <option value = <%= $value1 %> <%= $ck %> > <%= $value2 %> </option>
+                            % }      
+                            </select>
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <label for="ImageLegend_ed">Image Legend :</label>
+                            <input type="text" class="form-control" name="ImageLegend_ed" value="<%= $ImageLegend_ed %>" data-error="Please enter the legend or appropriate description for the image" placeholder="Please enter the legend or appropriate description for the image" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div>  
+                        </div>  
+
+                        % my $imagelink = "/imagesearch?linktoimage=$imageID";
+
+                        % my $hasimage = $basepath.$ImageTitle_ed;
+
+                        % if(-e $hasimage){
+                            <div class="form-group has-feedback">
+                                <label for="Uploaded Image">Uploaded Image :</label>
+                                <p style="text-align:left"> <a target="_blank" href="<%= $imagelink %> " data-toggle="tooltip" data-placement="bottom" title="Click to view Image " class="btn btn-one"><%= $ImageTitle_ed %></a>
+                                <button type="button" data-href="/get_image?edit=2&amp;imageID=<%= $imageID %>&amp;ImageTitle=<%= $ImageTitle_ed %>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger round">Delete&nbsp;<span class="glyphicon glyphicon-trash"></span></button>    
+                                </p>
+                                <p class="text-warning"><em><strong>N.B.</strong>If you want to amend the image, first delete the current one. You will then be able to enter a new image.</em></p>
+                            </div>
+                        % }
+                        % else{
+                                <div class="form-group has-feedback">
+                                    <label for="ImageUpload">Image Upload :</label>
+                                    <input type="file" class="form-control" name="ImageUpload" value="<%= $ImageTitle_ed %>" data-error="" required>
+                                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                                    <div class="help-block with-errors alert-message"></div>  
+                                </div>
+                        % } 
+
+                    <button type="submit" class="formButton btn btn-warning round">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
+                </form>
+                
+                <div><hr></div>
+
+                <div class="panel-footer-delete">
+                    <p style="text-align:center" class="text-danger"> You may also delete this record if it is no longer applicable&nbsp;
+                    <button type="button" data-href="/get_image?del=1&amp;imageID=<%= $imageID %>&amp;ImageTitle=<%= $ImageTitle_ed %>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger round">Delete&nbsp;<span class="glyphicon glyphicon-trash"></span></button>    
+                    </p>
+                </div>
+            % }
+            
+
+            </div>
+        </div>
+    </div>
+</div>
+% }
+
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+    <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4"><span class="glyphicon glyphicon-edit"></span>&nbsp;Enter new Image Information (Click here)</a>
+    </h4>
+    </div>
+    
+    <div id="collapse4" class="panel-collapse collapse">
+        <div class="panel-body">
+            <form method = "post" action = "/get_image?new=1" data-toggle="validator" enctype="multipart/form-data">
+ 
+                    <div class="form-group has-feedback">
+                        <label for="speciesID">Select Species:</label>
+                        <select class="form-control" id="speciesID" name="speciesID" data-error="Please select the Species" required>
+                        <option value = "">Please Select </option>
+                        % while (my @row = $sth->fetchrow_array()) {
+                            % my $value1 = $row[0]; 
+                            % my $value2 = $row[1]; 
+                    
+                            <option value = <%= $value1 %> > <%= $value2 %> </option>
+                        % }      
+                        </select>
+                        <div class="help-block with-errors alert-message"></div>   
+                    </div>
+        
+                    <div class="form-group has-feedback">
+                        <label for="neuropeptideID">Select Neuropeptide:</label>
+                        <select class="form-control" id="neuropeptideID" name="neuropeptideID" data-error="Please select the Neuropeptide" required>
+                        <option value = "">Please Select </option>
+                        % while (my @row = $sth3->fetchrow_array()) {
+                            % my $value1 = $row[0]; 
+                            % my $value2 = $row[1]; 
+                    
+                            <option value = <%= $value1 %> > <%= $value2 %> </option>
+                        % }      
+                        </select>
+                        <div class="help-block with-errors alert-message"></div>   
+                    </div>
+
+
+                    <div class="form-group has-feedback">
+                        <label for="funcID">Select Functionality:</label>
+                        <select class="form-control" id="funcID" name="funcID" data-error="Please select the Functionality" required>
+                        <option value = "">Please Select </option>
+                        % while (my @row = $sth5->fetchrow_array()) {
+                            % my $value1 = $row[0]; 
+                            % my $value2 = $row[1]; 
+                    
+                            <option value = <%= $value1 %> > <%= $value2 %> </option>
+                        % }      
+                        </select>
+                        <div class="help-block with-errors alert-message"></div>   
+                    </div>
+
+
+                    <div class="form-group has-feedback">
+                        <label for="ImageLegend">Image Legend :</label>
+                        <input type="text" class="form-control" id="ImageLegend" name="ImageLegend" data-error="Please enter the legend or appropriate description for the image" placeholder="Please enter the legend or appropriate description for the image" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>  
+
+  
+                    <div class="form-group has-feedback">
+                        <label for="ImageUpload">Image Upload :</label>
+                        <input type="file" class="form-control" id="ImageUpload" name="ImageUpload" data-error="" required>
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                        <div class="help-block with-errors alert-message"></div>  
+                    </div>  
+
+                <button type="submit" class="formButton btn btn-default">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
+                <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
