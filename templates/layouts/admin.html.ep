@@ -79,23 +79,26 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="/home">nEUROSTRESSPEP</a>
+                    <a class="navbar-brand" href="#">nEUROSTRESSPEP</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li><a href="/home"> Home </a></li>
-                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Project Details <span class="caret"></span></a>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Data Management <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/project/about">About Project</a></li>
-                                <li><a href="/project/board">Expert Advisory Board</a></li>
-                                <li><a href="/project/consortium">Consortium</a></li>
+                                <li><a href="/datamgmt">Index</a></li>
+                                <li><a href="/get_species">Species Information</a></li>
+                                <li><a href="/get_func">Functionality Information</a></li>
+                                <li><a href="/get_image">Image Information</a></li>
+                                <li><a href="/get_iso_info">Isoform Information</a></li>
+                                <li><a href="/get_npep">Neuropeptide Information</a></li>
+                                <li><a href="/get_gbank">GenBank Information</a></li>
+                                <li><a href="/get_order">Order Information</a></li>
+                                <li><a href="/get_func_cat">Functionality Category</a></li>
                             </ul>
                         </li>
-                        <li><a href="/infosearch">Information Search</a></li>
-                        <li><a href="/contact"> Contact Us </a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/login" title="Login">Login&nbsp;&nbsp;<span class="glyphicon glyphicon-user"></span></a></li>
+                        <li><a href="/logout" title="Logout">Logout&nbsp;&nbsp;<span class="glyphicon glyphicon-user"></span></a></li>
                     </ul>
                 </div>
             </div>

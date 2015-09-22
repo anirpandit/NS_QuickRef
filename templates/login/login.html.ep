@@ -1,0 +1,41 @@
+% layout 'default';
+% title 'nEUROSTRESSPEP: Login Page';
+
+<div class="container">
+    <div class="row jumbotron">
+        <div ><img class="img-responsive center-block" style="max-width:150px; align:center; valign:middle" src="/img/nsplogo.jpg" alt="nEUROSTRESSPEP logo"></div>
+        <div><h5 style="text-align:center">Novel biocontrol agents for insect pests from neuroendocrinology</h5></div>
+        <div><h1 style="text-align:center"><strong>nEUROSTRESSPEP</strong></h1></div>
+    </div>
+</div>
+
+<div class="container">
+  <h1>nEUROSTRESSPEP Admin Login</h1>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      %= form_for login => begin
+
+        % if (param 'username') {
+          <b>Wrong name or password, please try again.</b><br>
+        % }
+   
+        <div class="form-group has-feedback">
+          <label for="username">Username :</label>
+          <input type="text" class="form-control" id="username" name="username" data-error="Please enter your Username" placeholder="Please enter your Username" required>
+          <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+          <div class="help-block with-errors alert-message"></div> 
+        </div>
+
+        <div class="form-group has-feedback">
+          <label for="password">Password :</label>
+          <input type="password" class="form-control" id="password" name="password" data-error="Please enter your Password" placeholder="Please enter your Password"  required>
+          <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+          <div class="help-block with-errors alert-message"></div> 
+        </div>
+            
+        <button type="submit" class="formButton btn btn-default round">Login&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
+        <button type="reset" class="formButton btn btn-default round">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
+      % end
+    </div>
+  </div>
+</div>

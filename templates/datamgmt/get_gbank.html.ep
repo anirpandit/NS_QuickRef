@@ -1,4 +1,4 @@
-% layout 'default';
+% layout 'admin';
 % title 'nEUROSTRESSPEP: GenBank Information Management';
 
 % use Subs qw(alertMessage);

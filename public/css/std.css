@@ -151,6 +151,14 @@ h3 {
     text-align:center;
 }
 
+.tdadmin {
+  text-align: left;
+  vertical-align: middle;
+  background-color: #6699CC;
+  color: #fff;
+  font-weight: bold;
+}
+
 /*!
 Chosen, a Select Box Enhancer for jQuery and Prototype
 by Patrick Filler for Harvest, http://getharvest.com

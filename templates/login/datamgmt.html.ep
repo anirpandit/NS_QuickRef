@@ -1,0 +1,87 @@
+% layout 'admin';
+% title 'nEUROSTRESSPEP: Admin Data Management';
+
+
+<div class="container">
+  <h1>nEUROSTRESSPEP Data Management</h1>
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+		% if (my $msg = flash 'message') {
+ 			<b><%= $msg %></b><br>
+ 			Welcome <%= session 'user' %>.<br><br>
+		% }
+		
+		<div class="table-responsive">
+
+			<table class="table table-hover table-bordered display">
+
+			    <tbody>
+					<tr>
+        				<td colspan="2" class="tdadmin">Species Information</td>
+      				</tr>
+      				<tr>
+        				<td style="text-align:left">On this page, the admin will be able to view, edit or delete any current records of Species Information. They can also add records for new Species.</td>
+        				<td><a target="_blank" href="/get_species" class="btn btn-one">Go to Info Page</a></td>
+					</tr>
+
+					<tr>
+        				<td colspan="2" class="tdadmin">Functionality Information</td>
+      				</tr>
+      				<tr>
+        				<td style="text-align:left">On this page, the admin will be able to view, edit or delete any current records of Functionality Information. They can also add records for new Functionality. </td>
+						<td><a target="_blank" href="/get_func" class="btn btn-one">Go to Info Page</a></td>
+					</tr>
+					<tr>
+        				<td colspan="2" class="tdadmin">Image Information</td>
+      				</tr>
+      				<tr>
+        				<td style="text-align:left">On this page, the admin will be able to view, edit or delete any current records of Image Information. They can also add records for new Images. </td>
+        				<td><a target="_blank" href="/get_image" class="btn btn-one">Go to Info Page</a></td>
+					</tr>
+
+					<tr>
+        				<td colspan="2" class="tdadmin">Isoform Information</td>
+      				</tr>
+      				<tr>
+        				<td style="text-align:left">On this page, the admin will be able to view, edit or delete any current records of Isoform Information. They can also add records for new Isoforms. </td>
+        				<td><a target="_blank" href="/get_iso_info" class="btn btn-one">Go to Info Page</a></td>
+					</tr>
+					<tr>
+        				<td colspan="2" class="tdadmin">Neuropeptide Information</td>
+      				</tr>
+      				<tr>
+        				<td style="text-align:left">On this page, the admin will be able to view, edit or delete any current records of Neuropeptide Information. They can also add records for new Neuropeptides. </td>
+        				<td><a target="_blank" href="/get_npep" class="btn btn-one">Go to Info Page</a></td>
+					</tr>
+
+					<tr>
+        				<td colspan="2" class="tdadmin">GenBank Information</td>
+      				</tr>
+      				<tr>
+        				<td style="text-align:left">On this page, the admin will be able to view, edit or delete any current records of GenBank Information. They can also add records for new Neuropeptide GenBank References. </td>
+        				<td><a target="_blank" href="/get_gbank" class="btn btn-one">Go to Info Page</a></td>
+					</tr>
+					<tr>
+        				<td colspan="2" class="tdadmin">Order Information</td>
+      				</tr>
+      				<tr>
+        				<td style="text-align:left">On this page, the admin will be able to view, edit or delete any current records of Order Information. They can also add records for new Orders. </td>
+        				<td><a target="_blank" href="/get_order" class="btn btn-one">Go to Info Page</a></td>
+					</tr>
+
+					<tr>
+        				<td colspan="2" class="tdadmin">Functionality Category Information</td>
+      				</tr>
+      				<tr>
+        				<td style="text-align:left">On this page, the admin will be able to view, edit or delete any current records of Functionality Category Information. They can also add records for new Functionality Categories. </td>
+        				<td><a target="_blank" href="/get_func_cat" class="btn btn-one">Go to Info Page</a></td>
+					</tr>														
+    			</tbody>
+			</table>
+		</div>
+   
+    </div>
+  </div>
+</div>
+

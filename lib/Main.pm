@@ -30,7 +30,7 @@ sub startup {
 
 	#Routes to Controllers#
 
-	#Home#
+	$r -> get('/') -> to(controller => 'sitepages', action => 'gohome');
 	$r -> get('/home') -> to(controller => 'sitepages', action => 'gohome');
    	$r -> get('/project/about') -> to(controller => 'sitepages', action => 'getabout');
     $r -> get('/project/board') -> to(controller => 'sitepages', action => 'getboard');
@@ -42,17 +42,16 @@ sub startup {
 	$r -> get('/infosearchw') -> to(controller => 'infosearch', action => 'infosearchw');	
 
     #Login Routes#
-    $r->any('/login')->to('login#index')->name('index');
+    $r->get('/login')->to('login#login')->name('login');
     
     my $logged_in = $r->under('/')->to('login#logged_in');
-    $logged_in->get('/protected')->to('login#protected');
+    $logged_in->get('/datamgmt')->to('login#datamgmt');
     
     $r->get('/logout')->to('login#logout');
     
 	#Additional modules to Information Search#
 	$r -> get('/fasta') -> to(controller => 'common', action => 'fasta');
 	$r -> get('/imagesearch') -> to(controller => 'common', action => 'imagesearch');
-
 
 	#Data Management Subsections#
     $r -> any([qw(GET POST)] => '/get_species')->to(controller => 'species', action => 'getspecies');
