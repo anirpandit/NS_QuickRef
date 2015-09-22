@@ -56,13 +56,6 @@
 					</tr>
 
 					<tr>
-        				<td colspan="2" class="tdadmin">GenBank Information</td>
-      				</tr>
-      				<tr>
-        				<td style="text-align:left">On this page, the admin will be able to view, edit or delete any current records of GenBank Information. They can also add records for new Neuropeptide GenBank References. </td>
-        				<td><a target="_blank" href="/get_gbank" class="btn btn-one">Go to Info Page</a></td>
-					</tr>
-					<tr>
         				<td colspan="2" class="tdadmin">Order Information</td>
       				</tr>
       				<tr>

@@ -77,7 +77,7 @@ sub infosearchw {
         ORDER BY SpeciesInfo.speciesID';
 
     my $query2 = '
-        SELECT DISTINCT NeuroPepIsoInfo.isoID, NeuroPepIsoInfo.IsoformName, NeuroPepIsoInfo.IsoformAASeq, NeuroPepIsoInfo.Isoform_p_end, NeuroPepIsoInfo.Isoform_a_end, NeuropeptideInfo.NeuropeptideName, SpeciesInfo.SpeciesName, NeuroPepIsoInfo.GenBankAscNum, NeuroPepIsoInfo.GenBankAscNumURL, NeuropeptideInfo.neuropeptideID
+        SELECT DISTINCT NeuroPepIsoInfo.isoID, NeuroPepIsoInfo.IsoformName, NeuroPepIsoInfo.IsoformAASeq, NeuroPepIsoInfo.Isoform_p_end, NeuroPepIsoInfo.Isoform_a_end, NeuropeptideInfo.NeuropeptideName, SpeciesInfo.SpeciesName, NeuroPepIsoInfo.GenBankAscNum, NeuroPepIsoInfo.GenBankAscNumURL, NeuropeptideInfo.neuropeptideID, NeuropeptideInfo.NeuropeptideDesc
         FROM NeuroPepIsoInfo, NeuropeptideInfo, SpeciesInfo
         WHERE NeuroPepIsoInfo.speciesID = SpeciesInfo.speciesID
         AND NeuroPepIsoInfo.neuropeptideID = NeuropeptideInfo.neuropeptideID
@@ -85,14 +85,6 @@ sub infosearchw {
         ORDER BY SpeciesInfo.speciesID';
 
     my $query3 = '
-        SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, NeuropeptideInfo.NeuropeptideDesc, NeuroPepGeneInfo.GenBankAscNum, NeuroPepGeneInfo.GenBankAscNumURL
-        FROM NeuroPepGeneInfo, NeuropeptideInfo, SpeciesInfo
-        WHERE NeuroPepGeneInfo.speciesID = SpeciesInfo.speciesID
-        AND NeuroPepGeneInfo.neuropeptideID = NeuropeptideInfo.neuropeptideID
-        AND ( SpeciesInfo.speciesID IN (' . $species_cond . ') AND NeuropeptideInfo.neuropeptideID IN (' . $pep_cond . '))
-        ORDER BY SpeciesInfo.speciesID';
-
-    my $query4 = '
         SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, FuncCategories.FuncCategoryName, FuncInfo.FuncDescription, FuncInfo.FuncURL, FuncInfo.idID
         FROM NeuropeptideInfo, FuncCategories, FuncInfo , SpeciesInfo
         WHERE FuncInfo.speciesID = SpeciesInfo.speciesID
@@ -101,7 +93,7 @@ sub infosearchw {
         AND ( SpeciesInfo.speciesID IN (' . $species_cond . ') AND NeuropeptideInfo.neuropeptideID IN (' . $pep_cond . ') AND FuncCategories.funcID IN (' . $func_cond . '))
         ORDER BY NeuropeptideInfo.neuropeptideID, FuncCategories.FuncCategoryName';
 
-    my $query5 = '
+    my $query4 = '
         SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, FuncCategories.FuncCategoryName, ImageInfo.ImageTitle, ImageInfo.ImageLegend, ImageInfo.imageID
         FROM NeuropeptideInfo, FuncCategories, ImageInfo , SpeciesInfo
         WHERE ImageInfo.speciesID = SpeciesInfo.speciesID
@@ -115,14 +107,11 @@ sub infosearchw {
     my $sth2 = $dbh->prepare($query2);  
     $sth2->execute(@species_array,@pep_array);
 
-    my $sth3 = $dbh->prepare($query3);  
-    $sth3->execute(@species_array,@pep_array);
-    
+    my $sth3 = $dbh->prepare($query3);    
+    $sth3>execute(@species_array,@pep_array,@func_array,);
+
     my $sth4 = $dbh->prepare($query4);    
     $sth4->execute(@species_array,@pep_array,@func_array,);
-
-    my $sth5 = $dbh->prepare($query5);    
-    $sth5->execute(@species_array,@pep_array,@func_array,);
     
     $self->stash(
         species => $species_array[0],
@@ -130,9 +119,8 @@ sub infosearchw {
         functionality => $func_array[0],
         results => $sth->fetchall_arrayref,
         IsoformInfo => $sth2->fetchall_arrayref,
-        NPInfo => $sth3->fetchall_arrayref,
-        FuncCategories => $sth4->fetchall_arrayref,
-        ImageResults => $sth5->fetchall_arrayref
+        FuncCategories => $sth3->fetchall_arrayref,
+        ImageResults => $sth4->fetchall_arrayref
     );
     
     $self->render('/search/infosearchw');

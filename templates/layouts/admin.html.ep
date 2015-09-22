@@ -91,7 +91,6 @@
                                 <li><a href="/get_image">Image Information</a></li>
                                 <li><a href="/get_iso_info">Isoform Information</a></li>
                                 <li><a href="/get_npep">Neuropeptide Information</a></li>
-                                <li><a href="/get_gbank">GenBank Information</a></li>
                                 <li><a href="/get_order">Order Information</a></li>
                                 <li><a href="/get_func_cat">Functionality Category</a></li>
                             </ul>

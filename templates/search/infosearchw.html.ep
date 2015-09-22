@@ -115,47 +115,7 @@
                             </div>
                         </div>
 
-                        <h3 id="npinfo"> Neuropeptide Information</h3>
-                        <div class="table-responsive">
-                            <div class="panel panel-default">
-                                <table class="table table-hover table-bordered display">
-                                    <thead>
-                                        <tr>
-                                            <th> Neuropeptide</th>
-                                            <th> Species Name</th>
-                                            <th> GenBank Ascension </th>
-                                        </tr>
-                                    </thead>
-                                
-                                    <tbody>
-
-                                    % foreach my $result (@{$NPInfo}) {
-                                        % my $SpeciesName = $result->[0];
-                                        % my $NeuropeptideName = $result->[1];
-                                        % my $NeuropeptideDesc = $result->[2];
-                                        % my $GenBankAscNum = $result->[3];
-                                        % my $GenBankAscNumURL = $result->[4];
-                                        <tr>
-                                            <td><%= $NeuropeptideName %>&nbsp;&nbsp;&nbsp;&nbsp;<span data-toggle="tooltip" data-placement="right" title="<%= $NeuropeptideDesc %>" class="glyphicon glyphicon-info-sign"></span></td>
-                                            <td><%= $SpeciesName %></td>
-                                            % if(defined $GenBankAscNum eq 'NA' || defined $GenBankAscNumURL eq 'NA'){
-                                                <td>-</td>
-                                            % }
-                                            % else {
-                                                <td><a target="_blank" href="<%= $GenBankAscNumURL %> " data-toggle="tooltip" data-placement="right" title="Click to view external reference" class="btn btn-two"><%= $GenBankAscNum %></a></td>
-                                            % }
-                                        </tr>
-                                    % }
-            
-                                    </tbody>
-                                </table>
-                                <div style="text-align:right;padding:10px">
-                                    <a href="#" class="btn btn-one" data-toggle="tooltip" data-placement="right" title="Back to Top"><span class="glyphicon glyphicon-chevron-up"></span></a>
-                                </div>
-                            </div> 
-                        </div> 
-
-                        <h3 id="isoforminfo"> Isoform Information </h3>
+                        <h3 id="isoforminfo"> Neuropeptide Isoform Information </h3>
                         <div class="table-responsive">
                             <div class="panel panel-default">
                                 <table class="table table-hover table-bordered display">
@@ -184,6 +144,7 @@
                                         % my $GenBankAscNum = $result->[7];
                                         % my $GenBankAscNumURL = $result->[8];
                                         % my $neuropeptideID = $result->[9];
+                                        % my $NeuropeptideDesc = $result->[10];
 
                                         % my $fastalink = "/fasta?isoID=$isoID";
                                         % my $fastarel = "/fasta?neuropeptideID=$neuropeptideID";
@@ -195,7 +156,7 @@
 
                                         <tr>
                                             <td><%= $IsoformName %></td>
-                                            <td><%= $NeuropeptideName %></td>
+                                            <td><%= $NeuropeptideName %>&nbsp;&nbsp;&nbsp;&nbsp;<span data-toggle="tooltip" data-placement="right" title="<%= $NeuropeptideDesc %>" class="glyphicon glyphicon-info-sign"></span></td>
                                             <td><%= $SpeciesName %></td>
                                             <td><span class="bold-red"><%= $pend %></span><%= $IsoformAASeq %><span class="bold-red"><%= $aend %></span></td>
                                             <td><a target="_blank" href="<%= $fastalink %>" data-toggle="tooltip" data-placement="right" title="Click to obtain isoform sequence in FASTA format" class="btn btn-one">Get FASTA</a></td>
@@ -273,7 +234,7 @@
                             </div>
 
                             %if(@{$ImageResults}){
-                                                            <div id="rondellThumbnails">
+                            <div id="rondellThumbnails">
                                 % foreach my $result (@{$ImageResults}) {
 
                                         % my $SpeciesName_img = $result->[0];
