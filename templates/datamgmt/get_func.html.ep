@@ -250,6 +250,20 @@
                             <div class="help-block with-errors alert-message"></div>   
                         </div>
 
+                        <div class="form-group has-feedback">
+                            <label for="isoID">Select Isoform:</label>
+                            <select class="form-control" id="isoID" name="isoID" data-error="Please select the Isoform" required>
+                            <option value = "">Please Select </option>
+                            % while (my @row = $sth5->fetchrow_array()) {
+                                % my $value1 = $row[0]; 
+                                % my $value2 = $row[1]; 
+                        
+                                <option value = <%= $value1 %> > <%= $value2 %> </option>
+                            % }      
+                            </select>
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>
+
 
                         <div class="form-group has-feedback">
                             <label for="funcID">Select Functionality:</label>
