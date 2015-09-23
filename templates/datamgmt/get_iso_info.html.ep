@@ -3,6 +3,8 @@
 
 % use Subs qw(alertMessage);
 
+% use Data::Dumper;
+
 % if($message_to_page){
     
     % my ($message_alert)=Subs::alertMessage($message_to_page);
@@ -33,6 +35,10 @@
 
 %   my $sth4 = $dbh->prepare($query2);    
 %   $sth4->execute();
+
+%  my $IsoformNamecheck = $self->param('IsoformName'); 
+
+%  if ($IsoformNamecheck){ my $query3 = "SELECT IsoformName FROM NeuroPepIsoInfo WHERE IsoformName = ? "; my $sth5 = $dbh->prepare($query3); $sth5->execute($IsoformNamecheck); my ($data) = $sth5->rows; print Dumper($data);}
 
 <div class="container">
     <h1>Isoform Information Management</h1>
@@ -281,6 +287,8 @@
                         <input type="text" class="form-control" id="IsoformName" name="IsoformName" data-error="Please enter the Isoform Name" placeholder="Please enter the Isoform Name" required>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                         <div class="help-block with-errors alert-message"></div>  
+
+                        <div id="message"></div>
                     </div>     
 
                     <div class="panel panel-body">

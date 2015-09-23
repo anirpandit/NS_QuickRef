@@ -10,6 +10,28 @@ $(document).ready(function() {
 	});
 	
 	$('table.display').DataTable();
+	
+	$("#IsoformName").change(function(){
+	$("#message").html('<div class="cssload-loader"><div class="cssload-inner cssload-one"></div><div class="cssload-inner cssload-two"></div>	<div class="cssload-inner cssload-three"></div></div> checking...');
+             
+ 
+            var IsoformName=$("#IsoformName").val();
+ 
+              $.ajax({
+                    type:"post",
+                    url:"/check",
+                    data:"IsoformName="+IsoformName,
+                        success:function(data){
+                        if(data==0){
+                            $("#message").html('');
+                        }
+                        else{
+                            $("#message").html('<div class="alert alert-danger"><span class="glyphicon glyphicon-remove"></span> Isoform Name already taken. Please use another one or there will be errors in the data. </div>');
+                        }
+                    }
+                 });
+ 
+            });
 });
 
 

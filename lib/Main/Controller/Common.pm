@@ -62,4 +62,23 @@ sub imagesearch{
     
     $self->render('/search/imagesearch');
 }
+
+sub check{
+    my $self = shift;
+    
+    my $dbh = $self->app->dbh;
+    
+    my $IsoformNamecheck = $self->param('IsoformName');
+    
+    my $query3 = "SELECT IsoformName FROM NeuroPepIsoInfo WHERE IsoformName = ? ";
+    my $sth5 = $dbh->prepare($query3);
+       $sth5->execute($IsoformNamecheck);
+    
+    $self->stash(
+        data => $sth5->rows
+    );
+    
+    $self->render('/datamgmt/check');
+    
+}
 1;

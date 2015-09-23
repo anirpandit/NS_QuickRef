@@ -49,9 +49,12 @@ sub startup {
     
     $r->get('/logout')->to('login#logout');
     
+   
 	#Additional modules to Information Search#
 	$r -> get('/fasta') -> to(controller => 'common', action => 'fasta');
 	$r -> get('/imagesearch') -> to(controller => 'common', action => 'imagesearch');
+    
+   	$r -> post('/check') -> to(controller => 'common', action => 'check');
 
 	#Data Management Subsections#
     $r -> any([qw(GET POST)] => '/get_species')->to(controller => 'species', action => 'getspecies');
