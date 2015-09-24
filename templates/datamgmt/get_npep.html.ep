@@ -20,7 +20,8 @@
     <h1>Neuropeptide Information Management</h1>
 
     <div class="row">
-        <div class="col-md-12"><p>The following forms can be used to enter new data into the backed databases. Please use correct forms by clicking on the header for the information you would like to enter data for. Please make sure you have entered the correct information prior to submitting the form.</p></div>
+        <div class="col-md-6" style="text-align:left;padding-bottom:5px">The following forms can be used to enter new data into the backed databases. Please use correct forms by clicking on the header for the information you would like to enter data for. Please make sure you have entered the correct information prior to submitting the form.</div>
+        <div class="col-md-6" style="text-align:right;padding-bottom:5px;padding-top:10px"><a href="#newrecord" class="btn btn-two" id="top"><span class="glyphicon glyphicon-edit"></span>&nbsp;Click here to enter a new record </a></div>
     </div>
 
 
@@ -63,7 +64,6 @@
 
     <div class="panel-group" id="accordion">
 
-        <!-- Form for Functionality Category EDIT -->
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
@@ -80,7 +80,7 @@
                     % my $NeuropeptideName_ed = $result->[1];
                     % my $NeuropeptideDesc_ed = $result->[2];
                     
-                    <form method = "post" action = "/get_npep?update=1" data-toggle="validator">
+                    <form method = "post" action = "/get_npep?update=1" data-toggle="validator" id="editform" class="validate">
          
                         <div class="form-group has-feedback">
                             <label for="NeuropeptideName_ed">Neuropeptide :</label>
@@ -116,7 +116,11 @@
     </div>
 % }
 
-
+    <div class="row">
+        <div class="col-md-12" id="newrecord"><h3>Add New Record</h3></div>
+        <div class="col-md-12" style="padding-bottom:5px">Use the following form to add a new record: </div>
+    </div>
+    
     <div class="panel panel-default">
 
         <div class="panel-heading">
@@ -125,9 +129,9 @@
             </h4>
         </div>
         
-        <div id="collapse5" class="panel-collapse collapse">
+        <div id="collapse5" class="panel-collapse collapse in">
             <div class="panel-body">
-                <form method = "post" action = "/get_npep?new=1" data-toggle="validator">
+                <form method = "post" action = "/get_npep?new=1" data-toggle="validator" id="newform" class="validate">
      
                     <div class="form-group has-feedback">
                         <label for="NeuropeptideName">Neuropeptide :</label>

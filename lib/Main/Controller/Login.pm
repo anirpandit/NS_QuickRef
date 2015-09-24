@@ -26,4 +26,9 @@ sub logout {
     $self->redirect_to('home');
 }
 
+sub datamgmt {
+    my $self = shift;
+    $self->render('/login/datamgmt');
+}
+
 1;

@@ -85,11 +85,12 @@ sub infosearchw {
     ORDER BY SpeciesInfo.speciesID';
     
     my $query4 = '
-    SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, FuncCategories.FuncCategoryName, FuncInfo.FuncDescription, FuncInfo.FuncURL, FuncInfo.idID
-    FROM NeuropeptideInfo, FuncCategories, FuncInfo , SpeciesInfo
+    SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, NeuroPepIsoInfo.IsoformName, FuncCategories.FuncCategoryName, FuncInfo.FuncDescription, FuncInfo.FuncURL, FuncInfo.idID
+    FROM NeuropeptideInfo, FuncCategories, FuncInfo , SpeciesInfo, NeuroPepIsoInfo
     WHERE FuncInfo.speciesID = SpeciesInfo.speciesID
     AND FuncInfo.neuropeptideID = NeuropeptideInfo.neuropeptideID
     AND FuncInfo.funcID = FuncCategories.funcID
+    AND FuncInfo.isoID = NeuroPepIsoInfo.isoID
     AND ( SpeciesInfo.speciesID IN (' . $species_cond . ') AND NeuropeptideInfo.neuropeptideID IN (' . $pep_cond . ') AND FuncCategories.funcID IN (' . $func_cond . '))
     ORDER BY NeuropeptideInfo.neuropeptideID, FuncCategories.FuncCategoryName';
     

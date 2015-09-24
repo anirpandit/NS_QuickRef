@@ -61,7 +61,7 @@ sub getimage {
     
      if(defined $image_update){
 
-        ($ImageUpload)?$ImageTitle_ed=imageupload($ImageUpload):'';
+        ($ImageUpload)?$ImageTitle_ed=imageupload($ImageUpload):$ImageTitle_ed;
 
         my $query3 = '
             UPDATE ImageInfo SET

@@ -34,7 +34,7 @@
     <div class="row">
         <div class="col-md-12"><h3>Your search results are displayed below</h3></div>
         <div class="col-md-6" style="text-align:left;padding-bottom:5px">Some blah blah about the results search could go here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent scelerisque elit eget elit aliquam sollicitudin. </div>
-        <div class="col-md-6" style="text-align:right;padding-bottom:5px"><a href="#newsearch" class="btn btn-two" id="top"><span class="glyphicon glyphicon-search"></span>&nbsp;Click here to Start a new search </a></div>
+        <div class="col-md-6" style="text-align:right;padding-bottom:5px;padding-top:10px"><a href="#newsearch" class="btn btn-two" id="top"><span class="glyphicon glyphicon-search"></span>&nbsp;Click here to Start a new search </a></div>
     </div>
 
 </div>
@@ -121,7 +121,7 @@
                                 <table class="table table-hover table-bordered display">
                                     <thead>
                                         <tr>
-                                            <th> Isoform Name </th>
+                                            <th> Isoform </th>
                                             <th> Neuropeptide&nbsp;&nbsp;</th>
                                             <th> Species Name</th>
                                             <th> Amino Acid Sequence <span data-toggle="tooltip" data-placement="right" title="Please note : (Where applicable) the &quot;pQ&quot; prefix stands for Pyroglutamate while the &quot;amide&quot; stands for Amidation" class="glyphicon glyphicon-info-sign"></span></th>
@@ -185,6 +185,7 @@
                                 <table class="table table-hover table-bordered display">
                                     <thead>
                                         <tr>
+                                            <th> Isoform </th>
                                             <th> Neuropeptide </th>
                                             <th> Species Name</th>
                                             <th> Functionality Category</th>
@@ -199,12 +200,14 @@
 
                                         % my $SpeciesName = $result->[0];
                                         % my $NeuropeptideName = $result->[1];
-                                        % my $FuncCategoryName = $result->[2];
-                                        % my $FuncDescription = $result->[3];
-                                        % my $FuncURL = $result->[4];
-                                        % my $idID = $result->[5];
+                                        % my $IsoformName = $result->[2];
+                                        % my $FuncCategoryName = $result->[3];
+                                        % my $FuncDescription = $result->[4];
+                                        % my $FuncURL = $result->[5];
+                                        % my $idID = $result->[6];
 
                                         <tr>
+                                            <td><%= $IsoformName %></td>
                                             <td><%= $NeuropeptideName %></td>
                                             <td><%= $SpeciesName %></td>
                                             <td><%= $FuncCategoryName %></td>

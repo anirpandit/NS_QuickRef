@@ -5,6 +5,7 @@
 
 //For message alerts at top of page//
 $(document).ready(function() {
+
 	$(".alert").delay(4000).slideUp(200, function() {
     	$(this).alert('close');
 	});
@@ -12,29 +13,29 @@ $(document).ready(function() {
 	$('table.display').DataTable();
 	
 	$("#IsoformName").change(function(){
-	$("#message").html('<div class="cssload-loader"><div class="cssload-inner cssload-one"></div><div class="cssload-inner cssload-two"></div>	<div class="cssload-inner cssload-three"></div></div> checking...');
+		$("#message").html('<div class="cssload-loader"><div class="cssload-inner cssload-one"></div><div class="cssload-inner cssload-two"></div>	<div class="cssload-inner cssload-three"></div></div> checking...');
              
+ 		var IsoformName=$("#IsoformName").val();
  
-            var IsoformName=$("#IsoformName").val();
+		$.ajax({
+			type:"post",
+			url:"/check",
+			data:"IsoformName="+IsoformName,
+			success:function(data){
+				if(data==0){
+					$("#message").html('');
+				}
+				else{
+					$("#message").html('<div class="alert alert-danger"><span class="glyphicon glyphicon-remove"></span> Isoform Name already taken. Please use another one or there will be errors in the data. </div>');
+				}
+			}
+		});
  
-              $.ajax({
-                    type:"post",
-                    url:"/check",
-                    data:"IsoformName="+IsoformName,
-                        success:function(data){
-                        if(data==0){
-                            $("#message").html('');
-                        }
-                        else{
-                            $("#message").html('<div class="alert alert-danger"><span class="glyphicon glyphicon-remove"></span> Isoform Name already taken. Please use another one or there will be errors in the data. </div>');
-                        }
-                    }
-                 });
- 
-            });
+	});
+
 });
 
-
+//For scrolling to element seamlessly//
 $('a[href^="#"]').on('click', function(event) {
 
     var target = $( $(this).attr('href') );
@@ -60,7 +61,7 @@ for (var selector in config) {
 	$(selector).chosen(config[selector]);
 }
 
-
+//Validation for checkboxes//
 function checkFields(form) {
         var checks_radios = form.find(':checkbox, :radio'),
             inputs = form.find(':input').not(checks_radios).not('[type="submit"],[type="button"],[type="reset"]'); 
@@ -77,7 +78,8 @@ function checkFields(form) {
         return true;
     }
     
-    
+
+//For Thumbnail Carousel//    
 $(function() {
     $("#rondellThumbnails").rondell({
       preset: "thumbGallery"

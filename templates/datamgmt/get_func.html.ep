@@ -42,11 +42,20 @@
 %   my $sth6 = $dbh->prepare($query3);    
 %   $sth6->execute();
 
+%   #Query to get values for the Functionality Categories Select Dropdown
+%   my $query4 = "SELECT isoID, IsoformName FROM NeuroPepIsoInfo ORDER BY IsoformName ASC";
+%   my $sth7 = $dbh->prepare($query4);    
+%   $sth7->execute();
+
+%   my $sth8 = $dbh->prepare($query4);    
+%   $sth8->execute();
+
 <div class="container">
     <h1>Functionality Information Management</h1>
 
     <div class="row">
-        <div class="col-md-12"><p>The following forms can be used to enter new data into the backed databases. Please use correct forms by clicking on the header for the information you would like to enter data for. Please make sure you have entered the correct information prior to submitting the form.</p></div>
+        <div class="col-md-6" style="text-align:left;padding-bottom:5px">The following forms can be used to enter new data into the backed databases. Please use correct forms by clicking on the header for the information you would like to enter data for. Please make sure you have entered the correct information prior to submitting the form.</div>
+        <div class="col-md-6" style="text-align:right;padding-bottom:5px;padding-top:10px"><a href="#newrecord" class="btn btn-two" id="top"><span class="glyphicon glyphicon-edit"></span>&nbsp;Click here to enter a new record </a></div>
     </div>
 
 
@@ -56,7 +65,8 @@
                 <thead>
                     <tr>
                         <th> Operations </th>
-                        <th> Neuropeptide&nbsp;&nbsp;</th>
+                        <th> Isoform</th>
+                        <th> Neuropeptide</th>
                         <th> Species Name</th>
                         <th> Functionality Category</th>
                         <th> Functionality Description</th>
@@ -69,18 +79,20 @@
 
                         % my $SpeciesName = $result->[0];
                         % my $NeuropeptideName = $result->[1];
-                        % my $FuncCategoryName = $result->[2];
-                        % my $FuncDescription = $result->[3];
-                        % my $FuncURL = $result->[4];
-                        % my $idID = $result->[5];
+                        % my $IsoformName = $result->[2];
+                        % my $FuncCategoryName = $result->[3];
+                        % my $FuncDescription = $result->[4];
+                        % my $FuncURL = $result->[5];
+                        % my $idID = $result->[6];
 
                         <tr>
                             <td class="col-md-2"><button type="button" class="btn btn-danger round" data-href="/get_func?del=1&amp;idID=<%= $idID %>" data-toggle="modal" data-target="#confirm-delete"><span class="glyphicon glyphicon-trash"></span> D</button>
                             <a href="/get_func?edit=1&amp;idID=<%= $idID %>" class="btn btn-info round" ><span class="glyphicon glyphicon-pencil"></span> E</a></td>
+                            <td><%= $IsoformName %></td>
                             <td><%= $NeuropeptideName %></td>
                             <td><%= $SpeciesName %></td>
                             <td><%= $FuncCategoryName %></td>
-                            % if($FuncDescription eq 'NA' || $FuncURL eq 'NA'){
+                            % if(defined $FuncDescription eq 'NA' || defined $FuncURL eq 'NA'){
                                 <td>-</td>
                                 <td>-</td>
                             % }
@@ -117,16 +129,17 @@
                     % my $idID = $result->[0]; 
                     % my $speciesID_ed = $result->[1];
                     % my $neuropeptideID_ed = $result->[2];
-                    % my $funcID_ed = $result->[3];
-                    % my $FuncDescription_ed = $result->[4];
-                    % my $FuncURL_ed = $result->[5];
+                    % my $isoID_ed = $result->[3];
+                    % my $funcID_ed = $result->[4];
+                    % my $FuncDescription_ed = $result->[5];
+                    % my $FuncURL_ed = $result->[6];
   
-                    <form method = "post" action = "/get_func?update=1" data-toggle="validator">
+                    <form method = "post" action = "/get_func?update=1" data-toggle="validator" id="editform" class="validate">
                     
                     <input type="hidden" name = "idID" value = "<%= $idID%>">
                         <div class="form-group has-feedback">
                             <label for="speciesID_ed">Select Species:</label>
-                            <select class="form-control" id="speciesID_ed" name="speciesID_ed" data-error="Please select the Species" required>
+                            <select class="form-control chosen-select" id="speciesID_ed" name="speciesID_ed" data-error="Please select the Species" required>
                             <option value = "">Please Select </option>
                             % while (my @row = $sth2->fetchrow_array()) {
                                 % my $value1 = $row[0]; 
@@ -143,7 +156,7 @@
             
                         <div class="form-group has-feedback">
                             <label for="neuropeptideID_ed">Select Neuropeptide:</label>
-                            <select class="form-control" id="neuropeptideID_ed" name="neuropeptideID_ed" data-error="Please select the Neuropeptide" required>
+                            <select class="form-control chosen-select" id="neuropeptideID_ed" name="neuropeptideID_ed" data-error="Please select the Neuropeptide" required>
                             <option value = "">Please Select </option>
                             % while (my @row = $sth4->fetchrow_array()) {
                                 % my $value1 = $row[0]; 
@@ -158,10 +171,27 @@
                             <div class="help-block with-errors alert-message"></div>   
                         </div>
 
+                        <div class="form-group has-feedback">
+                            <label for="isoID_ed">Select Isoform:</label>
+                            <select class="form-control chosen-select" id="isoID_ed" name="isoID_ed" data-error="Please select the Isoform" required>
+                            <option value = "">Please Select </option>
+                            % while (my @row = $sth8->fetchrow_array()) {
+                                % my $value1 = $row[0]; 
+                                % my $value2 = $row[1]; 
+                        
+                                % my $ck = '';
+                                % if($isoID_ed == $value1){$ck = "selected";}
+
+                                <option value = <%= $value1 %> <%= $ck %> > <%= $value2 %> </option>
+                            % }      
+                            </select>
+                            <div class="help-block with-errors alert-message"></div>   
+                        </div>
+
 
                         <div class="form-group has-feedback">
                             <label for="funcID_ed">Select Functionality:</label>
-                            <select class="form-control" id="funcID_ed" name="funcID_ed" data-error="Please select the Functionality" required>
+                            <select class="form-control chosen-select" id="funcID_ed" name="funcID_ed" data-error="Please select the Functionality" required>
                             <option value = "">Please Select </option>
                             % while (my @row = $sth6->fetchrow_array()) {
                                 % my $value1 = $row[0]; 
@@ -210,6 +240,11 @@
     </div>
 % }
 
+    <div class="row">
+        <div class="col-md-12" id="newrecord"><h3>Add New Record</h3></div>
+        <div class="col-md-12" style="padding-bottom:5px">Use the following form to add a new record: </div>
+    </div>
+    
     <div class="panel panel-default">
 
         <div class="panel-heading">
@@ -218,13 +253,13 @@
         </h4>
         </div>
         
-        <div id="collapse4" class="panel-collapse collapse">
+        <div id="collapse4" class="panel-collapse collapse in">
             <div class="panel-body">
-                <form method = "post" action = "/get_func?new=1" data-toggle="validator">
+                <form method = "post" action = "/get_func?new=1" data-toggle="validator" id="newform" class="validate">
      
                         <div class="form-group has-feedback">
                             <label for="speciesID">Select Species:</label>
-                            <select class="form-control" id="speciesID" name="speciesID" data-error="Please select the Species" required>
+                            <select class="form-control chosen-select" id="speciesID" name="speciesID" data-error="Please select the Species" required>
                             <option value = "">Please Select </option>
                             % while (my @row = $sth->fetchrow_array()) {
                                 % my $value1 = $row[0]; 
@@ -238,7 +273,7 @@
             
                         <div class="form-group has-feedback">
                             <label for="neuropeptideID">Select Neuropeptide:</label>
-                            <select class="form-control" id="neuropeptideID" name="neuropeptideID" data-error="Please select the Neuropeptide" required>
+                            <select class="form-control chosen-select" id="neuropeptideID" name="neuropeptideID" data-error="Please select the Neuropeptide" required>
                             <option value = "">Please Select </option>
                             % while (my @row = $sth3->fetchrow_array()) {
                                 % my $value1 = $row[0]; 
@@ -252,9 +287,9 @@
 
                         <div class="form-group has-feedback">
                             <label for="isoID">Select Isoform:</label>
-                            <select class="form-control" id="isoID" name="isoID" data-error="Please select the Isoform" required>
+                            <select class="form-control chosen-select" id="isoID" name="isoID" data-error="Please select the Isoform" required>
                             <option value = "">Please Select </option>
-                            % while (my @row = $sth5->fetchrow_array()) {
+                            % while (my @row = $sth7->fetchrow_array()) {
                                 % my $value1 = $row[0]; 
                                 % my $value2 = $row[1]; 
                         
@@ -264,10 +299,9 @@
                             <div class="help-block with-errors alert-message"></div>   
                         </div>
 
-
                         <div class="form-group has-feedback">
                             <label for="funcID">Select Functionality:</label>
-                            <select class="form-control" id="funcID" name="funcID" data-error="Please select the Functionality" required>
+                            <select class="form-control chosen-select" id="funcID" name="funcID" data-error="Please select the Functionality" required>
                             <option value = "">Please Select </option>
                             % while (my @row = $sth5->fetchrow_array()) {
                                 % my $value1 = $row[0]; 

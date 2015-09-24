@@ -125,7 +125,7 @@
         <script src="/js/jquery.rondell.min.js"></script>
         <script src="/js/modernizr-2.0.6.min.js"></script>
         <script src="/js/validator.js"></script>
-        <script src="/js/jquery.validate.min.js"></script>
+        <script src="/js/jquery.validate.js"></script>
         <script src="/js/additional-methods.min.js"></script>
         <script src="/js/tooltip.js"></script>
         <script src="/js/misc.js"></script>

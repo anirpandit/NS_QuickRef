@@ -52,7 +52,8 @@
     <h1>Image Information Management</h1>
 
     <div class="row">
-        <div class="col-md-12"><p>The following forms can be used to enter new data into the backend databases. Please use correct forms by clicking on the header for the information you would like to enter data for. Please make sure you have entered the correct information prior to submitting the form.</p></div>
+        <div class="col-md-6" style="text-align:left;padding-bottom:5px">The following forms can be used to enter new data into the backed databases. Please use correct forms by clicking on the header for the information you would like to enter data for. Please make sure you have entered the correct information prior to submitting the form.</div>
+        <div class="col-md-6" style="text-align:right;padding-bottom:5px;padding-top:10px"><a href="#newrecord" class="btn btn-two" id="top"><span class="glyphicon glyphicon-edit"></span>&nbsp;Click here to enter a new record </a></div>
     </div>
 
 
@@ -123,12 +124,12 @@
                     % my $ImageTitle_ed = $result->[4];
                     % my $ImageLegend_ed = $result->[5];
   
-                    <form method = "post" action = "/get_image?update=1" data-toggle="validator" enctype="multipart/form-data">
+                    <form method = "post" action = "/get_image?update=1" data-toggle="validator" enctype="multipart/form-data" id="editform" class="validate">
                     
                     <input type="hidden" name = "imageID" value = "<%= $imageID %>">
                         <div class="form-group has-feedback">
                             <label for="speciesID_ed">Select Species:</label>
-                            <select class="form-control" id="speciesID_ed" name="speciesID_ed" data-error="Please select the Species" required>
+                            <select class="form-control chosen-select" id="speciesID_ed" name="speciesID_ed" data-error="Please select the Species" required>
                             <option value = "">Please Select </option>
                             % while (my @row = $sth2->fetchrow_array()) {
                                 % my $value1 = $row[0]; 
@@ -145,7 +146,7 @@
             
                         <div class="form-group has-feedback">
                             <label for="neuropeptideID_ed">Select Neuropeptide:</label>
-                            <select class="form-control" id="neuropeptideID_ed" name="neuropeptideID_ed" data-error="Please select the Neuropeptide" required>
+                            <select class="form-control chosen-select" id="neuropeptideID_ed" name="neuropeptideID_ed" data-error="Please select the Neuropeptide" required>
                             <option value = "">Please Select </option>
                             % while (my @row = $sth4->fetchrow_array()) {
                                 % my $value1 = $row[0]; 
@@ -163,7 +164,7 @@
 
                         <div class="form-group has-feedback">
                             <label for="funcID_ed">Select Functionality:</label>
-                            <select class="form-control" id="funcID_ed" name="funcID_ed" data-error="Please select the Functionality" required>
+                            <select class="form-control chosen-select" id="funcID_ed" name="funcID_ed" data-error="Please select the Functionality" required>
                             <option value = "">Please Select </option>
                             % while (my @row = $sth6->fetchrow_array()) {
                                 % my $value1 = $row[0]; 
@@ -192,6 +193,7 @@
                         % if(-e $hasimage){
                             <div class="form-group has-feedback">
                                 <label for="Uploaded Image">Uploaded Image :</label>
+                                <input type="hidden" name = "ImageTitle_ed" value = "<%= $ImageTitle_ed %>">
                                 <p style="text-align:left"> <a target="_blank" href="<%= $imagelink %> " data-toggle="tooltip" data-placement="bottom" title="Click to view Image " class="btn btn-one"><%= $ImageTitle_ed %></a>
                                 <button type="button" data-href="/get_image?edit=2&amp;imageID=<%= $imageID %>&amp;ImageTitle=<%= $ImageTitle_ed %>" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger round">Delete&nbsp;<span class="glyphicon glyphicon-trash"></span></button>    
                                 </p>
@@ -226,6 +228,12 @@
 </div>
 % }
 
+
+<div class="row">
+    <div class="col-md-12" id="newrecord"><h3>Add New Record</h3></div>
+    <div class="col-md-12" style="padding-bottom:5px">Use the following form to add a new record: </div>
+</div>
+
 <div class="panel panel-default">
 
     <div class="panel-heading">
@@ -234,13 +242,13 @@
     </h4>
     </div>
     
-    <div id="collapse4" class="panel-collapse collapse">
+    <div id="collapse4" class="panel-collapse collapse in">
         <div class="panel-body">
-            <form method = "post" action = "/get_image?new=1" data-toggle="validator" enctype="multipart/form-data">
+            <form method = "post" action = "/get_image?new=1" data-toggle="validator" enctype="multipart/form-data" id="newform" class="validate">
  
                     <div class="form-group has-feedback">
                         <label for="speciesID">Select Species:</label>
-                        <select class="form-control" id="speciesID" name="speciesID" data-error="Please select the Species" required>
+                        <select class="form-control chosen-select" id="speciesID" name="speciesID" data-error="Please select the Species" required>
                         <option value = "">Please Select </option>
                         % while (my @row = $sth->fetchrow_array()) {
                             % my $value1 = $row[0]; 
@@ -254,7 +262,7 @@
         
                     <div class="form-group has-feedback">
                         <label for="neuropeptideID">Select Neuropeptide:</label>
-                        <select class="form-control" id="neuropeptideID" name="neuropeptideID" data-error="Please select the Neuropeptide" required>
+                        <select class="form-control chosen-select" id="neuropeptideID" name="neuropeptideID" data-error="Please select the Neuropeptide" required>
                         <option value = "">Please Select </option>
                         % while (my @row = $sth3->fetchrow_array()) {
                             % my $value1 = $row[0]; 
@@ -269,7 +277,7 @@
 
                     <div class="form-group has-feedback">
                         <label for="funcID">Select Functionality:</label>
-                        <select class="form-control" id="funcID" name="funcID" data-error="Please select the Functionality" required>
+                        <select class="form-control chosen-select" id="funcID" name="funcID" data-error="Please select the Functionality" required>
                         <option value = "">Please Select </option>
                         % while (my @row = $sth5->fetchrow_array()) {
                             % my $value1 = $row[0]; 
