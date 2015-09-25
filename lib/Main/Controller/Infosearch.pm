@@ -77,7 +77,7 @@ sub infosearchw {
     ORDER BY SpeciesInfo.speciesID';
     
     my $query2 = '
-    SELECT DISTINCT NeuroPepIsoInfo.isoID, NeuroPepIsoInfo.IsoformName, NeuroPepIsoInfo.IsoformAASeq, NeuroPepIsoInfo.Isoform_p_end, NeuroPepIsoInfo.Isoform_a_end, NeuropeptideInfo.NeuropeptideName, SpeciesInfo.SpeciesName, NeuroPepIsoInfo.GenBankAscNum, NeuroPepIsoInfo.GenBankAscNumURL, NeuropeptideInfo.neuropeptideID
+    SELECT DISTINCT NeuroPepIsoInfo.isoID, NeuroPepIsoInfo.IsoformName, NeuroPepIsoInfo.IsoformAASeq, NeuroPepIsoInfo.Isoform_p_end, NeuroPepIsoInfo.Isoform_a_end, NeuropeptideInfo.NeuropeptideName, SpeciesInfo.SpeciesName, NeuroPepIsoInfo.GenBankAscNum, NeuroPepIsoInfo.GenBankAscNumURL, NeuropeptideInfo.neuropeptideID, NeuropeptideInfo.NeuropeptideDesc
     FROM NeuroPepIsoInfo, NeuropeptideInfo, SpeciesInfo
     WHERE NeuroPepIsoInfo.speciesID = SpeciesInfo.speciesID
     AND NeuroPepIsoInfo.neuropeptideID = NeuropeptideInfo.neuropeptideID

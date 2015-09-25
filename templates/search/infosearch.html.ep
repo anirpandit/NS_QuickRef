@@ -27,7 +27,7 @@
     <h1>Information Search</h1>
 
     <div class="row">
-        <div class="col-md-12" style="padding-bottom:5px">Some blah blah about the how to search could go here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent scelerisque elit eget elit aliquam sollicitudin. Aliquam commodo mollis iaculis. In condimentum eleifend posuere. Mauris mollis, ex a lacinia facilisis, purus ex ornare mi, nec semper nulla mauris vitae ligula. Quisque sodales nec magna quis dictum. In hac habitasse platea dictumst. </div>
+        <div class="col-md-12" style="padding-bottom:5px">The following form is used for searching the database. Using this search you will be able to access General Information about Species and Neuropeptides. You can see any relevant and related neuropeptide isoforms, their functionality and even where available Image results. You may search using individual fields on their own or using any combination of Species, Neuropeptides and/or Functionality. You can also select multiple options at a time for any of the fields (using the 'cmd' button on a Mac or the 'Ctrl' button on a PC). </div>
     </div>
        
     <div class="panel-group" id="accordion">

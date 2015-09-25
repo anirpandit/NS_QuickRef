@@ -4,9 +4,8 @@ use strict;
 use warnings;
 
 my $USERS = {
-    joel      => 'las3rs',
-    marcus    => 'lulz',
-    sebastian => 'secr3t'
+    joseph      => 'spid3y',
+    anir    => 'batman'
 };
 
 sub new { bless {}, shift }

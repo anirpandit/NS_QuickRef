@@ -31,7 +31,7 @@
     <h1>Species Information Management</h1>
 
     <div class="row">
-        <div class="col-md-6" style="text-align:left;padding-bottom:5px">The following forms can be used to enter new data into the backed databases. Please use correct forms by clicking on the header for the information you would like to enter data for. Please make sure you have entered the correct information prior to submitting the form.</div>
+        <div class="col-md-6" style="text-align:left;padding-bottom:5px">On this page, the admin will be able to view, edit or delete any current records of Species Information. They can also add records for new Species.</div>
         <div class="col-md-6" style="text-align:right;padding-bottom:5px;padding-top:10px"><a href="#newrecord" class="btn btn-two" id="top"><span class="glyphicon glyphicon-edit"></span>&nbsp;Click here to enter a new record </a></div>
     </div>
 
