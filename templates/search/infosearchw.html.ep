@@ -236,7 +236,7 @@
                             </div>
 
                             %if(@{$ImageResults}){
-                            <div id="rondellThumbnails">
+                            <div id="rondellThumbnails" style="margin: 0 auto;">
                                 % foreach my $result (@{$ImageResults}) {
 
                                         % my $SpeciesName_img = $result->[0];
