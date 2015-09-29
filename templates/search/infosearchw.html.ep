@@ -10,7 +10,7 @@
 %   $sth->execute();
 
 %   #Query to get values for the Neuropeptides Select Dropdown
-%   my $query2 = "SELECT neuropeptideID, NeuropeptideName FROM NeuropeptideInfo ORDER BY NeuropeptideName ASC";
+%   my $query2 = "SELECT neuropeptideID, NeuropeptideName, NeuropeptideDesc FROM NeuropeptideInfo ORDER BY NeuropeptideName ASC";
 %   my $sth2 = $dbh->prepare($query2);    
 %   $sth2->execute();
 
@@ -123,7 +123,7 @@
                                             <th> Isoform </th>
                                             <th> Neuropeptide&nbsp;&nbsp;</th>
                                             <th> Species Name</th>
-                                            <th> Amino Acid Sequence <span data-toggle="tooltip" data-placement="right" title="Please note : (Where applicable) the &quot;pQ&quot; prefix stands for Pyroglutamate while the &quot;amide&quot; stands for Amidation" class="glyphicon glyphicon-info-sign"></span></th>
+                                            <th> Amino Acid Sequence <span data-toggle="tooltip" data-placement="right" title="Please note : (Where applicable) the &quot;p&quot; prefix stands for Pyroglutamate while the &quot;amide&quot; stands for Amidation" class="glyphicon glyphicon-info-sign"></span></th>
                                             <th > FASTA Sequences</th>
                                             <th > RELATED FASTA Sequences</th>
                                             <th> GenBank Ascension </th>
@@ -150,7 +150,7 @@
 
                                         % my ($pend,$aend);
 
-                                        % if ($Isoform_p_end){ $pend = 'pQ';}
+                                        % if ($Isoform_p_end){ $pend = 'p';}
                                         % if ($Isoform_a_end){ $aend = 'amide';}
 
                                         <tr>
@@ -199,15 +199,16 @@
 
                                         % my $SpeciesName = $result->[0];
                                         % my $NeuropeptideName = $result->[1];
-                                        % my $IsoformName = $result->[2];
-                                        % my $FuncCategoryName = $result->[3];
-                                        % my $FuncDescription = $result->[4];
-                                        % my $FuncURL = $result->[5];
-                                        % my $idID = $result->[6];
+                                        % my $NeuropeptideDesc = $result->[2];
+                                        % my $IsoformName = $result->[3];
+                                        % my $FuncCategoryName = $result->[4];
+                                        % my $FuncDescription = $result->[5];
+                                        % my $FuncURL = $result->[6];
+                                        % my $idID = $result->[7];
 
                                         <tr>
                                             <td><%= $IsoformName %></td>
-                                            <td><%= $NeuropeptideName %></td>
+                                            <td><%= $NeuropeptideName %>&nbsp;&nbsp;<span data-toggle="tooltip" data-placement="right" title="<%= $NeuropeptideDesc %>" class="glyphicon glyphicon-info-sign"></span></td>
                                             <td><%= $SpeciesName %></td>
                                             <td><%= $FuncCategoryName %></td>
                                             % if($FuncDescription eq 'NA' || $FuncURL eq 'NA'){
@@ -309,8 +310,9 @@
                             % while (my @row2 = $sth2->fetchrow_array()) {
                                 % my $value1 = $row2[0]; 
                                 % my $value2 = $row2[1]; 
+                                % my $value3 = $row2[2]; 
                         
-                                <option value = <%= $value1 %> > <%= $value2 %> </option>
+                                <option value = <%= $value1 %> > <%= $value3 %>&nbsp;(<%= $value2 %>) </option>
                             % }         
                             </select>
                                 

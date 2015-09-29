@@ -104,7 +104,7 @@ sub getimage {
     }
     
     my $query = '
-        SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, FuncCategories.FuncCategoryName, ImageInfo.ImageTitle, ImageInfo.ImageLegend, ImageInfo.imageID
+        SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, NeuropeptideInfo.NeuropeptideDesc, FuncCategories.FuncCategoryName, ImageInfo.ImageTitle, ImageInfo.ImageLegend, ImageInfo.imageID
         FROM NeuropeptideInfo, FuncCategories, ImageInfo , SpeciesInfo
         WHERE ImageInfo.speciesID = SpeciesInfo.speciesID
         AND ImageInfo.neuropeptideID = NeuropeptideInfo.neuropeptideID

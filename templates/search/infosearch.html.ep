@@ -11,7 +11,7 @@
 %   $sth->execute();
 
 %   #Query to get values for the Neuropeptides Select Dropdown
-%   my $query2 = "SELECT neuropeptideID, NeuropeptideName FROM NeuropeptideInfo ORDER BY NeuropeptideName ASC";
+%   my $query2 = "SELECT neuropeptideID, NeuropeptideName, NeuropeptideDesc FROM NeuropeptideInfo ORDER BY NeuropeptideName ASC";
 %   my $sth2 = $dbh->prepare($query2);    
 %   $sth2->execute();
 
@@ -60,8 +60,9 @@
                             % while (my @row2 = $sth2->fetchrow_array()) {
                                 % my $value1 = $row2[0]; 
                                 % my $value2 = $row2[1]; 
+                                % my $value3 = $row2[2]; 
                         
-                                <option value = <%= $value1 %> > <%= $value2 %> </option>
+                                <option value = <%= $value1 %> > <%= $value3 %>&nbsp;(<%= $value2 %>) </option>
                             % }         
                             </select>
                                 

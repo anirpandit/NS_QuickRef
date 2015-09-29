@@ -83,7 +83,7 @@ sub getfunc {
     }
     
     my $query = '
-        SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, NeuroPepIsoInfo.IsoformName,FuncCategories.FuncCategoryName, FuncInfo.FuncDescription, FuncInfo.FuncURL, FuncInfo.idID
+        SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName,NeuropeptideInfo.NeuropeptideDesc, NeuroPepIsoInfo.IsoformName,FuncCategories.FuncCategoryName, FuncInfo.FuncDescription, FuncInfo.FuncURL, FuncInfo.idID
         FROM NeuropeptideInfo, FuncCategories, FuncInfo , SpeciesInfo, NeuroPepIsoInfo
         WHERE FuncInfo.speciesID = SpeciesInfo.speciesID
         AND FuncInfo.neuropeptideID = NeuropeptideInfo.neuropeptideID

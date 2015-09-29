@@ -85,7 +85,7 @@ sub infosearchw {
     ORDER BY SpeciesInfo.speciesID';
     
     my $query4 = '
-    SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, NeuroPepIsoInfo.IsoformName, FuncCategories.FuncCategoryName, FuncInfo.FuncDescription, FuncInfo.FuncURL, FuncInfo.idID
+    SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, NeuropeptideInfo.NeuropeptideDesc,NeuroPepIsoInfo.IsoformName, FuncCategories.FuncCategoryName, FuncInfo.FuncDescription, FuncInfo.FuncURL, FuncInfo.idID
     FROM NeuropeptideInfo, FuncCategories, FuncInfo , SpeciesInfo, NeuroPepIsoInfo
     WHERE FuncInfo.speciesID = SpeciesInfo.speciesID
     AND FuncInfo.neuropeptideID = NeuropeptideInfo.neuropeptideID
@@ -95,7 +95,7 @@ sub infosearchw {
     ORDER BY NeuropeptideInfo.neuropeptideID, FuncCategories.FuncCategoryName';
     
     my $query5 = '
-    SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName, FuncCategories.FuncCategoryName, ImageInfo.ImageTitle, ImageInfo.ImageLegend, ImageInfo.imageID
+    SELECT DISTINCT SpeciesInfo.SpeciesName, NeuropeptideInfo.NeuropeptideName,FuncCategories.FuncCategoryName, ImageInfo.ImageTitle, ImageInfo.ImageLegend, ImageInfo.imageID
     FROM NeuropeptideInfo, FuncCategories, ImageInfo , SpeciesInfo
     WHERE ImageInfo.speciesID = SpeciesInfo.speciesID
     AND ImageInfo.neuropeptideID = NeuropeptideInfo.neuropeptideID
