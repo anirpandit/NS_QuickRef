@@ -32,6 +32,14 @@ $(document).ready(function() {
 		});
  
 	});
+	
+	
+	//For Deselection of multiple chosen//
+	$(".desel").chosen();
+
+	$("#reset").click(function () {
+    	$('.chosen-select option').prop('selected', false).trigger('chosen:updated');
+	});
 
 });
 

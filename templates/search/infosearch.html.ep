@@ -44,7 +44,7 @@
      
                         <div class="form-group has-feedback">
                             <label for="sel1">Select Species:&nbsp;</label>
-                            <select multiple class="form-control chosen-select searchformval" id="sel1" name="species" data-placeholder="Click here to select species" data-error="Please select a species" >
+                            <select multiple class="form-control chosen-select searchformval desel" id="sel1" name="species" data-placeholder="Click here to select species" data-error="Please select a species" >
                             % while (my @row = $sth->fetchrow_array()) {
                                 % my $value1 = $row[0]; 
                                 % my $value2 = $row[1]; 
@@ -56,7 +56,7 @@
 
                         <div class="form-group has-feedback">
                             <label for="sel2">Select Neuropeptide:&nbsp;</label>
-                            <select multiple class="form-control chosen-select searchformval" id="sel2" name="neuropeptide" data-placeholder="Click here to select neuropeptide" data-error="Please select a neuropeptide" >
+                            <select multiple class="form-control chosen-select searchformval desel" id="sel2" name="neuropeptide" data-placeholder="Click here to select neuropeptide" data-error="Please select a neuropeptide" >
                             % while (my @row2 = $sth2->fetchrow_array()) {
                                 % my $value1 = $row2[0]; 
                                 % my $value2 = $row2[1]; 
@@ -71,7 +71,7 @@
 
                         <div class="form-group has-feedback">
                             <label for="sel3">Select Functionality:&nbsp;</label>
-                            <select multiple class="form-control chosen-select searchformval" id="sel3" name="functionality" data-placeholder="Click here to select functionality" data-error="Please select at least one functionality" >
+                            <select multiple class="form-control chosen-select searchformval desel" id="sel3" name="functionality" data-placeholder="Click here to select functionality" data-error="Please select at least one functionality" >
                             % while (my @row3 = $sth3->fetchrow_array()) {
                                 % my $value1 = $row3[0]; 
                                 % my $value2 = $row3[1]; 
@@ -84,7 +84,7 @@
                         </div>
                             
                         <button type="submit" class="formButton btn btn-default">Search&nbsp;<span class="glyphicon glyphicon-search"></span></button>
-                        <button type="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove-sign"></span></button>
+                        <button type="reset" id="reset" class="formButton btn btn-default">Clear&nbsp;<span class="glyphicon glyphicon-remove-sign"></span></button>
                     </form>
                 </div>
             </div>
