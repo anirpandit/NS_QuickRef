@@ -126,7 +126,7 @@
                                             <th> Amino Acid Sequence <span data-toggle="tooltip" data-placement="right" title="Please note : (Where applicable) the &quot;p&quot; prefix stands for Pyroglutamate while the &quot;amide&quot; stands for Amidation" class="glyphicon glyphicon-info-sign"></span></th>
                                             <th > FASTA Sequences</th>
                                             <th > RELATED FASTA Sequences</th>
-                                            <th> GenBank Ascension </th>
+                                            <th> GenBank / Other Reference</th>
                                         </tr>
                                     </thead>
                                 

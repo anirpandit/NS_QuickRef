@@ -60,7 +60,7 @@
                         <th> Species Name</th>
                         <th> Amino Acid Sequence <span data-toggle="tooltip" data-placement="right" title="Please note : (Where applicable) the &amp;quot;p&amp;quot; prefix stands for Pyroglutamate while the &amp;quot;amide&amp;quot; stands for Amidation" class="glyphicon glyphicon-info-sign"></span></th>
                         <th> FASTA Sequence</th>
-                        <th> GenBank Reference </th>
+                        <th> GenBank / Other Reference</th>
                     </tr>
                 </thead>
 
@@ -132,8 +132,9 @@
                     % my $IsoformAASeq_ed = $result->[4];
                     % my $Isoform_p_end_ed = $result->[5];
                     % my $Isoform_a_end_ed = $result->[6];
-                    % my $GenBankAscNum_ed = $result->[7];
-                    % my $GenBankAscNumURL_ed = $result->[8];
+                    % my $ForReference_ed = $result->[7];
+                    % my $GenBankAscNum_ed = $result->[8];
+                    % my $GenBankAscNumURL_ed = $result->[9];
                     
 
                     % my $fastalink = "/fasta?isoID=$isoID";
@@ -197,9 +198,11 @@
                             <div class="help-block with-errors alert-message"></div>  
                         </div>  
 
-                        % my $ck1 = ''; my $ck2 = ''; 
-                        % if($Isoform_p_end_ed == 1 ){$ck1 = "checked";} 
-                        % if($Isoform_a_end_ed == 1 ){$ck2 = "checked";} 
+                        % my $ck1 = ''; my $ck2 = ''; my $ck3 = ''; my $ck4 = ''; 
+                        % $ck1 = ($Isoform_p_end_ed == 1) ? "checked": "" ; 
+                        % $ck2 = ($Isoform_a_end_ed == 1) ? "checked": "" ; 
+                        % $ck3 = ($ForReference_ed == 1) ? "checked " : "";
+                        % $ck4 = ($ForReference_ed == 2) ? "checked " : "";
 
                         <div class="checkbox">
                             <label for="Isoform_p_end_ed"><input type="checkbox" id="Isoform_p_end_ed" name="Isoform_p_end_ed" value=1 <%= $ck1 %> >Please tick if the sequence has a Pyroglutamate end (p-)</label>
@@ -213,6 +216,9 @@
 
                     <div class="form-group has-feedback">
                         <label for="GenBankAscNum_ed">GenBank Ascension Number:</label>
+                        <div class="radio">
+                            <label for="ForReference_ed"><input type="radio" id="ForReference_ed" name="ForReference_ed" value="1" <%= $ck3 %> onclick="radioEdit()"> Input GenBank Reference</label>&nbsp;&nbsp;<label for="ForReference_ed"><input type="radio" id="ForReference_ed" name="ForReference_ed" value="2" <%= $ck4 %> onclick="radioEdit(this.value)"> Input Other Reference</label>
+                        </div>
                         <input type="text" class="form-control" id="GenBankAscNum_ed" name="GenBankAscNum_ed" value="<%= $GenBankAscNum_ed %>" data-error="Please enter the GenBank Ascension Number (or &amp;quot;NA&amp;quot; if not available)" placeholder="Please enter the GenBank Ascension Number (or &amp;quot;NA&amp;quot; if not available)" required>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                         <div class="help-block with-errors alert-message"></div>  
@@ -319,7 +325,10 @@
                     
 
                     <div class="form-group has-feedback">
-                        <label for="GenBankAscNum">GenBank Ascension Number:</label>
+                        <label for="GenBankAscNum">GenBank / Other Reference:</label>
+                        <div class="radio">
+                            <label for="ForReference"><input type="radio" id="ForReference" name="ForReference" value="1" onclick="radioNew()"> Input GenBank Reference</label>&nbsp;&nbsp;<label for="ForReference"><input type="radio" id="ForReference" name="ForReference" value="2" onclick="radioNew(this.value)"> Input Other Reference</label>
+                        </div>
                         <input type="text" class="form-control" id="GenBankAscNum" name="GenBankAscNum" data-error="Please enter the GenBank Ascension Number (or &amp;quot;NA&amp;quot; if not available)" placeholder="Please enter the GenBank Ascension Number (or &amp;quot;NA&amp;quot; if not available)" required>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                         <div class="help-block with-errors alert-message"></div>  

@@ -93,3 +93,15 @@ $(function() {
       preset: "thumbGallery"
     });
 });
+
+// For the Radio Buttons clear text on the IsoInformation Admin Form //
+function radioEdit(num) { 
+    var txt=''; 
+	if(num == 2){txt="Get Reference"; }
+	document.getElementById("GenBankAscNum_ed").value=txt;
+}
+function radioNew(num) {
+   var txtn= '';
+	if(num == 2){txtn="Get Reference"; } 
+	document.getElementById("GenBankAscNum").value=txtn;
+} 

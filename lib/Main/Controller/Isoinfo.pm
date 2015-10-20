@@ -21,6 +21,7 @@ sub getisoinfo {
     my $IsoformAASeq = $self->param('IsoformAASeq');
     my $Isoform_p_end = $self->param('Isoform_p_end');
     my $Isoform_a_end = $self->param('Isoform_a_end');
+    my $ForReference = $self->param('ForReference');
     my $GenBankAscNum = $self->param('GenBankAscNum');
     my $GenBankAscNumURL = $self->param('GenBankAscNumURL');
 
@@ -30,6 +31,7 @@ sub getisoinfo {
     my $IsoformAASeq_ed = $self->param('IsoformAASeq_ed');
     my $Isoform_p_end_ed = $self->param('Isoform_p_end_ed');
     my $Isoform_a_end_ed= $self->param('Isoform_a_end_ed');
+    my $ForReference_ed = $self->param('ForReference_ed');
     my $GenBankAscNum_ed = $self->param('GenBankAscNum_ed');
     my $GenBankAscNumURL_ed = $self->param('GenBankAscNumURL_ed');
 
@@ -40,7 +42,7 @@ sub getisoinfo {
     
     if(defined $iso_info_edit){
         my $query2 = '
-        SELECT DISTINCT NeuroPepIsoInfo.isoID, NeuroPepIsoInfo.speciesID, NeuroPepIsoInfo.neuropeptideID, NeuroPepIsoInfo.IsoformName, NeuroPepIsoInfo.IsoformAASeq,NeuroPepIsoInfo.Isoform_p_end,NeuroPepIsoInfo.Isoform_a_end, NeuroPepIsoInfo.GenBankAscNum, NeuroPepIsoInfo.GenBankAscNumURL
+        SELECT DISTINCT NeuroPepIsoInfo.isoID, NeuroPepIsoInfo.speciesID, NeuroPepIsoInfo.neuropeptideID, NeuroPepIsoInfo.IsoformName, NeuroPepIsoInfo.IsoformAASeq,NeuroPepIsoInfo.Isoform_p_end,NeuroPepIsoInfo.Isoform_a_end, NeuroPepIsoInfo.ForReference,NeuroPepIsoInfo.GenBankAscNum, NeuroPepIsoInfo.GenBankAscNumURL
         FROM NeuroPepIsoInfo
         WHERE NeuroPepIsoInfo.isoID = ? ';
         
@@ -62,12 +64,13 @@ sub getisoinfo {
             NeuroPepIsoInfo.IsoformAASeq = ?,
             NeuroPepIsoInfo.Isoform_p_end = ?,
             NeuroPepIsoInfo.Isoform_a_end = ?,
+            NeuroPepIsoInfo.ForReference = ?,
             NeuroPepIsoInfo.GenBankAscNum = ?,
             NeuroPepIsoInfo.GenBankAscNumURL = ?
             WHERE NeuroPepIsoInfo.isoID = ? ';
         
          my $sth3 = $dbh->prepare($query3);
-         $sth3->execute($speciesID_ed,$neuropeptideID_ed,$IsoformName_ed,$IsoformAASeq_ed,$Isoform_p_end_ed,$Isoform_a_end_ed,$GenBankAscNum_ed,$GenBankAscNumURL_ed,$isoID);
+         $sth3->execute($speciesID_ed,$neuropeptideID_ed,$IsoformName_ed,$IsoformAASeq_ed,$Isoform_p_end_ed,$Isoform_a_end_ed,$ForReference_ed,$GenBankAscNum_ed,$GenBankAscNumURL_ed,$isoID);
         
          $message_to_page = 4;
        
@@ -84,9 +87,9 @@ sub getisoinfo {
     }
     
     if(defined $iso_info_new){
-        my $query4 = 'INSERT INTO NeuroPepIsoInfo (speciesID,neuropeptideID,IsoformName,IsoformAASeq,Isoform_p_end,Isoform_a_end,GenBankAscNum,GenBankAscNumURL) VALUES (?,?,?,?,?,?,?,?)';
+        my $query4 = 'INSERT INTO NeuroPepIsoInfo (speciesID,neuropeptideID,IsoformName,IsoformAASeq,Isoform_p_end,Isoform_a_end,ForReference,GenBankAscNum,GenBankAscNumURL) VALUES (?,?,?,?,?,?,?,?)';
         my $sth4 = $dbh->prepare($query4);
-        $sth4->execute($speciesID,$neuropeptideID,$IsoformName,$IsoformAASeq,$Isoform_p_end,$Isoform_a_end,$GenBankAscNum,$GenBankAscNumURL);
+        $sth4->execute($speciesID,$neuropeptideID,$IsoformName,$IsoformAASeq,$Isoform_p_end,$Isoform_a_end,$ForReference,$GenBankAscNum,$GenBankAscNumURL);
         
         $message_to_page = 1;
     }
