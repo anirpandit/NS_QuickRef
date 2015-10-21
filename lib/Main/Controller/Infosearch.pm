@@ -55,7 +55,7 @@ sub infosearchw {
 
     my $query = '
     SELECT DISTINCT SpeciesInfo.SpeciesName, OrderInfo.OrderName, SpeciesInfo.CommonName,
-    SpeciesInfo.Importance, SpeciesInfo.GenomeSequence, SpeciesInfo.GenomeDatabase, SpeciesInfo.DatabaseURL, SpeciesInfo.SpeciesSource
+    SpeciesInfo.Importance, SpeciesInfo.GenomeSequence, SpeciesInfo.GenomeDatabase, SpeciesInfo.DatabaseURL
     FROM SpeciesInfo, OrderInfo, NeuropeptideInfo, NeuroPepIsoInfo
     WHERE SpeciesInfo.orderID = OrderInfo.orderID
     AND NeuroPepIsoInfo.speciesID = SpeciesInfo.speciesID

@@ -21,7 +21,6 @@ sub getspecies {
     my $GenomeSequence = $self->param('GenomeSequence');
     my $GenomeDatabase = $self->param('GenomeDatabase');
     my $DatabaseURL = $self->param('DatabaseURL');
-    my $SpeciesSource = $self->param('SpeciesSource');
 
     my $orderID_ed = $self->param('orderID_ed');
     my $SpeciesName_ed = $self->param('SpeciesName_ed');
@@ -30,8 +29,6 @@ sub getspecies {
     my $GenomeSequence_ed = $self->param('GenomeSequence_ed');
     my $GenomeDatabase_ed = $self->param('GenomeDatabase_ed');
     my $DatabaseURL_ed = $self->param('DatabaseURL_ed');
-    my $SpeciesSource_ed = $self->param('SpeciesSource_ed');
-
 
     my $message_to_page=0; my $sth2; my $species_edit_array;
     
@@ -39,7 +36,7 @@ sub getspecies {
     
     if(defined $species_edit){
         my $query2 = '
-        SELECT DISTINCT SpeciesInfo.speciesID, SpeciesInfo.orderID, SpeciesInfo.SpeciesName, SpeciesInfo.CommonName, SpeciesInfo.Importance, SpeciesInfo.GenomeSequence, SpeciesInfo.GenomeDatabase, SpeciesInfo.DatabaseURL, SpeciesInfo.SpeciesSource
+        SELECT DISTINCT SpeciesInfo.speciesID, SpeciesInfo.orderID, SpeciesInfo.SpeciesName, SpeciesInfo.CommonName, SpeciesInfo.Importance, SpeciesInfo.GenomeSequence, SpeciesInfo.GenomeDatabase, SpeciesInfo.DatabaseURL
         FROM SpeciesInfo
         WHERE SpeciesInfo.speciesID = ? ';
         
@@ -62,11 +59,10 @@ sub getspecies {
             SpeciesInfo.GenomeSequence = ?,
             SpeciesInfo.GenomeDatabase = ?,
             SpeciesInfo.DatabaseURL = ?,
-            SpeciesInfo.SpeciesSource = ?
             WHERE SpeciesInfo.speciesID = ? ';
         
          my $sth3 = $dbh->prepare($query3);
-         $sth3->execute($orderID_ed,$SpeciesName_ed,$CommonName_ed,$Importance_ed,$GenomeSequence_ed,$GenomeDatabase_ed,$DatabaseURL_ed,$SpeciesSource_ed,$speciesID);
+         $sth3->execute($orderID_ed,$SpeciesName_ed,$CommonName_ed,$Importance_ed,$GenomeSequence_ed,$GenomeDatabase_ed,$DatabaseURL_ed,$speciesID);
         
          $message_to_page = 4;
        
@@ -83,16 +79,16 @@ sub getspecies {
     }
     
     if(defined $species_new){
-        my $query4 = 'INSERT INTO SpeciesInfo (speciesID,orderID,SpeciesName,CommonName,Importance,GenomeSequence,GenomeDatabase,DatabaseURL,SpeciesSource) VALUES (?,?,?,?,?,?,?,?,?)';
+        my $query4 = 'INSERT INTO SpeciesInfo (speciesID,orderID,SpeciesName,CommonName,Importance,GenomeSequence,GenomeDatabase,DatabaseURL) VALUES (?,?,?,?,?,?,?,?)';
         my $sth4 = $dbh->prepare($query4);
-        $sth4->execute($speciesID,$orderID,$SpeciesName,$CommonName,$Importance,$GenomeSequence,$GenomeDatabase, $DatabaseURL, $SpeciesSource);
+        $sth4->execute($speciesID,$orderID,$SpeciesName,$CommonName,$Importance,$GenomeSequence,$GenomeDatabase, $DatabaseURL);
         
         $message_to_page = 1;
     }
     
     my $query = '
         SELECT DISTINCT SpeciesInfo.SpeciesName, OrderInfo.OrderName, SpeciesInfo.CommonName, 
-        SpeciesInfo.Importance, SpeciesInfo.GenomeSequence, SpeciesInfo.GenomeDatabase, SpeciesInfo.DatabaseURL, SpeciesInfo.SpeciesSource, SpeciesInfo.speciesID
+        SpeciesInfo.Importance, SpeciesInfo.GenomeSequence, SpeciesInfo.GenomeDatabase, SpeciesInfo.DatabaseURL, SpeciesInfo.speciesID
         FROM SpeciesInfo, OrderInfo
         WHERE SpeciesInfo.orderID = OrderInfo.orderID
         ORDER BY SpeciesInfo.speciesID';

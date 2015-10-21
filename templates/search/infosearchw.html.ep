@@ -76,7 +76,6 @@
                                             <th> Importance </th>
                                             <th> Genome Sequence Available</th>
                                             <th> Genome Database</th>
-                                            <th> Species Source</th>
                                         </tr>
                                     </thead>
             
@@ -89,7 +88,6 @@
                                         % my $GenomeSequence = $result->[4];
                                         % my $GenomeDatabase = $result->[5];
                                         % my $DatabaseURL = $result->[6];
-                                        % my $SpeciesSource = $result->[7];
 
                                         <tr>
                                             <td><%= $SpeciesName %></td>
@@ -103,7 +101,6 @@
                                             % else {
                                                 <td><a target="_blank" href="<%= $DatabaseURL %> " data-toggle="tooltip" data-placement="right" title="Click to view external reference" class="btn btn-default btn-block"><%= $GenomeDatabase %></a></td>
                                             % }
-                                            <td><%= $SpeciesSource %></td>
                                         </tr>
                                     % }  
                                     </tbody>

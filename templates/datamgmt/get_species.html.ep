@@ -48,7 +48,6 @@
                         <th> Importance </th>
                         <th> Genome Sequence Available</th>
                         <th> Genome Database</th>
-                        <th> Species Source</th>
                     </tr>
                 </thead>
 
@@ -61,8 +60,7 @@
                         % my $GenomeSequence = $result->[4];
                         % my $GenomeDatabase = $result->[5];
                         % my $DatabaseURL = $result->[6];
-                        % my $SpeciesSource = $result->[7];
-                        % my $speciesID = $result->[8];
+                        % my $speciesID = $result->[7];
 
                         <tr>
                             <td class="col-md-2"><button type="button" class="btn btn-danger round" data-href="/get_species?del=1&amp;speciesID=<%= $speciesID %>" data-toggle="modal" data-target="#confirm-delete"><span class="glyphicon glyphicon-trash"></span> D</button>
@@ -78,7 +76,6 @@
                             % else {
                                 <td><a target="_blank" href="<%= $DatabaseURL %> " data-toggle="tooltip" data-placement="bottom" title="Click to view external reference" class="btn btn-default btn-block"><%= $GenomeDatabase %></a></td>
                             % }
-                            <td><%= $SpeciesSource %></td>
                         </tr>
                     % }  
                 </tbody>
@@ -111,7 +108,6 @@
                     % my $GenomeSequence_ed = $result->[5];
                     % my $GenomeDatabase_ed = $result->[6];
                     % my $DatabaseURL_ed = $result->[7];
-                    % my $SpeciesSource_ed = $result->[8];
 
                     
                     <form method = "post" action = "/get_species?update=1" data-toggle="validator" id="editform" class="validate">
@@ -183,13 +179,6 @@
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div>   
                         </div>   
-
-                        <div class="form-group has-feedback">
-                            <label for="SpeciesSource_ed">Species Source :</label>
-                            <input type="text" class="form-control" id="SpeciesSource_ed" name="SpeciesSource_ed" value="<%= $SpeciesSource_ed %>" data-error="Please enter the Species Source for this species" placeholder="Please enter the Species Source for this species" required>
-                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
-                            <div class="help-block with-errors alert-message"></div>   
-                        </div>  
 
                         <button type="submit" class="formButton btn btn-warning round">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
                     </form>
@@ -285,13 +274,6 @@
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div>   
                         </div>   
-
-                        <div class="form-group has-feedback">
-                            <label for="SpeciesSource">Species Source :</label>
-                            <input type="text" class="form-control" id="SpeciesSource" name="SpeciesSource" data-error="Please enter the Species Source for this species" placeholder="Please enter the Species Source for this species" required>
-                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
-                            <div class="help-block with-errors alert-message"></div>   
-                        </div>  
 
                         <button type="submit" class="formButton btn btn-default round">Submit&nbsp;<span class="glyphicon glyphicon-ok"></span></button>
                         <button type="reset" class="formButton btn btn-default round">Clear&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
