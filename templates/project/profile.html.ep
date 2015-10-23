@@ -66,8 +66,8 @@
                             <p><strong><%= $PIOrganisation%></strong></p>
                         </div>
                         <div class="col-xs-8">
-
                             <p><em><%= $PIProfile%></em></p>
+                            <p><a target="_blank" href="<%= $PIWebsite %> " data-toggle="tooltip" data-placement="right" title="Click to view website" class="btn btn-two">Visit Website</a></p>
                         </div>
                     </div>
                 </div>
