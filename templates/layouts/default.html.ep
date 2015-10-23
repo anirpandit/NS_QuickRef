@@ -88,6 +88,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="/project/about">About Project</a></li>
                                 <li><a href="/project/board">Expert Advisory Board</a></li>
+                                <li><a href="/project/profile">Principal Investigators</a></li>
                                 <li><a href="/project/consortium">Consortium</a></li>
                             </ul>
                         </li>

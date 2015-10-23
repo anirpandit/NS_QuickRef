@@ -1,0 +1,81 @@
+% layout 'default';
+% title 'nEUROSTRESSPEP: Principal Investigator Profiles';
+
+<div class="container">
+    <div class="row jumbotron">
+        <div ><img class="img-responsive center-block" style="max-width:150px; align:center; valign:middle" src="/img/nsplogo.jpg" alt="nEUROSTRESSPEP logo"></div>
+        <div><h5 style="text-align:center">Novel biocontrol agents for insect pests from neuroendocrinology</h5></div>
+        <div><h1 style="text-align:center"><strong>nEUROSTRESSPEP</strong></h1></div>
+    </div>
+</div>
+
+<div class="container">
+<h1 style="text-align:center">Prinicipal Investigator Profiles</h1>
+
+    <div class="container">
+        <div class="card-deck-wrapper">
+            <div class="card-deck">
+                % foreach my $result (@{$part_profile_info}) {
+                    % my $piID = $result->[0];
+                    % my $PIName = $result->[1];
+                    % my $PIOrganisation = $result->[2];
+                    % my $PIImage = $result->[3];
+
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
+                            <div class="avatar">
+                                <img src="" alt="" />
+                            </div>
+                            <div class="content">
+                                <p><%= $PIName %> <br>
+                                   <%= $PIOrganisation %></p>
+                                <p><a href="#<%= $piID %>" class="btn btn-two">More Info</a></p>
+
+                                <img class="src-image"  src="<%= $PIImage %>"/>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>        
+            </div>
+        </div>
+    </div>
+    <p style="height:50px">&nbsp;</p>
+    <div class="container">
+        <div class="row">
+        % foreach my $result (@{$full_profile_info}) {
+            % my $piID = $result->[0];
+            % my $PIName = $result->[1];
+            % my $PIOrganisation = $result->[2];
+            % my $PIPosition = $result->[3];
+            % my $PIProfile = $result->[4];
+            % my $PIWebsite = $result->[5];
+            % my $PIImage = $result->[6];
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title" id="<%= $piID%>"><%= $PIName%></h4>
+                </div>
+                
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-4" style="text-align:center">
+                            <img src="<%= $PIImage %>" class="img-rounded" style="width: 150px; height: 150px; margin-bottom:10px">
+                            <p><strong><%= $PIName %></strong></p>
+                            <p><strong><%= $PIPosition%></strong></p>
+                            <p><strong><%= $PIOrganisation%></strong></p>
+                        </div>
+                        <div class="col-xs-8">
+
+                            <p><em><%= $PIProfile%></em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p style="height:100px">&nbsp;</p>
+        <% } %>        
+        </div>
+    </div>
+</div>
+
+

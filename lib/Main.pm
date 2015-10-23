@@ -34,6 +34,7 @@ sub startup {
 	$r -> get('/home') -> to(controller => 'sitepages', action => 'gohome');
    	$r -> get('/project/about') -> to(controller => 'sitepages', action => 'getabout');
     $r -> get('/project/board') -> to(controller => 'sitepages', action => 'getboard');
+    $r -> get('/project/profile') -> to(controller => 'sitepages', action => 'getprofile');
     $r -> get('/project/consortium') -> to(controller => 'sitepages', action => 'getconsortium');
     $r -> get('/contact') -> to(controller => 'sitepages', action => 'getcontact');
 
