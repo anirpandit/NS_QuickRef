@@ -110,10 +110,6 @@
             <p style="height:300px">&nbsp;<p>
         </div>
 
-        <div style="text-align:center;padding:10px">
-            <a href="#" class="btn btn-one" title="Back to Top">Back to Top&nbsp;<span class="glyphicon glyphicon-chevron-up"></span></a>
-        </div>
-
         <div class = "navbar navbar-default navbar-fixed-bottom" >
             <div class= "container">
                 <div class="footer" >&copy; Dow-Davies Lab, 2015</div>
@@ -132,6 +128,7 @@
         <script src="/js/tooltip.js"></script>
         <script src="/js/misc.js"></script>
         <script src="/js/chval.js"></script>
+        <script src="/js/jquery.scrollUp.min.js"></script>
 
     </body>
 </html>

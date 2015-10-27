@@ -59,13 +59,13 @@
                 
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-4" style="text-align:center">
-                            <img src="<%= $PIImage %>" class="img-rounded" style="width: 150px; height: 150px; margin-bottom:10px">
+                        <div class="col-sm-4" style="text-align:center">
+                            <img src="<%= $PIImage %>" class="img-rounded" style="width: 150px; height:150px; margin-bottom:10px">
                             <p><strong><%= $PIName %></strong></p>
                             <p><strong><%= $PIPosition%></strong></p>
                             <p><strong><%= $PIOrganisation%></strong></p>
                         </div>
-                        <div class="col-xs-8">
+                        <div class="col-sm-8">
                             <p><em><%= $PIProfile%></em></p>
                             <p><a target="_blank" href="<%= $PIWebsite %> " data-toggle="tooltip" data-placement="right" title="Click to view website" class="btn btn-two">Visit Website</a></p>
                         </div>

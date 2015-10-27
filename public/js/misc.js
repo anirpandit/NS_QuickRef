@@ -106,8 +106,19 @@ function radioNew(num) {
 	document.getElementById("GenBankAscNum").value=txtn;
 } 
 
-
-
+//For Back to Top//
+$(function () {
+  $.scrollUp({
+    scrollName: 'scrollUp', // Element ID
+    topDistance: '300', // Distance from top before showing element (px)
+    topSpeed: 300, // Speed back to top (ms)
+    animation: 'fade', // Fade, slide, none
+    animationInSpeed: 200, // Animation in speed (ms)
+    animationOutSpeed: 200, // Animation out speed (ms)
+    scrollText: 'Back to top&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-up"></span>', // Text for element
+    activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+  });
+});
 
 // Profile Cards JQUERY SNIPPET//
 /*
