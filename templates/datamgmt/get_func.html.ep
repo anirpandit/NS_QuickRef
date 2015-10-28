@@ -67,7 +67,7 @@
                         <th> Operations </th>
                         <th> Isoform</th>
                         <th> Neuropeptide</th>
-                        <th> Species Name</th>
+                        <th> Species Used in Study</th>
                         <th> Functionality Category</th>
                         <th> Functionality Description</th>
                         <th> Functionality Reference</th>
@@ -139,7 +139,7 @@
                     
                     <input type="hidden" name = "idID" value = "<%= $idID%>">
                         <div class="form-group has-feedback">
-                            <label for="speciesID_ed">Select Species:</label>
+                            <label for="speciesID_ed">Select Species Used in Study:</label>
                             <select class="form-control chosen-select" id="speciesID_ed" name="speciesID_ed" data-error="Please select the Species" required>
                             <option value = "">Please Select </option>
                             % while (my @row = $sth2->fetchrow_array()) {
@@ -260,7 +260,7 @@
                 <form method = "post" action = "/get_func?new=1" data-toggle="validator" id="newform" class="validate">
      
                         <div class="form-group has-feedback">
-                            <label for="speciesID">Select Species:</label>
+                            <label for="speciesID">Select Species Used in Study:</label>
                             <select class="form-control chosen-select" id="speciesID" name="speciesID" data-error="Please select the Species" required>
                             <option value = "">Please Select </option>
                             % while (my @row = $sth->fetchrow_array()) {

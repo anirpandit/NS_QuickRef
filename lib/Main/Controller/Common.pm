@@ -45,7 +45,7 @@ sub imagesearch{
     
     my $idID = $self->param('linktoimage');
     my $query = '
-    SELECT DISTINCT NeuropeptideInfo.NeuropeptideName, SpeciesInfo.SpeciesName, ImageInfo.ImageTitle, ImageInfo.ImageLegend
+    SELECT DISTINCT NeuropeptideInfo.NeuropeptideName, SpeciesInfo.SpeciesName, ImageInfo.ImageTitle, ImageInfo.ImageLegend, ImageInfo.ImageReference, ImageInfo.ImageReferenceURL
     FROM ImageInfo, NeuropeptideInfo, SpeciesInfo
     WHERE
     ImageInfo.neuropeptideID = NeuropeptideInfo.neuropeptideID

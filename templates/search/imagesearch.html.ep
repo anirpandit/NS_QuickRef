@@ -11,6 +11,8 @@
     % my $SpeciesName = $result->[1];
     % my $ImageTitle = $result->[2];
     % my $ImageLegend = $result->[3];
+    % my $ImageReference = $result->[4];
+    % my $ImageReferenceURL = $result->[5];
 
     % my $ImgSrc = "/npimages/".$ImageTitle;
 
@@ -20,7 +22,11 @@
         <div class="panel panel-default">
             <div class="panel-heading"><h4 class="panel-title"><%= $NeuropeptideName %>&nbsp;( <em><%= $SpeciesName %> </em>)</h4></div>
             <div class="panel-body" ><img src="<%= $ImgSrc %>" class="img-responsive center-block" alt="<%= $ImageTitle %>" style="padding-bottom:10px"></div>
-            <div class="panel-footer"><h6><em><strong>Legend</strong> : <%= $ImageLegend %></em></h6></div>
+            <div class="panel-footer">
+                <h6><strong>Legend : </strong> <em><%= $ImageLegend %></em></h6>
+                <h6><strong>Reference : </strong><em> <%= $ImageReference %></em></h6>
+                <p><a target="_blank" href="<%= $ImageReferenceURL %> " data-toggle="tooltip" data-placement="right" title="Click to view external reference" class="btn btn-two">Get Reference</a></p>
+            </div>
         </div>
     </div>
 

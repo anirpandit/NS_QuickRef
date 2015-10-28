@@ -17,9 +17,13 @@
             <div class="card-deck">
                 % foreach my $result (@{$part_profile_info}) {
                     % my $piID = $result->[0];
-                    % my $PIName = $result->[1];
-                    % my $PIOrganisation = $result->[2];
-                    % my $PIImage = $result->[3];
+                    % my $PITitle = $result->[1];
+                    % my $PIForename = $result->[2];
+                    % my $PISurname = $result->[3];
+                    % my $PIOrganisation = $result->[4];
+                    % my $PIImage = $result->[5];
+
+                    % my $PIName = join(' ',$PITitle,$PIForename,$PISurname);
 
                     <div class="col-sm-4">
                         <div class="card">
@@ -45,12 +49,16 @@
         <div class="row">
         % foreach my $result (@{$full_profile_info}) {
             % my $piID = $result->[0];
-            % my $PIName = $result->[1];
-            % my $PIOrganisation = $result->[2];
-            % my $PIPosition = $result->[3];
-            % my $PIProfile = $result->[4];
-            % my $PIWebsite = $result->[5];
-            % my $PIImage = $result->[6];
+            % my $PITitle = $result->[1];
+            % my $PIForename = $result->[2];
+            % my $PISurname = $result->[3];
+            % my $PIOrganisation = $result->[4];
+            % my $PIPosition = $result->[5];
+            % my $PIProfile = $result->[6];
+            % my $PIWebsite = $result->[7];
+            % my $PIImage = $result->[8];
+
+            % my $PIName = join(' ',$PITitle,$PIForename,$PISurname);
 
             <div class="panel panel-default">
                 <div class="panel-heading">

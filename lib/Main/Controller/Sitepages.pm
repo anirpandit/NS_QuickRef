@@ -27,17 +27,17 @@ sub getprofile {
     my $dbh = $self->app->dbh;
 
     my $query = '
-    SELECT DISTINCT PIProfiles.piID, PIProfiles.PIName, PIProfiles.PIOrganisation, PIProfiles.PIImageSrc
+    SELECT DISTINCT PIProfiles.piID, PIProfiles.PITitle,PIProfiles.PIForename,PIProfiles.PISurname, PIProfiles.PIOrganisation, PIProfiles.PIImageSrc
     FROM PIProfiles
-    ORDER BY PIProfiles.piID';
+    ORDER BY PIProfiles.PISurname';
 
     my $sth = $dbh->prepare($query);
     $sth->execute();
 
     my $query2 = '
-    SELECT DISTINCT PIProfiles.piID, PIProfiles.PIName,  PIProfiles.PIOrganisation, PIProfiles.PIPosition, PIProfiles.PIProfile, PIProfiles.PIWebsite, PIProfiles.PIImageSrc
+    SELECT DISTINCT PIProfiles.piID, PIProfiles.PITitle,PIProfiles.PIForename,PIProfiles.PISurname,  PIProfiles.PIOrganisation, PIProfiles.PIPosition, PIProfiles.PIProfile, PIProfiles.PIWebsite, PIProfiles.PIImageSrc
     FROM PIProfiles
-    ORDER BY PIProfiles.piID';
+    ORDER BY PIProfiles.PISurname';
 
     my $sth2 = $dbh->prepare($query2);
     $sth2->execute();
