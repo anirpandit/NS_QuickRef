@@ -17,6 +17,19 @@ sub startup {
         }
     );
 
+
+    my $dbh = $self->app->dbh;
+
+    if ( not $dbh->ping ) {
+        (ref $self)->attr(
+            dbh => sub {
+                DBI->connect(
+                'DBI:mysql:nSP_QuickRef:127.0.0.1:3306','root','spider'
+                );
+            }
+        );
+    }
+
 	#For Hypnotoad, config file call#
 	my $config = $self->plugin('Config');
     
