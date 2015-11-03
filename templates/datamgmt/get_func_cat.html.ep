@@ -31,6 +31,7 @@
                     <tr>
                         <th> Operations </th>
                         <th> Functionality Category</th>
+                        <th> Quick Go Reference</th>
 
                     </tr>
                 </thead>
@@ -39,11 +40,14 @@
                 % foreach my $result (@{$func_cat_info}) {
                     % my $funcID = $result->[0];
                     % my $FuncCategoryName = $result->[1];
+                    % my $FuncCatGOTerm = $result->[2];
+                    % my $FuncCatGOURL = $result->[3];
 
                     <tr>
                     <td class="col-md-2"><button type="button" class="btn btn-danger round" data-href="/get_func_cat?del=1&amp;funcID=<%= $funcID %>" data-toggle="modal" data-target="#confirm-delete"><span class="glyphicon glyphicon-trash"></span> D</button>
                         <a href="/get_func_cat?edit=1&amp;funcID=<%= $funcID %>" class="btn btn-info round" ><span class="glyphicon glyphicon-pencil"></span> E</a></td>
                         <td><%= $FuncCategoryName %></td>
+                        <td><a target="_blank" href="<%= $FuncCatGOURL %> " data-toggle="tooltip" data-placement="right" title="Click to view external reference" class="btn btn-two"><%= $FuncCatGOTerm %></a></td>
                         
                     </tr>
                 % }  
@@ -70,6 +74,8 @@
                 % foreach my $result (@{$func_cat_edit_array}) {
                     % my $funcID = $result->[0];
                     % my $FuncCategoryName_ed = $result->[1];
+                    % my $FuncCatGOTerm_ed = $result->[2];
+                    % my $FuncCatGOURL_ed = $result->[3];
                     
                     <form method = "post" action = "/get_func_cat?update=1" data-toggle="validator" id="editform" class="validate">
          
@@ -77,6 +83,21 @@
                             <label for="FuncCategoryName_ed">Functionality Category :</label>
                             <input type="hidden" name = "funcID" value = "<%= $funcID%>">
                             <input type="text" class="form-control" id="FuncCategoryName_ed" name="FuncCategoryName_ed" value = "<%= $FuncCategoryName_ed %>" data-error="Please enter the Functionality Category" placeholder="Please enter the Functionality Category" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div> 
+                        </div>
+
+
+                        <div class="form-group has-feedback">
+                            <label for="FuncCatGOTerm_ed">GO Term:</label>
+                            <input type="text" class="form-control" id="FuncCatGOTerm_ed" name="FuncCatGOTerm_ed" value = "<%= $FuncCatGOTerm_ed %>" data-error="Please enter the GO Term" placeholder="Please enter the Go Term" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div> 
+                        </div>
+                        
+                        <div class="form-group has-feedback">
+                            <label for="FuncCatGOURL_ed">GO URL :</label>
+                            <input type="text" class="form-control" id="FuncCatGOURL_ed" name="FuncCatGOURL_ed" value = "<%= $FuncCatGOURL_ed %>"  data-error="Please enter the GO URL" placeholder="Please enter the GO URL" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div> 
                         </div>
@@ -121,6 +142,20 @@
                         <div class="form-group has-feedback">
                             <label for="FuncCategoryName">Functionality Category :</label>
                             <input type="text" class="form-control" id="FuncCategoryName" name="FuncCategoryName" data-error="Please enter the Functionality Category" placeholder="Please enter the Functionality Category" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div> 
+                        </div>
+                        
+                        <div class="form-group has-feedback">
+                            <label for="FuncCatGOTerm">GO Term:</label>
+                            <input type="text" class="form-control" id="FuncCatGOTerm" name="FuncCatGOTerm" data-error="Please enter the GO Term" placeholder="Please enter the Go Term" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
+                            <div class="help-block with-errors alert-message"></div> 
+                        </div>
+                        
+                        <div class="form-group has-feedback">
+                            <label for="FuncCatGOURL">GO URL :</label>
+                            <input type="text" class="form-control" id="FuncCatGOURL" name="FuncCatGOURL" data-error="Please enter the GO URL" placeholder="Please enter the GO URL" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span> 
                             <div class="help-block with-errors alert-message"></div> 
                         </div>

@@ -15,15 +15,23 @@ sub getfunccat {
     
     my $funcID = $self->param('funcID');
     my $FuncCategoryName = $self->param('FuncCategoryName');
+    my $FuncCatGOTerm = $self->param('FuncCatGOTerm');
+    my $FuncCatGOURL = $self->param('FuncCatGOURL');    
+
+
+
     my $FuncCategoryName_ed = $self->param('FuncCategoryName_ed');
-    
+    my $FuncCatGOTerm_ed = $self->param('FuncCatGOTerm_ed');
+    my $FuncCatGOURL_ed = $self->param('FuncCatGOURL_ed');    
+
+   
     my $message_to_page=0; my $sth2; my $func_cat_edit_array;
     
     my $dbh = $self->app->dbh;
     
     if(defined $func_cat_edit){
         my $query2 = '
-        SELECT DISTINCT FuncCategories.funcID, FuncCategories.FuncCategoryName
+        SELECT DISTINCT FuncCategories.funcID, FuncCategories.FuncCategoryName, FuncCategories.FuncCatGOTerm, FuncCategories.FuncCatGOURL
         FROM FuncCategories
         WHERE FuncCategories.funcID = ? ';
         
@@ -39,11 +47,13 @@ sub getfunccat {
     if(defined $func_cat_update){
         my $query3 = '
         UPDATE FuncCategories SET
-        FuncCategories.FuncCategoryName = ?
+        FuncCategories.FuncCategoryName = ?,
+        FuncCategories.FuncCatGOTerm = ?,
+        FuncCategories.FuncCatGOURL = ?
         WHERE FuncCategories.funcID = ? ';
         
         my $sth3 = $dbh->prepare($query3);
-        $sth3->execute($FuncCategoryName_ed,$funcID);
+        $sth3->execute($FuncCategoryName_ed,$FuncCatGOTerm_ed,$FuncCatGOURL_ed,$funcID);
         
         $message_to_page = 4;
         
@@ -61,7 +71,7 @@ sub getfunccat {
     }
     
     if(defined $func_cat_new){
-        my $query4 = 'INSERT INTO FuncCategories (FuncCategoryName) VALUES (?)';
+        my $query4 = 'INSERT INTO FuncCategories (FuncCategoryName,FuncCatGOTerm,FuncCatGOURL) VALUES (?,?,?)';
         my $sth4 = $dbh->prepare($query4);
         $sth4->execute($FuncCategoryName);
         
@@ -69,7 +79,7 @@ sub getfunccat {
     }
     
     my $query = '
-    SELECT DISTINCT FuncCategories.funcID, FuncCategories.FuncCategoryName
+    SELECT DISTINCT FuncCategories.funcID, FuncCategories.FuncCategoryName, FuncCategories.FuncCatGOTerm, FuncCategories.FuncCatGOURL
     FROM FuncCategories' ;
     
     my $sth = $dbh->prepare($query);
