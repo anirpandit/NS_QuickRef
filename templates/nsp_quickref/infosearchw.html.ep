@@ -139,8 +139,8 @@
                                         % my $neuropeptideID = $result->[9];
                                         % my $NeuropeptideDesc = $result->[10];
 
-                                        % my $fastalink = "/fasta?isoID=$isoID";
-                                        % my $fastarel = "/fasta?neuropeptideID=$neuropeptideID";
+                                        % my $fastalink = "/nsp_quickref/fasta?isoID=$isoID";
+                                        % my $fastarel = "/nsp_quickref/fasta?neuropeptideID=$neuropeptideID";
 
                                         % my ($pend,$aend);
 
@@ -239,9 +239,9 @@
                                         % my $ImageLegend_img = $result->[4];
                                         % my $imageID = $result->[5];
 
-                                        % my $imagelink = "/imagesearch?linktoimage=$imageID";
+                                        % my $imagelink = "/nsp_quickref/imagesearch?linktoimage=$imageID";
 
-                                        <a target="_blank" href="<%= $imagelink %> "><img src="npimages/<%= $ImageTitle_img %>" alt="<%= $ImageTitle_img %>" title="<%= $NeuropeptideName_img %> (<%= $SpeciesName_img %>) : <%= $ImageLegend_img %>"></a>
+                                        <a target="_blank" href="<%= $imagelink %> "><img src="/npimages/<%= $ImageTitle_img %>" alt="<%= $ImageTitle_img %>" title="<%= $NeuropeptideName_img %> (<%= $SpeciesName_img %>) : <%= $ImageLegend_img %>"></a>
                                     % } 
                             </div>
 
@@ -278,7 +278,7 @@
             
             <div id="collapse1" class="panel-collapse collapse in">
                 <div class="panel-body">
-                    <form method = "get" action = "/infosearchw" data-toggle="validator" id="searchform">
+                    <form method = "get" action = "/nsp_quickref/infosearchw" data-toggle="validator" id="searchform">
      
                         <div class="form-group has-feedback">
                             <label for="sel1">Select Species:&nbsp;</label>

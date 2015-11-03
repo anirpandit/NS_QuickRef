@@ -36,7 +36,7 @@ sub fasta {
     seqinfo => $sth->fetchall_arrayref
     );
     
-    $self->render('/search/fasta');
+    $self->render('/nsp_quickref/fasta');
     
 }
 
@@ -60,7 +60,7 @@ sub imagesearch{
     imginfo => $sth->fetchall_arrayref
     );
     
-    $self->render('/search/imagesearch');
+    $self->render('/nsp_quickref/imagesearch');
 }
 
 sub check{

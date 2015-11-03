@@ -5,7 +5,7 @@ use Mojo::Base 'Mojolicious::Controller';
 # Action
 sub infosearch {
     my $self = shift;
-    $self->render('/search/infosearch');
+    $self->render('/nsp_quickref/infosearch');
 }
 
 sub infosearchw {
@@ -122,8 +122,18 @@ sub infosearchw {
     ImageResults => $sth5->fetchall_arrayref
     );
     
-    $self->render('/search/infosearchw');
+    $self->render('/nsp_quickref/infosearchw');
     
+}
+
+sub getfaq {
+    my $self = shift;
+    $self->render('/nsp_quickref/faq');
+}
+
+sub gettutorial {
+    my $self = shift;
+    $self->render('/nsp_quickref/tutorial');
 }
 
 1;

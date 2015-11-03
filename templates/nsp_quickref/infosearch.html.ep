@@ -40,7 +40,7 @@
             
             <div id="collapse1" class="panel-collapse collapse <%= $collapseopt %>">
                 <div class="panel-body">
-                    <form method = "get" action = "/infosearchw" data-toggle="validator" id="searchform" class="validate">
+                    <form method = "get" action = "/nsp_quickref/infosearchw" data-toggle="validator" id="searchform" class="validate">
      
                         <div class="form-group has-feedback">
                             <label for="sel1">Select Species:&nbsp;</label>

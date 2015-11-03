@@ -52,8 +52,11 @@ sub startup {
     $r -> get('/contact') -> to(controller => 'sitepages', action => 'getcontact');
 
 	#Information Search#
-	$r -> get('/infosearch') -> to(controller => 'infosearch', action => 'infosearch');	
-	$r -> get('/infosearchw') -> to(controller => 'infosearch', action => 'infosearchw');	
+	$r -> get('/nsp_quickref/infosearch') -> to(controller => 'infosearch', action => 'infosearch');	
+	$r -> get('/nsp_quickref/infosearchw') -> to(controller => 'infosearch', action => 'infosearchw');	
+
+    $r -> get('/nsp_quickref/faq') -> to(controller => 'infosearch', action => 'getfaq'); 
+    $r -> get('/nsp_quickref/tutorial') -> to(controller => 'infosearch', action => 'gettutorial');   
 
     #Login Routes#
     $r->get('/login')->to('login#login')->name('login');
@@ -65,8 +68,8 @@ sub startup {
     
    
 	#Additional modules to Information Search#
-	$r -> get('/fasta') -> to(controller => 'common', action => 'fasta');
-	$r -> get('/imagesearch') -> to(controller => 'common', action => 'imagesearch');
+	$r -> get('/nsp_quickref/fasta') -> to(controller => 'common', action => 'fasta');
+	$r -> get('/nsp_quickref/imagesearch') -> to(controller => 'common', action => 'imagesearch');
     
    	$r -> post('/check') -> to(controller => 'common', action => 'check');
 

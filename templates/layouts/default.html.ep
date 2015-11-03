@@ -91,7 +91,13 @@
                                 <li><a href="/project/consortium">Consortium</a></li>
                             </ul>
                         </li>
-                        <li><a href="/infosearch">Information Search</a></li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">nSP_QuickRef <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/nsp_quickref/infosearch">Information Search</a></li>
+                                <li><a href="/nsp_quickref/tutorial">Tutorial</a></li>
+                                <li><a href="/nsp_quickref/faq">FAQs</a></li>
+                            </ul>
+                        </li>
                         <li><a href="/contact"> Contact Us </a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
