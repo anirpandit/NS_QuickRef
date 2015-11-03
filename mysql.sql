@@ -1,0 +1,1 @@
+SELECT speciesID, SpeciesName FROM SpeciesInfo ORDER BY SpeciesName ASC;

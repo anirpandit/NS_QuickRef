@@ -87,7 +87,7 @@ sub getisoinfo {
     }
     
     if(defined $iso_info_new){
-        my $query4 = 'INSERT INTO NeuroPepIsoInfo (speciesID,neuropeptideID,IsoformName,IsoformAASeq,Isoform_p_end,Isoform_a_end,ForReference,GenBankAscNum,GenBankAscNumURL) VALUES (?,?,?,?,?,?,?,?)';
+        my $query4 = 'INSERT INTO NeuroPepIsoInfo (speciesID,neuropeptideID,IsoformName,IsoformAASeq,Isoform_p_end,Isoform_a_end,ForReference,GenBankAscNum,GenBankAscNumURL) VALUES (?,?,?,?,?,?,?,?,?)';
         my $sth4 = $dbh->prepare($query4);
         $sth4->execute($speciesID,$neuropeptideID,$IsoformName,$IsoformAASeq,$Isoform_p_end,$Isoform_a_end,$ForReference,$GenBankAscNum,$GenBankAscNumURL);
         

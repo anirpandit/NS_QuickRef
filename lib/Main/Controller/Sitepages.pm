@@ -29,7 +29,7 @@ sub getprofile {
     my $query = '
     SELECT DISTINCT PIProfiles.piID, PIProfiles.PITitle,PIProfiles.PIForename,PIProfiles.PISurname, PIProfiles.PIOrganisation, PIProfiles.PIImageSrc
     FROM PIProfiles
-    ORDER BY PIProfiles.PISurname';
+    ORDER BY PIProfiles.piID';
 
     my $sth = $dbh->prepare($query);
     $sth->execute();
