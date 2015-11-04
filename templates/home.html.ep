@@ -2,12 +2,12 @@
 % title 'nEUROSTRESSPEP: Home';
 
 <div class="container">
-    <div class="row jumbotron">
-        <div ><img class="img-responsive center-block" style="max-width:150px; align:center; valign:middle" src="/img/nsplogo.jpg" alt="nEUROSTRESSPEP logo"></div>
-        <div><h5 style="text-align:center">Novel biocontrol agents for insect pests from neuroendocrinology</h5></div>
-        <div><h1 style="text-align:center"><strong>nEUROSTRESSPEP</strong></h1></div>
-    </div>
+  <div id="owl-demo" class="owl-carousel owl-theme">
+    <div class="item"><img src="img/homepage/nspmain.png" alt="The Last of us"></div>
+    <div class="item"><a href="/nsp_quickref/infosearch"><img src="img/homepage/nspquickref.png" alt="The Last of us"></a></div>
+  </div>
 </div>
+
 
 <div class="container">
 <h1>Welcome to nEUROSTRESSPEP</h1>
@@ -26,6 +26,23 @@
       <p>This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 634361</p>
     </div>
   </div>
+
+
+
+
+<!--    <div class="row jumbotron">
+        <div ><img class="img-responsive center-block" style="max-width:150px; align:center; valign:middle" src="/img/nsplogo.jpg" alt="nEUROSTRESSPEP logo"></div>
+        <div><h5 style="text-align:center">Novel biocontrol agents for insect pests from neuroendocrinology</h5></div>
+        <div><h1 style="text-align:center"><strong>nEUROSTRESSPEP</strong></h1></div>
+    </div>
+    <div class="row jumbotron" style="background-color:#003366;color:#fff">
+        <div><h1 style="text-align:center;color:#fff;"><strong>nSP_QuickRef</strong></h1></div>
+        <div><h2 style="text-align:center;color:#fff;">nEUROSTRESSPEP QuickRef Database App</h2></div>
+        <div><h5 style="text-align:center;color:#fff;">Search the database for information about the various species and neuropeptides of interest to the consortium.</h5></div>
+        <div style="text-align:center">Click here to <a href="/nsp_quickref/infosearch" class="btn btn-default" id="top"><span class="glyphicon glyphicon-search"></span>&nbsp;Search Now </a></div>
+    </div>
+</div>
+-->
 </div>
 
 
