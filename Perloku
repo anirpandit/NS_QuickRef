@@ -1,2 +1,0 @@
-#!/bin/sh
-./ns_quickrefnew.pl daemon --listen http://*:$PORT
