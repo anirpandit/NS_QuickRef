@@ -3,8 +3,9 @@
 
 <div class="container">
   <div id="owl-demo" class="owl-carousel owl-theme">
-    <div class="item"><img src="img/homepage/nspmain.png" alt="The Last of us"></div>
-    <div class="item"><a href="/nsp_quickref/infosearch"><img src="img/homepage/nspquickref.png" alt="The Last of us"></a></div>
+    <div class="item"><img src="img/homepage/nspmain.png" alt="Main Page"></div>
+    <div class="item"><a href="/nsp_quickref/infosearch"><img src="img/homepage/nspquickref.png" alt="nSP_QuickRef"></a></div>
+    <div class="item"><a href="/nsp_quickref/infosearch"><img src="img/homepage/PIs.png" alt="PIs"></a></div>
   </div>
 </div>
 
